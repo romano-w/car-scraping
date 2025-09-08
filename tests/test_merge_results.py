@@ -68,3 +68,14 @@ def test_merge_csv_dedupes_by_url(tmp_path):
     assert len(out_rows) == 3
     urls = [r["url"] for r in out_rows]
     assert urls == ["http://1", "http://2", "http://3"]
+
+
+def test_merge_csv_no_files(tmp_path, capsys):
+    output_file = tmp_path / "combined.csv"
+    merged = mr.merge_csv_files(
+        input_dir=str(tmp_path), pattern="*_results.csv", output_file=str(output_file)
+    )
+    assert merged == []
+    assert not output_file.exists()
+    captured = capsys.readouterr()
+    assert "No rows found to merge." in captured.out

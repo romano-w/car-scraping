@@ -62,6 +62,18 @@ class CarGurusScraperTests(unittest.TestCase):
             rows = cg.scrape()
         self.assertEqual(rows, [])
 
+    @patch("requests.Session.get")
+    def test_scrape_returns_rows(self, mock_get):
+        resp = MagicMock()
+        resp.status_code = 200
+        resp.text = SAMPLE_HTML
+        mock_get.return_value = resp
+        with patch.object(cg, "make_session") as ms, patch.object(cg, "MAX_PAGES", 1), patch.object(cg, "PAGE_DELAY_RANGE", (0, 0)):
+            ms.return_value = cg.requests.Session()
+            rows = cg.scrape()
+        self.assertEqual(len(rows), 2)
+        self.assertEqual(rows[0]["source"], "cargurus")
+
 
 if __name__ == "__main__":
     unittest.main()
