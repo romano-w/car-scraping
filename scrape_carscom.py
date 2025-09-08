@@ -56,6 +56,12 @@ def clean_number(text: Optional[str]) -> Optional[int]:
 
 def make_session() -> requests.Session:
     session = requests.Session()
+    # Ignore any proxy settings from the execution environment.  The
+    # sandbox used for automated tests sets proxy-related environment
+    # variables that lead to connection failures (HTTP 403 via a proxy
+    # tunnel).  ``requests`` picks these up by default, so we explicitly
+    # disable this behaviour to make direct connections instead.
+    session.trust_env = False
     session.headers.update(HEADERS)
     retry = Retry(
         total=4,
