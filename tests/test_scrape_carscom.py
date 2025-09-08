@@ -1,8 +1,10 @@
 import os
+import sys
 import types
 import unittest
 from unittest.mock import patch, MagicMock
 
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import scrape_carscom as sc
 
 SAMPLE_HTML = """
