@@ -1,0 +1,19 @@
+[project]
+name = "car-scraping"
+version = "0.1.0"
+description = "Used car listings scraper for multiple sources"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "beautifulsoup4>=4.13.5",
+    "lxml>=6.0.1",
+    "pandas>=2.3.2",
+    "requests>=2.32.5",
+    "selenium>=4.35.0",
+    "webdriver-manager>=4.0.2",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+]

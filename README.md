@@ -28,22 +28,18 @@ Optional backups later: Autotrader (via service), Carfax, etc.
 ## Prerequisites
 
 - Python 3.9+
-- `pip install -r requirements.txt`
+- [uv](https://docs.astral.sh/uv/) for dependency management
 
-Windows (PowerShell):
-
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-```
-
-macOS/Linux:
+Install dependencies and create a virtual environment with:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+uv sync
+```
+
+Run the scrapers through uv (no manual activation needed):
+
+```bash
+uv run python scrape_carscom.py
 ```
 
 ---
@@ -66,15 +62,15 @@ These values are applied across all scrapers.
 
 Run individually; each writes a CSV to `data/`.
 
-```powershell
+```bash
 # Cars.com (static; fastest to validate pipeline)
-python scrape_carscom.py
+uv run python scrape_carscom.py
 
 # Craigslist (private sellers)
-python scrape_craigslist.py
+uv run python scrape_craigslist.py
 
 # CarGurus (try requests first; may auto-fallback to Selenium later)
-python scrape_cargurus.py
+uv run python scrape_cargurus.py
 ```
 
 Outputs (by default):
