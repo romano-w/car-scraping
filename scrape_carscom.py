@@ -10,6 +10,14 @@ from bs4 import BeautifulSoup
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
+# New imports for Selenium fallback
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait  # fixed import
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+
 import config
 
 BASE_URL = "https://www.cars.com/shopping/results/"
@@ -31,6 +39,8 @@ OUTPUT_FILE = os.path.join(OUTPUT_DIR, "carscom_results.csv")
 MAX_PAGES = int(os.getenv("CARS_MAX_PAGES", "10"))  # safety cap
 PAGE_DELAY_RANGE = (2.0, 6.0)
 REQUEST_TIMEOUT = int(os.getenv("CARS_TIMEOUT", "45"))
+FETCH_MODE = os.getenv("CARS_FETCH_MODE", "auto").lower()  # auto | requests | selenium
+SELENIUM_WAIT = int(os.getenv("CARS_SELENIUM_WAIT", "12"))
 
 
 def build_search_url(page: int) -> str:
@@ -68,6 +78,19 @@ def make_session() -> requests.Session:
     session.mount("https://", adapter)
     session.mount("http://", adapter)
     return session
+
+
+def make_driver() -> webdriver.Chrome:
+    opts = ChromeOptions()
+    if os.getenv("HEADLESS", "1") not in ("0", "false", "False"):
+        opts.add_argument("--headless=new")
+    opts.add_argument("--disable-gpu")
+    opts.add_argument("--no-sandbox")
+    opts.add_argument("--window-size=1365,1024")
+    opts.add_argument(f"--user-agent={HEADERS['User-Agent']}")
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=opts)
+    driver.set_page_load_timeout(REQUEST_TIMEOUT)
+    return driver
 
 
 def parse_listings(html: str) -> List[Dict]:
@@ -169,24 +192,73 @@ def write_csv(rows: List[Dict], path: str) -> None:
             writer.writerow(r)
 
 
+def fetch_html_requests(session: requests.Session, url: str) -> Optional[str]:
+    try:
+        resp = session.get(url, timeout=REQUEST_TIMEOUT)
+        if resp.status_code == 200:
+            return resp.text
+        print(f"[cars.com] HTTP {resp.status_code} for {url}")
+        return None
+    except requests.RequestException as e:
+        print(f"[cars.com] requests error: {e}")
+        return None
+
+
+def fetch_html_selenium(driver: webdriver.Chrome, url: str) -> Optional[str]:
+    try:
+        driver.get(url)
+        # Wait for at least one vehicle-card to appear, or a results container
+        WebDriverWait(driver, SELENIUM_WAIT).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, ".vehicle-card, article.vehicle-card"))
+        )
+        return driver.page_source
+    except Exception as e:
+        print(f"[cars.com] selenium error: {e}")
+        return None
+
+
 def scrape() -> List[Dict]:
     all_rows: List[Dict] = []
     session = make_session()
+    driver: Optional[webdriver.Chrome] = None
+
+    if FETCH_MODE == "selenium":
+        driver = make_driver()
+    elif FETCH_MODE == "auto":
+        driver = None
+
+    # Warm-up: hit homepage to establish cookies/session
+    try:
+        _ = session.get("https://www.cars.com/", timeout=min(REQUEST_TIMEOUT, 20))
+    except Exception:
+        pass
 
     for page in range(1, MAX_PAGES + 1):
         url = build_search_url(page)
         print(f"[cars.com] Fetching page {page}: {url}")
-        try:
-            resp = session.get(url, timeout=REQUEST_TIMEOUT)
-        except requests.RequestException as e:
-            print(f"[cars.com] Request error on page {page}: {e}")
+
+        html: Optional[str] = None
+        used_driver = False
+
+        if FETCH_MODE == "requests":
+            html = fetch_html_requests(session, url)
+        elif FETCH_MODE == "selenium":
+            html = fetch_html_selenium(driver, url)
+            used_driver = True
+        else:  # auto
+            html = fetch_html_requests(session, url)
+            if not html:
+                if driver is None:
+                    driver = make_driver()
+                assert driver is not None  # for type checkers
+                html = fetch_html_selenium(driver, url)
+                used_driver = True
+
+        if not html:
+            print(f"[cars.com] Failed to fetch page {page}; stopping.")
             break
 
-        if resp.status_code != 200:
-            print(f"[cars.com] HTTP {resp.status_code} on page {page}; stopping.")
-            break
-
-        page_rows = parse_listings(resp.text)
+        page_rows = parse_listings(html)
         if not page_rows:
             print(f"[cars.com] No results found on page {page}; stopping.")
             break
@@ -196,6 +268,12 @@ def scrape() -> List[Dict]:
 
         # Polite delay between pages
         time.sleep(random.uniform(*PAGE_DELAY_RANGE))
+
+    if driver:
+        try:
+            driver.quit()
+        except Exception:
+            pass
 
     return all_rows
 
