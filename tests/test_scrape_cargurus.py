@@ -1,0 +1,67 @@
+import os
+import types
+import unittest
+from unittest.mock import patch, MagicMock
+
+import scrape_cargurus as cg
+
+SAMPLE_HTML = """
+<html>
+  <body>
+    <div class="cg-dealFinderResult-wrap">
+      <a class="listing-link" href="/Cars/SomeListingId1">2012 Toyota Camry</a>
+      <span class="listing-price">$8,999</span>
+      <span class="listing-mileage">123,456 mi</span>
+      <span class="dealer-name">Best Dealer</span>
+      <span class="listing-location">Philadelphia, PA</span>
+    </div>
+    <div class="cg-dealFinderResult-wrap">
+      <a class="listing-link" href="/Cars/SomeListingId2">2002 Honda Civic</a>
+      <span class="listing-price">$3,500</span>
+      <span class="listing-mileage">200,001 mi</span>
+      <span class="dealer-name">Good Cars</span>
+      <span class="listing-location">Philly, PA</span>
+    </div>
+  </body>
+</html>
+"""
+
+
+class CarGurusScraperTests(unittest.TestCase):
+    def test_parse_listings_extracts_fields(self):
+        rows = cg.parse_listings(SAMPLE_HTML)
+        self.assertEqual(len(rows), 2)
+        first = rows[0]
+        self.assertEqual(first["source"], "cargurus")
+        self.assertIn("Toyota Camry", first["title"])
+        self.assertEqual(first["price"], 8999)
+        self.assertEqual(first["mileage"], 123456)
+        self.assertTrue(first["url"].startswith("https://www.cargurus.com/Cars/"))
+        self.assertEqual(first["dealer"], "Best Dealer")
+        self.assertIn("Philadelphia", first["location"])
+
+    def test_filter_by_config_applies_limits(self):
+        rows = cg.parse_listings(SAMPLE_HTML)
+        with patch.object(cg, "config", autospec=True) as mock_cfg:
+            mock_cfg.PRICE_MAX = 9000
+            mock_cfg.MILEAGE_MAX = 200000
+            mock_cfg.YEAR_MIN = 2004
+            filtered = cg.filter_by_config(rows)
+        titles = [r["title"] for r in filtered]
+        self.assertTrue(any("Toyota Camry" in t for t in titles))
+        self.assertFalse(any("2002" in t for t in titles))
+
+    @patch("requests.Session.get")
+    def test_scrape_handles_http_errors(self, mock_get):
+        resp = MagicMock()
+        resp.status_code = 500
+        resp.text = ""
+        mock_get.return_value = resp
+        with patch.object(cg, "make_session") as ms:
+            ms.return_value = cg.requests.Session()
+            rows = cg.scrape()
+        self.assertEqual(rows, [])
+
+
+if __name__ == "__main__":
+    unittest.main()
