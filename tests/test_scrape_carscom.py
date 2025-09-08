@@ -28,6 +28,20 @@ SAMPLE_HTML = """
 </html>
 """
 
+DUPLICATE_HTML = """
+<html>
+  <body>
+    <div class="vehicle-card">
+      <article class="vehicle-card">
+        <a class="vehicle-card-link" href="/vehicledetail/abcd1234">2012 Toyota Camry</a>
+        <div class="primary-price">$8,999</div>
+        <div class="mileage">123,456 mi.</div>
+      </article>
+    </div>
+  </body>
+</html>
+"""
+
 class CarsComScraperTests(unittest.TestCase):
     def test_parse_listings_extracts_fields(self):
         rows = sc.parse_listings(SAMPLE_HTML)
@@ -54,6 +68,10 @@ class CarsComScraperTests(unittest.TestCase):
         titles = [r["title"] for r in filtered]
         self.assertTrue(any("Toyota Camry" in t for t in titles))
         self.assertFalse(any("2002" in t for t in titles))
+
+    def test_parse_listings_avoids_duplicate_cards(self):
+        rows = sc.parse_listings(DUPLICATE_HTML)
+        self.assertEqual(len(rows), 1)
 
     @patch("requests.Session.get")
     def test_scrape_handles_http_errors(self, mock_get):
