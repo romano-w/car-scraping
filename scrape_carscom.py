@@ -29,9 +29,14 @@ HEADERS = {
     ),
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.9",
-    "Accept-Encoding": "gzip, deflate, br",
+    # Avoid brotli as many Python stacks lack brotli decoder
+    "Accept-Encoding": "gzip, deflate",
     "Referer": "https://www.cars.com/",
     "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1",
+    "DNT": "1",
+    "Pragma": "no-cache",
+    "Cache-Control": "no-cache",
 }
 
 OUTPUT_DIR = "data"
@@ -41,6 +46,7 @@ PAGE_DELAY_RANGE = (2.0, 6.0)
 REQUEST_TIMEOUT = int(os.getenv("CARS_TIMEOUT", "45"))
 FETCH_MODE = os.getenv("CARS_FETCH_MODE", "auto").lower()  # auto | requests | selenium
 SELENIUM_WAIT = int(os.getenv("CARS_SELENIUM_WAIT", "12"))
+PAGE_SIZE = int(os.getenv("CARS_PAGE_SIZE", "50"))
 
 
 def build_search_url(page: int) -> str:
@@ -52,7 +58,7 @@ def build_search_url(page: int) -> str:
         "mileage_max": config.MILEAGE_MAX,
         "year_min": config.YEAR_MIN,
         "page": page,
-        "page_size": 100,
+        "page_size": PAGE_SIZE,
     }
     return f"{BASE_URL}?{urlencode(params)}"
 
@@ -74,9 +80,16 @@ def make_session() -> requests.Session:
         allowed_methods=["HEAD", "GET", "OPTIONS"],
         raise_on_status=False,
     )
-    adapter = HTTPAdapter(max_retries=retry)
+    adapter = HTTPAdapter(max_retries=retry, pool_connections=10, pool_maxsize=10)
     session.mount("https://", adapter)
     session.mount("http://", adapter)
+
+    # Warm-up to establish cookies/session for cars.com
+    try:
+        session.get("https://www.cars.com/", timeout=min(REQUEST_TIMEOUT, 20))
+    except requests.RequestException:
+        # Non-fatal; continue without cookies
+        pass
     return session
 
 
