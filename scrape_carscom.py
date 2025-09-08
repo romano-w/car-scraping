@@ -74,6 +74,7 @@ def parse_listings(html: str) -> List[Dict]:
     soup = BeautifulSoup(html, "lxml")
     cards = soup.select(".vehicle-card, article.vehicle-card")
     results: List[Dict] = []
+    seen_urls = set()
 
     for card in cards:
         # URL
@@ -109,6 +110,16 @@ def parse_listings(html: str) -> List[Dict]:
 
         if not url and not title:
             continue
+
+        # The markup sometimes nests an <article> with class
+        # ``vehicle-card`` inside another element with the same class,
+        # which would cause duplicate rows.  Use the listing URL as a
+        # simple deduplication key to avoid returning the same car
+        # multiple times.
+        if url and url in seen_urls:
+            continue
+        if url:
+            seen_urls.add(url)
 
         results.append(
             {
