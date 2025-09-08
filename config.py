@@ -1,4 +1,4 @@
-ZIP_CODE = "19102"          # Philly zip or change as needed
+ZIP_CODE = "19102"          # Philly zip [keeping]
 RADIUS_MILES = 200
 PRICE_MAX = 4500
 MILEAGE_MAX = 200000

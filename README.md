@@ -1,54 +1,133 @@
 # Used Car Listings Scraper – Multi-Source, AI-Assisted
 
-This project automates the process of gathering **used car listings** from multiple websites (CarGurus, Cars.com, Craigslist) within a **200-mile radius** of a given location, under a given **price** and **mileage** limit.
-
-The goal is to quickly build a **comprehensive dataset** of vehicles for evaluation and offers, using **AI-assisted coding** for fast development but keeping the workflow under your control.
+Automate gathering used car listings from multiple websites (CarGurus, Cars.com, Craigslist) within a configurable radius, price, year, and mileage. Built to be fast to implement, free to run locally, and assisted by AI for coding (not an autonomous agent).
 
 ---
 
-## Project Goals
-- Aggregate used car listings from major dealer and private sale websites.
-- Run on **local or lightweight cloud environments** with no extra cost.
-- Use **AI tools** (ChatGPT, VSCode Copilot) to accelerate coding, but avoid full autonomous agents for reliability.
-- Deliver a **CSV or Airtable dataset** for easy filtering, sorting, and contacting sellers.
+## What this does
+
+- Scrapes major sources for dealer and private listings.
+- Respects your criteria (zip, radius, price, year, mileage) from a single config.
+- Saves per-source CSVs under `data/`, with an option to merge.
+- Minimizes cost and complexity; Selenium is only used if needed.
 
 ---
 
-## Data Sources
-| Source       | Coverage                  | Method            | Notes                                     |
-|---------------|----------------------------|-------------------|-------------------------------------------|
-| CarGurus       | Dealers, some private      | `requests` or `selenium` | Provides deal ratings, big inventory.      |
-| Cars.com       | Dealers                    | `requests`        | Simple HTML parsing, well-documented.      |
-| Craigslist     | Private sellers, local lots| `requests`        | Focus on `cars+trucks` category by owner.  |
+## Data sources and approach
 
-Optional backups:
-- Autotrader (Apify scraper exists)
-- Carfax (has official scraper on Apify)
-- eBay Motors, TrueCar, etc. (future expansion)
+| Source     | Coverage                     | Method                 | Notes |
+|------------|------------------------------|------------------------|-------|
+| CarGurus   | Dealers + some private       | `requests` → fallback `selenium` | May need modern headers or Selenium for pagination. |
+| Cars.com   | Dealers                       | `requests` + `bs4`     | Straightforward static parsing. |
+| Craigslist | Private sellers + small lots | `requests` + `bs4`     | Use cars+trucks (by owner and/or dealer). Paginate with `s=120`. |
+
+Optional backups later: Autotrader (via service), Carfax, etc.
 
 ---
 
-## Tech Stack
+## Prerequisites
 
-- **Python 3.9+**
-- **Libraries**:
-  - `requests`, `beautifulsoup4`, `lxml` – for HTTP requests and HTML parsing
-  - `selenium`, `webdriver-manager` – for dynamic pages (CarGurus if needed)
-  - `pandas` – for cleaning, merging, CSV export
-  - `time`, `random` – for polite scraping delays
-- **AI Tools** (for coding help only):
-  - ChatGPT / Copilot in VSCode
-  - GPT-4 for generating parsing logic, troubleshooting
-- **Data Output**:
-  - CSV files per source
-  - Optional merge into a single CSV or Airtable base
+- Python 3.9+
+- `pip install -r requirements.txt`
 
----
+Windows (PowerShell):
 
-## Quick Start
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
 
-### 1. Setup Environment
+macOS/Linux:
+
 ```bash
-python3 -m venv venv
-source venv/bin/activate   # or venv\Scripts\activate on Windows
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
+```
+
+---
+
+## Configure your search
+
+Edit `config.py`:
+
+- `ZIP_CODE`: e.g., "22030" for Fairfax, VA (currently set to "19102").
+- `RADIUS_MILES`: e.g., 50–200
+- `PRICE_MAX`: e.g., 15000
+- `MILEAGE_MAX`: e.g., 150000–200000
+- `YEAR_MIN`: e.g., 2008+
+
+These values are applied across all scrapers.
+
+---
+
+## Run the scrapers
+
+Run individually; each writes a CSV to `data/`.
+
+```powershell
+# Cars.com (static; fastest to validate pipeline)
+python scrape_carscom.py
+
+# Craigslist (private sellers)
+python scrape_craigslist.py
+
+# CarGurus (try requests first; may auto-fallback to Selenium later)
+python scrape_cargurus.py
+```
+
+Outputs (by default):
+
+- `data/carscom_results.csv`
+- `data/craigslist_results.csv`
+- `data/cargurus_results.csv`
+
+---
+
+## Merge results (optional)
+
+A simple merger script can combine per-source CSVs into one master file with a `source` column and basic de-duplication heuristics (e.g., URL or VIN if present):
+
+```powershell
+python data/merge_results.py
+```
+
+Target: `data/combined_listings.csv`
+
+---
+
+## Scraping etiquette and reliability
+
+- Add small random delays between requests (1–5s) and between pages (2–7s).
+- Use reasonable page limits; stop when no new results.
+- Rotate a modern `User-Agent` header; back off on HTTP 429/403.
+- Prefer `requests` for static sites; use Selenium only where necessary (e.g., CarGurus pagination).
+- Keep it personal-use and respect each site’s Terms of Service.
+
+Selenium note: if needed, `webdriver-manager` will fetch the driver automatically; you’ll need a local Chrome/Chromium installed.
+
+---
+
+## Roadmap (fast track)
+
+### Day 1
+
+- Finalize `config.py` criteria.
+- Implement/test Cars.com and Craigslist parsers; save CSVs.
+- Prototype CarGurus with `requests`; add Selenium fallback if required.
+
+### Day 2
+
+- Full runs with polite rate limiting.
+- Optional merge step and quick sanity checks (price/year/mileage filters).
+- Triage issues; if a site blocks, slow down or temporarily skip.
+
+Fallback: If a site is unexpectedly difficult, pause it and proceed with the others first; consider a third-party scraper service only as a last resort.
+
+---
+
+## Notes
+
+- Output is intended for manual evaluation and outreach via listing URLs (no scraping of hidden contact info).
+- This project uses AI to accelerate coding only; you remain in control of runs and outputs.
