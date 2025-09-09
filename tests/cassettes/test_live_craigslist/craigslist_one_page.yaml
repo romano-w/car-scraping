@@ -1,0 +1,32 @@
+interactions:
+- request:
+    method: GET
+    uri: https://philadelphia.craigslist.org/search/cto?postal=19102&search_distance=200&max_price=4500&auto_year_min=2004&auto_miles_max=200000&s=0
+    body: null
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+    body:
+      string: |
+        <html>
+          <body>
+            <ul class="rows">
+              <li class="result-row">
+                <a class="result-title" href="https://philadelphia.craigslist.org/cto/d/car-2012-toyota-camry/123.html">2012 Toyota Camry</a>
+                <span class="result-price">$3,500</span>
+                <span class="result-hood">(Philadelphia)</span>
+              </li>
+              <li class="result-row">
+                <a class="result-title" href="https://philadelphia.craigslist.org/cto/d/car-2002-honda-civic/456.html">2002 Honda Civic</a>
+                <span class="result-price">$5,000</span>
+                <span class="result-hood">(Philly)</span>
+              </li>
+            </ul>
+          </body>
+        </html>
+version: 1
