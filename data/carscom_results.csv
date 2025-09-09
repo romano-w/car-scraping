@@ -1,1 +1,500 @@
-source,title,price,mileage,dealer,location,url
+source,title,price,mileage,dealer,location,url,first_seen
+cars.com,2012 FIAT 500 Sport,4300,101000,,,https://www.cars.com/vehicledetail/8d1ca7c7-b0f8-49f9-82cc-4be8bde1942f/,2025-09-09T18:18:21
+cars.com,2007 Scion tC Base,4350,144000,The Car Place,,https://www.cars.com/vehicledetail/aabef0fd-bb64-48df-9dff-fc1b13f91dff/,2025-09-09T18:18:21
+cars.com,2006 Mercury Mariner Luxury,3900,84800,,,https://www.cars.com/vehicledetail/664e79fd-4795-44ff-bf04-b651a70eb186/,2025-09-09T18:18:21
+cars.com,2004 Honda Civic VP,4000,135723,,,https://www.cars.com/vehicledetail/c52dca39-cb85-4db4-bb68-ff164a1aafdc/,2025-09-09T18:18:21
+cars.com,2011 Volvo XC90 3.2,3700,175423,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/2841a9d5-12a6-48e1-a9ad-0c11f6ef359a/,2025-09-09T18:18:21
+cars.com,2008 Kia Sorento LX,2195,174695,A&R Auto,,https://www.cars.com/vehicledetail/8c59acf1-251e-446e-b1ef-df2de3a79ad1/,2025-09-09T18:18:21
+cars.com,2013 Honda Civic LX,4500,159862,Blue Star Cars,,https://www.cars.com/vehicledetail/2a3184d4-1bce-43b5-85d4-de7c8de60758/,2025-09-09T18:18:21
+cars.com,2008 Subaru Outback 2.5 i Limited,3450,195000,The Car Place,,https://www.cars.com/vehicledetail/f2c3558b-8fec-4839-b30f-109c1459bedb/,2025-09-09T18:18:21
+cars.com,2010 Dodge Charger SXT,4500,116000,,,https://www.cars.com/vehicledetail/2b18a7ec-00fa-418e-b84e-3f2ee02af3e9/,2025-09-09T18:18:21
+cars.com,2012 Nissan Altima 2.5 S,4450,173203,Discount Auto,,https://www.cars.com/vehicledetail/b6a73e7f-1cfa-4538-8bcb-fc11e3d2f691/,2025-09-09T18:18:21
+cars.com,2009 Nissan Rogue S,3995,157000,N Enterprise,,https://www.cars.com/vehicledetail/849a248b-de02-4652-a977-1a1b2184f21b/,2025-09-09T18:18:21
+cars.com,2012 Nissan Altima 2.5 S,2995,177873,"CT Car Co, LLC",,https://www.cars.com/vehicledetail/d529965a-9292-4717-93b6-337ca4ee38fc/,2025-09-09T18:18:21
+cars.com,2010 Dodge Journey SXT,2710,117245,Liccardi Chrysler Dodge Ram Mitsubishi,,https://www.cars.com/vehicledetail/c26088b0-16a8-4418-9649-68c059e3e974/,2025-09-09T18:18:21
+cars.com,2010 GMC Terrain SLT-1,4500,137556,Alpha Motorsports Fredericksburg,,https://www.cars.com/vehicledetail/e2af1ff1-9a7f-4cce-99d5-a596e8450d25/,2025-09-09T18:18:21
+cars.com,2011 Chevrolet Malibu LS,4495,135250,DCH Paramus Honda,,https://www.cars.com/vehicledetail/e2be737b-b286-4d48-994d-3726164ca923/,2025-09-09T18:18:21
+cars.com,2012 Chrysler 200 Touring,3999,189046,Planet Honda,,https://www.cars.com/vehicledetail/e81877d7-c503-40f0-828c-905379c9b38f/,2025-09-09T18:18:21
+cars.com,2008 Chevrolet Impala LT,4297,130021,OtoCity LLC,,https://www.cars.com/vehicledetail/cf477d29-7e35-4305-8cab-c2f8c257fa1a/,2025-09-09T18:18:21
+cars.com,2014 Ford Focus SE,4499,156348,Independence Auto Sale,,https://www.cars.com/vehicledetail/9ad66086-823a-44fa-809c-98d79793eaca/,2025-09-09T18:18:21
+cars.com,2013 Subaru Impreza 2.0i,4312,167429,Frontier Auto Sales Inc.,,https://www.cars.com/vehicledetail/d75b60e9-d109-4930-a6ea-702728db1985/,2025-09-09T18:18:21
+cars.com,2009 Chrysler Town & Country Touring,3990,185903,Divan Auto Group,,https://www.cars.com/vehicledetail/e92367cd-e779-44ec-8119-83421fc8eafa/,2025-09-09T18:18:21
+cars.com,2008 Pontiac Grand Prix Base,3450,150000,The Car Place,,https://www.cars.com/vehicledetail/070caf51-18e7-4fad-9ae5-a014272b2216/,2025-09-09T18:18:21
+cars.com,2010 Mazda CX-7 s Touring,3700,159704,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/7d3ad26a-6b8e-4619-a7e4-6dcc94d0544e/,2025-09-09T18:18:21
+cars.com,2010 Chevrolet Cobalt LT,3490,167811,I-Deal Cars,,https://www.cars.com/vehicledetail/a5f31807-c2bc-4575-b96b-c7e06f0e44ee/,2025-09-09T18:18:21
+cars.com,2007 BMW 525 xi,4000,128758,,,https://www.cars.com/vehicledetail/a8d2f5fe-42c6-4014-998b-0a94e23b376c/,2025-09-09T18:18:21
+cars.com,2011 Ford Fiesta SEL,4000,128000,,,https://www.cars.com/vehicledetail/b7adced3-deed-4d79-a354-18ce5c45ca69/,2025-09-09T18:18:21
+cars.com,2008 Nissan Xterra S,3494,166938,Deal Hunter Autos,,https://www.cars.com/vehicledetail/eb29dfe2-9d4e-4a78-be1f-b11b40796b9e/,2025-09-09T18:18:21
+cars.com,2008 Dodge Nitro SXT,3200,159223,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/acd73024-c6ca-46d6-a700-312878105d71/,2025-09-09T18:18:21
+cars.com,2010 Chevrolet Cobalt LT,2795,169969,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/597472e8-ca47-44b6-bd35-3de90795528e/,2025-09-09T18:18:21
+cars.com,2007 Hyundai SONATA Limited,4499,133208,Stop and Drive Auto Sales,,https://www.cars.com/vehicledetail/15ff60e9-fdfa-4d96-abf3-f2ca56b7306f/,2025-09-09T18:18:21
+cars.com,2014 Ford Focus SE,3500,104000,,,https://www.cars.com/vehicledetail/a2b4485b-1439-4ba0-84c8-28b487d1370d/,2025-09-09T18:18:21
+cars.com,2004 Lexus ES 330 Base,2500,147005,,,https://www.cars.com/vehicledetail/5f64da67-eac0-43be-8b8c-53597eeb8017/,2025-09-09T18:18:21
+cars.com,2004 Chevrolet Suburban 1500 LS,3988,179468,Route 46 Auto Inc.,,https://www.cars.com/vehicledetail/2ecead10-f852-4a6a-b8fe-32ecd8784312/,2025-09-09T18:18:21
+cars.com,2008 Chevrolet Malibu LS,2995,167462,A&R Auto,,https://www.cars.com/vehicledetail/35503370-ca38-4e65-bc67-ff575a6157f4/,2025-09-09T18:18:21
+cars.com,2015 Nissan Quest SL,3995,194167,Best Value Autos,,https://www.cars.com/vehicledetail/f71b04f6-3ed1-4b40-8048-8e818b34706b/,2025-09-09T18:18:21
+cars.com,2010 Ford Focus SE,4450,115160,Auto Land Fredericksburg,,https://www.cars.com/vehicledetail/34ce7108-58e5-479f-8513-7d14f2fc21f1/,2025-09-09T18:18:21
+cars.com,2008 Volkswagen Eos Turbo,2999,123729,Stop and Drive Auto Sales,,https://www.cars.com/vehicledetail/87ab049a-7d34-4051-9ce3-01c251269ad0/,2025-09-09T18:18:21
+cars.com,2006 Mercury Milan V6,2936,187000,Fonse Motors,,https://www.cars.com/vehicledetail/900cf6b8-6158-48ba-a9f1-40cd973c26d6/,2025-09-09T18:18:21
+cars.com,2007 Chevrolet Malibu LT,3700,119450,,,https://www.cars.com/vehicledetail/954d8251-fa67-4cfd-8005-c18db9bda014/,2025-09-09T18:18:21
+cars.com,2006 Honda Odyssey EX-L,3350,133000,,,https://www.cars.com/vehicledetail/65baa90f-21f8-4e09-8424-c61641df1a83/,2025-09-09T18:18:21
+cars.com,2006 Ford Escape XLT Sport,2500,163813,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/932949c8-e1b1-42bb-8cb5-21c86db3279e/,2025-09-09T18:18:21
+cars.com,2012 Hyundai SONATA Limited,3900,176220,Auto Bid Center,,https://www.cars.com/vehicledetail/d5995197-c2ec-4269-86dc-7d018ae98001/,2025-09-09T18:18:21
+cars.com,2005 Volvo XC70 2.5T,4495,178200,,,https://www.cars.com/vehicledetail/c23aabb4-30c7-4e57-b1df-28b5802f1777/,2025-09-09T18:18:21
+cars.com,2009 Hyundai SONATA Limited,3995,142692,Noble Pre-Owned Auto Sales,,https://www.cars.com/vehicledetail/d4d5afab-d648-4ba2-a31e-d3e1572edbe9/,2025-09-09T18:18:21
+cars.com,2011 Ford Escape XLT,4500,170889,Overdrive Motors,,https://www.cars.com/vehicledetail/507921a4-36b9-47b7-9d2e-6eb477564871/,2025-09-09T18:18:21
+cars.com,2013 Volkswagen Jetta SE,4500,151000,,,https://www.cars.com/vehicledetail/726f2516-781f-438e-91dc-b54ba8a187e8/,2025-09-09T18:18:21
+cars.com,2012 Kia Soul Base,3995,128466,Cos' Central Auto,,https://www.cars.com/vehicledetail/0701f624-dfa9-4b5b-8b36-13cee6c14f68/,2025-09-09T18:18:21
+cars.com,2011 Chevrolet Cruze LS,2995,155599,"CT Car Co, LLC",,https://www.cars.com/vehicledetail/dffe3da6-76c1-42cb-aa52-a5a47042c486/,2025-09-09T18:18:21
+cars.com,2009 Ford Edge SE,4500,186420,Ikon MotorCars Group,,https://www.cars.com/vehicledetail/e03a5f31-f920-47d1-85b7-827c52c3a90d/,2025-09-09T18:18:21
+cars.com,2013 Hyundai Accent GS,2949,151526,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/f6942fcd-ff68-47da-8861-454c22f8adc5/,2025-09-09T18:18:21
+cars.com,2011 Chevrolet Equinox LT,4500,154604,,,https://www.cars.com/vehicledetail/892a694d-0ab8-4312-9633-98a68868579f/,2025-09-09T18:18:21
+cars.com,2012 Nissan Maxima SV,3000,146000,,,https://www.cars.com/vehicledetail/b11952b1-971f-48c8-9eb6-c01a3d35ea1a/,2025-09-09T18:18:33
+cars.com,2011 Subaru Impreza 2.5 i,2900,159538,Alpha Auto Group LLC,,https://www.cars.com/vehicledetail/e3635bb0-915e-495b-b9c8-dc3992befd37/,2025-09-09T18:18:33
+cars.com,2005 Cadillac DeVille Base,3495,117866,A&R Auto,,https://www.cars.com/vehicledetail/28babc79-1d59-4d52-b0f9-48231889bca4/,2025-09-09T18:18:33
+cars.com,2004 Volvo S60 2.5T,2995,122442,Kars On King Auto Center,,https://www.cars.com/vehicledetail/b1adb2ca-0bc0-4e1d-8f65-8f4b1594cda5/,2025-09-09T18:18:33
+cars.com,2015 Kia Soul Base,3899,169969,Premier Auto,,https://www.cars.com/vehicledetail/5f0e151a-4fc8-4f65-8275-486816ce4fc3/,2025-09-09T18:18:33
+cars.com,2007 Nissan Sentra 2.0 SL,3600,167559,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/c68f479e-9d77-483d-92f9-3845ba84ce45/,2025-09-09T18:18:33
+cars.com,2009 Ford Fusion SEL,4375,122219,NJ Auto Pros,,https://www.cars.com/vehicledetail/48fd9220-a6e3-421a-94bb-64e42d75482b/,2025-09-09T18:18:33
+cars.com,2009 Jeep Compass Sport,4500,132866,Auto Place LLC,,https://www.cars.com/vehicledetail/93f976f3-9be6-4b2e-a8b9-3bfac642145b/,2025-09-09T18:18:33
+cars.com,2008 Chevrolet Impala Police,4470,156086,Econo Auto Inc,,https://www.cars.com/vehicledetail/991eac52-1748-4ef3-8063-d50e07aa9517/,2025-09-09T18:18:33
+cars.com,2005 Ford Escape XLT,3900,122113,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/7131eaeb-f19b-422e-83ab-3a8d44749b31/,2025-09-09T18:18:33
+cars.com,2006 Nissan Sentra 1.8 S,3275,118190,NJ Auto Pros,,https://www.cars.com/vehicledetail/4bb8ccfc-95fe-4ea1-8991-e97743e56f7e/,2025-09-09T18:18:33
+cars.com,2008 Ford Taurus SEL,2495,162374,A&R Auto,,https://www.cars.com/vehicledetail/e14d7a33-a001-43cd-b0ba-b1d364b7178a/,2025-09-09T18:18:33
+cars.com,2007 BMW 530 XI,4450,189005,Auto Land Fredericksburg,,https://www.cars.com/vehicledetail/c5e55b3c-ba0b-4169-b269-323eb3ae271c/,2025-09-09T18:18:33
+cars.com,2011 Subaru Legacy 2.5i Premium,4377,168766,Off Lease Motors,,https://www.cars.com/vehicledetail/c5dd2ae0-11ad-41b4-8b16-93731b4c276a/,2025-09-09T18:18:33
+cars.com,2011 Nissan Sentra 2.0 SR,4500,111961,Auto Place LLC,,https://www.cars.com/vehicledetail/219f3959-0b12-4995-a578-2a66101df614/,2025-09-09T18:18:33
+cars.com,2007 Chevrolet Malibu LT,2675,177321,NJ Auto Pros,,https://www.cars.com/vehicledetail/1eebc981-5845-479a-a6d6-f2e7cd9690c0/,2025-09-09T18:18:33
+cars.com,2015 Chevrolet Sonic LS,4250,138098,Diamond Auto Sales of BERLIN,,https://www.cars.com/vehicledetail/6b7160b3-0fa8-4bb1-abf9-4acc06feafe5/,2025-09-09T18:18:33
+cars.com,2011 Subaru Legacy Premium,3500,194385,Auto Bid Center,,https://www.cars.com/vehicledetail/def915cd-63c2-490b-911e-fc93189375ec/,2025-09-09T18:18:33
+cars.com,2008 Hyundai ELANTRA SE,4495,143895,Faraj Auto Traders Inc.,,https://www.cars.com/vehicledetail/08808b7f-435f-47f7-995c-654023ccc94e/,2025-09-09T18:18:33
+cars.com,2011 GMC Terrain SLE-2,4450,188717,Zaza Moto,,https://www.cars.com/vehicledetail/e65963dd-2041-4fa9-b274-a11f3fd300bb/,2025-09-09T18:18:33
+cars.com,2010 Mazda Mazda3 s Sport,3000,175232,Auto Bid Center,,https://www.cars.com/vehicledetail/570848b3-13cb-41a7-8ade-ec0b078e76ba/,2025-09-09T18:18:33
+cars.com,2009 Volvo S80 3.2,4000,192000,European Motors,,https://www.cars.com/vehicledetail/93b4cc42-386e-43e3-ac79-9a03925e514c/,2025-09-09T18:18:33
+cars.com,2009 Pontiac Vibe GT,3999,163406,Car Trade,,https://www.cars.com/vehicledetail/d6c6a666-d75f-4717-86ba-8800cbe7eca6/,2025-09-09T18:18:33
+cars.com,2011 Chevrolet Aveo,1700,101200,Auto Bohn Family Motors,,https://www.cars.com/vehicledetail/3c7f9516-ad5d-455a-8639-449d68fb3ac5/,2025-09-09T18:18:33
+cars.com,2005 Ford Taurus SE,3999,123025,Carhub,,https://www.cars.com/vehicledetail/18bbfd8a-8472-4486-8efc-7e0c3921f95e/,2025-09-09T18:18:33
+cars.com,2008 Mercury Mariner Hybrid Base,4000,113000,,,https://www.cars.com/vehicledetail/3cd8345c-74e0-4122-b731-62866d724ebb/,2025-09-09T18:18:33
+cars.com,2005 Mercury Grand Marquis LS,3395,133211,Global Fleet Leasing LLC,,https://www.cars.com/vehicledetail/636196c9-96aa-4e82-9202-5d38c6997b63/,2025-09-09T18:18:33
+cars.com,2004 Nissan Xterra XE,3377,169442,New 2 You Car Sales,,https://www.cars.com/vehicledetail/6cf9f77a-1de8-44d0-8f3d-45453fd979b9/,2025-09-09T18:18:33
+cars.com,2009 Volkswagen GTI Base,3995,129312,Road Masters II Inc.,,https://www.cars.com/vehicledetail/8ad85aa0-ab44-40a9-8756-d54d68914015/,2025-09-09T18:18:33
+cars.com,2008 Chevrolet Aveo LS,2800,86839,Auto Bid Center,,https://www.cars.com/vehicledetail/62465059-2b5a-48ec-8bf7-18ed421dd0fc/,2025-09-09T18:18:33
+cars.com,2006 Scion xA,2995,160192,"CT Car Co, LLC",,https://www.cars.com/vehicledetail/f21e60dc-f572-46b0-a966-bfd7a2741c7e/,2025-09-09T18:18:33
+cars.com,2009 Subaru Outback 2.5 i Limited,3295,116766,Global Fleet Leasing LLC,,https://www.cars.com/vehicledetail/cf308659-9966-48ea-bbbe-c6aa08039f79/,2025-09-09T18:18:33
+cars.com,2004 Lexus RX 330,3500,161925,DHL Auto Sales,,https://www.cars.com/vehicledetail/b53477f8-a9ad-40fc-b528-09d5688cd41b/,2025-09-09T18:18:33
+cars.com,2008 Volvo V70 3.2,3400,159022,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/df23e8d7-b0b3-41e5-a679-194212072f48/,2025-09-09T18:18:33
+cars.com,2004 Cadillac Seville Base,3499,122714,Deal Hunter Autos,,https://www.cars.com/vehicledetail/4d84354c-cb12-422f-840b-c63edae60855/,2025-09-09T18:18:33
+cars.com,2012 Hyundai Genesis 3.8,4000,150747,Auto Bid Center,,https://www.cars.com/vehicledetail/d2904026-b08c-4366-98d4-9252f0def5e3/,2025-09-09T18:18:33
+cars.com,2004 Chrysler Sebring Base,3720,119553,Deal Hunter Autos,,https://www.cars.com/vehicledetail/0817ac08-4699-4cec-9376-895f173eb098/,2025-09-09T18:18:33
+cars.com,2011 Mazda CX-7 s Touring,4450,136392,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/2f6d2b0a-bf29-4bcb-9967-622d1fad35bc/,2025-09-09T18:18:33
+cars.com,2005 Ford Escape Hybrid Base,2999,79529,Auto Spot LLC,,https://www.cars.com/vehicledetail/70a2b0ae-1724-46ac-8ea6-a149358601b7/,2025-09-09T18:18:33
+cars.com,2006 Lexus RX 330 Base,3999,191834,S I Finest Cars,,https://www.cars.com/vehicledetail/db36c4a8-24ff-48e8-8a57-f5ed3052dd6c/,2025-09-09T18:18:33
+cars.com,2006 BMW 325 Ci,3500,142000,,,https://www.cars.com/vehicledetail/110c3608-c97d-42f1-8d03-3d2dd70110f2/,2025-09-09T18:18:33
+cars.com,2007 Jeep Commander Sport,2900,197302,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/7cacfa82-c7f3-416e-9d7b-2f5512e7022e/,2025-09-09T18:18:33
+cars.com,2006 Pontiac Vibe Base,4500,122520,Tappahannock Chevrolet,,https://www.cars.com/vehicledetail/901d90b3-2cbc-4df9-8cb8-275998dd765f/,2025-09-09T18:18:33
+cars.com,2009 Chevrolet HHR LT,2995,150635,"CT Car Co, LLC",,https://www.cars.com/vehicledetail/659bf1e1-95b1-4424-b2ef-5fdd61202e33/,2025-09-09T18:18:33
+cars.com,2009 Nissan Cube 1.8 S,2995,159613,"CT Car Co, LLC",,https://www.cars.com/vehicledetail/dd9acdd7-c03a-4edd-8bc6-3a91fd6cd648/,2025-09-09T18:18:33
+cars.com,2014 Nissan Versa Note SV,3500,171743,Auto Bid Center,,https://www.cars.com/vehicledetail/1bee6231-6e17-42a8-8bf5-b3939228489a/,2025-09-09T18:18:33
+cars.com,2011 Chevrolet Cruze 2LT,3995,175613,443 Auto Sales,,https://www.cars.com/vehicledetail/8d2845f4-5171-4c96-a16e-dd80ef7b0a59/,2025-09-09T18:18:33
+cars.com,2006 Chevrolet Cobalt LS,3495,88809,A&R Auto,,https://www.cars.com/vehicledetail/5a843a0b-2949-4b9a-9485-9723bbf69428/,2025-09-09T18:18:33
+cars.com,2005 Nissan Quest 3.5 S,3300,173471,,,https://www.cars.com/vehicledetail/c817fee2-da3e-4173-9165-b30b2653c118/,2025-09-09T18:18:33
+cars.com,2011 Chevrolet HHR LT,3995,134806,Thornton Automotive Manchester,,https://www.cars.com/vehicledetail/b93920b9-bca0-4683-bb1a-4f8693ea7210/,2025-09-09T18:18:33
+cars.com,2006 Chevrolet TrailBlazer EXT LS,3000,183420,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/eebd7b89-b7e2-4977-bef6-892fd6fdd090/,2025-09-09T18:18:41
+cars.com,2010 Chevrolet HHR LS,3200,154023,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/93352b47-136a-43dd-9ec2-7d6987cb7e3b/,2025-09-09T18:18:41
+cars.com,2010 Dodge Nitro SE,3500,159908,Silverton Motors,,https://www.cars.com/vehicledetail/a6404f5a-392e-46a7-bc1b-83c24c647327/,2025-09-09T18:18:41
+cars.com,2007 Pontiac G6 Base,2997,132312,OtoCity LLC,,https://www.cars.com/vehicledetail/f927a2ae-c579-4d4e-9bd3-a88324c0825a/,2025-09-09T18:18:41
+cars.com,2008 Chevrolet Malibu Classic LT,2250,111220,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/ba7d7570-d0ea-4546-a1de-0b29cd676123/,2025-09-09T18:18:41
+cars.com,2006 Chevrolet Monte Carlo LT,2850,190377,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/a5654a77-e427-4316-b9f5-f10158804286/,2025-09-09T18:18:41
+cars.com,2009 Kia Rondo LX V6,3843,129828,Carbuyus,,https://www.cars.com/vehicledetail/7ea0f243-f937-4d5f-9e59-99371407659c/,2025-09-09T18:18:41
+cars.com,2008 Volvo C70 T5,3995,95674,Global Fleet Leasing LLC,,https://www.cars.com/vehicledetail/45116b96-754d-4b40-940b-d407d3d89347/,2025-09-09T18:18:41
+cars.com,2009 Saturn Vue XE,3995,144903,Cars R Us Auto Sales,,https://www.cars.com/vehicledetail/5fc23aec-3882-48e0-9a15-3dab35fbfb90/,2025-09-09T18:18:41
+cars.com,2008 Dodge Caliber SXT,3399,121662,Auto Spot of Mountain Lakes,,https://www.cars.com/vehicledetail/95c3d8b4-9c31-4d5c-bc8e-8ea8fc1d57fd/,2025-09-09T18:18:41
+cars.com,2011 Toyota Yaris Base,2895,177422,Auto Buying Service,,https://www.cars.com/vehicledetail/37c75db4-0b72-4dc3-9a64-44f23dd2f93d/,2025-09-09T18:18:41
+cars.com,2008 Saab 9-5 2.3t 4dr Sedan,3999,172813,Big T's Auto Sales LLC,,https://www.cars.com/vehicledetail/656cfa7d-89a3-4abe-abd4-6d05bc6d1a2b/,2025-09-09T18:18:41
+cars.com,2008 Saab 9-3 2.0T,3595,116128,Great Auto Deals,,https://www.cars.com/vehicledetail/57e60377-afc5-4785-a254-558dcf85e864/,2025-09-09T18:18:41
+cars.com,2008 INFINITI EX35 Journey,3799,128348,Planet Honda,,https://www.cars.com/vehicledetail/24517901-81ba-474c-ae49-7ecdec47f4ea/,2025-09-09T18:18:41
+cars.com,2012 Nissan Cube 1.8 SL,4495,119476,A Better Way Wholesale,,https://www.cars.com/vehicledetail/b7e20c2b-ad60-41e6-a8c1-388c77aec94c/,2025-09-09T18:18:41
+cars.com,2012 Chevrolet Captiva Sport LT,4499,144000,Car Trade,,https://www.cars.com/vehicledetail/63fc3441-5a77-46fc-956b-ca37cce11008/,2025-09-09T18:18:41
+cars.com,2005 Lexus ES 330 Base,4500,115000,,,https://www.cars.com/vehicledetail/ee9edbba-76cf-4c4e-94bb-636afe9789af/,2025-09-09T18:18:41
+cars.com,2012 Mazda Mazda5 Touring,3605,146361,Kelly Chrysler Dodge Jeep RAM,,https://www.cars.com/vehicledetail/c4f8bfb0-e723-422f-a863-da07255af57b/,2025-09-09T18:18:41
+cars.com,2009 Pontiac G6 Base,3200,103000,,,https://www.cars.com/vehicledetail/0b95b357-6d57-4916-8141-760e954cc0d2/,2025-09-09T18:18:41
+cars.com,2004 Volvo S40 2.4i,3795,113204,Ridgeline Motors,,https://www.cars.com/vehicledetail/b7168aac-994a-4908-bbca-8863f45019c6/,2025-09-09T18:18:41
+cars.com,2008 Mercury Milan I4 Premier,2981,198360,H & R Auto,,https://www.cars.com/vehicledetail/0bbac759-0ed5-4ddd-9c49-15c63f609d80/,2025-09-09T18:18:41
+cars.com,2004 Toyota Camry Solara SE,3595,187160,Great Auto Deals,,https://www.cars.com/vehicledetail/f2728f74-b43e-4f6f-97d8-1fb246661488/,2025-09-09T18:18:41
+cars.com,2007 Chevrolet Cobalt LS,4290,80564,JC MILLER AUTO SALES INC,,https://www.cars.com/vehicledetail/19f0cc63-b397-45df-a64c-3b23c1530f3e/,2025-09-09T18:18:41
+cars.com,2007 Chevrolet Aveo LS,3655,111005,Napoli Auto Xpress,,https://www.cars.com/vehicledetail/c761d062-2c16-404b-8a02-5e3835bd2f1f/,2025-09-09T18:18:41
+cars.com,2005 Saturn Ion 3,2488,143850,Brick City Motors,,https://www.cars.com/vehicledetail/426a5a02-ccfc-4183-a040-6c4821adb252/,2025-09-09T18:18:41
+cars.com,2006 Saab 9-3 2.0T 2dr Convertible,3799,119034,Independence Auto Sale,,https://www.cars.com/vehicledetail/8aedaffb-7e30-487b-9df9-927d7bb8e810/,2025-09-09T18:18:41
+cars.com,2010 Chevrolet HHR LS Panel,2900,142916,Auto Bid Center,,https://www.cars.com/vehicledetail/e66aa37c-7216-467d-945c-e91ebf9bb021/,2025-09-09T18:18:41
+cars.com,2008 Saturn Vue XR,3998,90341,Brick City Motors,,https://www.cars.com/vehicledetail/265af4e7-beef-41af-bab9-89b4b3f19a41/,2025-09-09T18:18:41
+cars.com,2008 Suzuki SX4 Sport Convenience,3950,106222,Bridge Auto Group,,https://www.cars.com/vehicledetail/5d670abc-c371-4d99-998a-e3eae777f33b/,2025-09-09T18:18:41
+cars.com,2006 Chevrolet Aveo LS,2995,124094,Active Auto Sales Hatboro,,https://www.cars.com/vehicledetail/1f4ac15c-6e9f-4b37-ab39-0fd57490ce4a/,2025-09-09T18:18:41
+cars.com,2012 Ford Fiesta SE,2500,157641,Auto Bid Center,,https://www.cars.com/vehicledetail/57e65a71-1207-42c4-baa1-8752a7f5828f/,2025-09-09T18:18:41
+cars.com,2004 Honda Accord EX,3696,165239,Planet Honda,,https://www.cars.com/vehicledetail/2b03d7bb-bbe3-41e3-b9bf-ec7f2df532af/,2025-09-09T18:18:41
+cars.com,2011 Chevrolet Impala LT,4495,128091,VNC Inc.,,https://www.cars.com/vehicledetail/ed03c5d0-7e6e-4e70-b8f1-db3c53d2180f/,2025-09-09T18:18:41
+cars.com,2005 MINI Cooper,4300,143578,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/9561f87e-1fa1-4340-91e3-75395eb39d5c/,2025-09-09T18:18:41
+cars.com,2008 Lexus ES 350 Base,4000,195140,,,https://www.cars.com/vehicledetail/8f6342e1-ea63-4290-bd27-033e1ad69430/,2025-09-09T18:18:41
+cars.com,2004 GMC Envoy SLE,3895,175000,Gene Scatena Auto Sales,,https://www.cars.com/vehicledetail/4cc47e3f-8754-4849-b490-741da3103bdd/,2025-09-09T18:18:41
+cars.com,2008 Chrysler Town & Country Touring,3495,189855,Street Visions Inc.,,https://www.cars.com/vehicledetail/0660cb8e-1dc6-4ef1-9469-868d2449db86/,2025-09-09T18:18:41
+cars.com,2008 Volkswagen Jetta S,3995,174337,NJM Auto Group,,https://www.cars.com/vehicledetail/af7e3c2a-72eb-45d2-b7b3-13b5021fd4a0/,2025-09-09T18:18:41
+cars.com,2010 Hyundai ELANTRA GLS,4499,162494,Independence Auto Sale,,https://www.cars.com/vehicledetail/6aca92a7-f21a-4954-96c1-5f14a438c5f6/,2025-09-09T18:18:41
+cars.com,2007 Scion tC Base,3995,168010,Cars R Us Auto Sales,,https://www.cars.com/vehicledetail/116c4f54-a626-450b-992e-b7b5b5fc83b6/,2025-09-09T18:18:41
+cars.com,2008 Ford Escape XLT,3495,182075,PLATINUM AUTO SALES,,https://www.cars.com/vehicledetail/7aad88df-d0a7-4435-84ad-75e50a940493/,2025-09-09T18:18:41
+cars.com,2013 MINI Hardtop Cooper S,3995,143874,Tri State Car Haven,,https://www.cars.com/vehicledetail/729c9084-5126-4927-9e6b-15462377bf35/,2025-09-09T18:18:41
+cars.com,2009 Pontiac Vibe Base,3450,175140,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/65b4bde3-fa05-44da-9476-79d75a84c447/,2025-09-09T18:18:41
+cars.com,2012 Mitsubishi Outlander SE,3999,161104,Aren Auto Group,,https://www.cars.com/vehicledetail/36bbc70e-cffd-423c-acfd-c10116ceeb63/,2025-09-09T18:18:41
+cars.com,2006 Toyota RAV4 Base,4400,198025,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/2c7583b4-56fe-416d-8fd9-8eda53dd73e2/,2025-09-09T18:18:41
+cars.com,2007 Ford Expedition XLT,2995,159900,A-Kar Auto Sales,,https://www.cars.com/vehicledetail/a8869131-f564-49ee-b49f-875e747c48de/,2025-09-09T18:18:41
+cars.com,2009 Nissan Rogue S,4499,113836,Carhub,,https://www.cars.com/vehicledetail/90111865-2f3c-4c43-8101-6f5ab546815a/,2025-09-09T18:18:41
+cars.com,2008 Nissan Sentra 2.0 S,3998,125121,Independence Auto Sale,,https://www.cars.com/vehicledetail/1b4b3d98-92e6-4d6e-9ada-f47090c20148/,2025-09-09T18:18:41
+cars.com,2011 Kia Rio LX,4450,60350,Sell My Car,,https://www.cars.com/vehicledetail/2b00a778-a810-476e-afca-40ee3126c495/,2025-09-09T18:18:41
+cars.com,2015 Volkswagen Jetta 2.0L S,3997,183272,Tom's Volkswagen of Union,,https://www.cars.com/vehicledetail/96a720ae-0c1b-4742-9dde-d8638d691e6d/,2025-09-09T18:18:41
+cars.com,2010 Land Rover LR2 HSE,4495,167115,New 2 You Car Sales,,https://www.cars.com/vehicledetail/8ad00657-5102-4e38-9b1c-20b9328440b6/,2025-09-09T18:18:51
+cars.com,2006 Toyota Corolla LE,3500,147727,Quality Autos LLC,,https://www.cars.com/vehicledetail/60de5dd2-7464-40b9-b0c9-4960061b7349/,2025-09-09T18:18:51
+cars.com,2005 Buick Century 4dr Sedan Custom,2450,118131,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/e351a306-0f5e-4fd6-b7ad-38addbe9441a/,2025-09-09T18:18:51
+cars.com,2007 Scion tC Spec Package,3800,192583,Independence Auto Sale,,https://www.cars.com/vehicledetail/4fd11d18-78d8-416c-9827-d84641ec8052/,2025-09-09T18:18:51
+cars.com,2010 Subaru Impreza Outback Sport,3500,173000,,,https://www.cars.com/vehicledetail/0c09b826-2df5-44d8-8841-466ab20a823d/,2025-09-09T18:18:51
+cars.com,2011 MINI Cooper Base,4450,140754,Auto Land Fredericksburg,,https://www.cars.com/vehicledetail/291dfe51-75f8-45ab-bf63-3422f289ee1f/,2025-09-09T18:18:51
+cars.com,2009 MINI Cooper S Base,3995,108158,DMV Automotive of Falls Church,,https://www.cars.com/vehicledetail/4fa9984b-aa2c-46be-8e4e-bd7b34c22ea7/,2025-09-09T18:18:51
+cars.com,2009 Kia Rondo LX,2195,181111,A&R Auto,,https://www.cars.com/vehicledetail/e8502075-0b6b-4bb7-bdb3-c4d5a246696c/,2025-09-09T18:18:51
+cars.com,2006 Jeep Liberty Sport,2499,160033,Buy Right Inc. Preowned Auto Sales,,https://www.cars.com/vehicledetail/98dfa49f-dd10-4f49-bb4e-4d5fa2728b29/,2025-09-09T18:18:51
+cars.com,2004 Ford Escape XLT,3300,179563,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/5e306de5-c93b-4023-9f63-b5b6af790d99/,2025-09-09T18:18:51
+cars.com,2008 Dodge Nitro SXT,4300,174226,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/de825011-a741-499f-a5c8-a9785237c44a/,2025-09-09T18:18:51
+cars.com,2010 Ford Fusion SE,3999,138521,Best Buy Auto Stop,,https://www.cars.com/vehicledetail/ae040af0-80c5-4b20-a137-2e54f6807f81/,2025-09-09T18:18:51
+cars.com,2004 Jeep Grand Cherokee Laredo,2988,158181,Route 46 Auto Inc.,,https://www.cars.com/vehicledetail/cf075049-6eb2-43c7-b715-52e087d07215/,2025-09-09T18:18:51
+cars.com,2009 Subaru Forester 2.5 X Limited,3995,151186,Global Fleet Leasing LLC,,https://www.cars.com/vehicledetail/3f8e71f9-9d31-4a19-a135-65119ea06fe7/,2025-09-09T18:18:51
+cars.com,2010 Subaru Forester 2.5 X Premium,3995,181620,Union Auto Sales,,https://www.cars.com/vehicledetail/ec503f6d-dc09-4fde-b57e-15ff00089cc1/,2025-09-09T18:18:51
+cars.com,2010 Chrysler Sebring Touring,2995,192969,Auto Haus of Irvington,,https://www.cars.com/vehicledetail/e01883a3-d162-4ab4-8164-eaa63976f71d/,2025-09-09T18:18:51
+cars.com,2008 Lincoln MKZ Base,3995,193380,National Motors of Ellicott City,,https://www.cars.com/vehicledetail/f61201ef-1b7b-435c-b45a-5ca5b99e4f04/,2025-09-09T18:18:51
+cars.com,2004 Cadillac DeVille Base,3995,137265,Big C Motors,,https://www.cars.com/vehicledetail/83edb395-e6d8-475e-9965-567a87c584cb/,2025-09-09T18:18:51
+cars.com,2008 Ford Escape XLT,3800,102413,Auto Bid Center,,https://www.cars.com/vehicledetail/e8019f7f-2e97-45ff-8989-8e493bb8ad13/,2025-09-09T18:18:51
+cars.com,2010 Volkswagen Golf 2-Door,4500,109000,,,https://www.cars.com/vehicledetail/01324a57-d1f2-4006-8cfd-25dbea923b79/,2025-09-09T18:18:51
+cars.com,2006 Toyota Avalon XLS,4499,193805,Eastern Auto Exchange,,https://www.cars.com/vehicledetail/d572896f-08ae-48e1-bd9a-f8e797dce609/,2025-09-09T18:18:51
+cars.com,2011 Hyundai TUCSON GLS,3995,195968,B & B Auto,,https://www.cars.com/vehicledetail/922ce21b-cfa1-49b4-a87b-f7221b8e6156/,2025-09-09T18:18:51
+cars.com,2008 Saturn Outlook XE,2495,185377,A&R Auto,,https://www.cars.com/vehicledetail/0d03e5d5-532b-4ef0-8abf-b7e28320e527/,2025-09-09T18:18:51
+cars.com,2008 Nissan Versa S,3500,138781,Independence Auto Sale,,https://www.cars.com/vehicledetail/80e92f88-e2b9-45a6-9158-890c51c593f8/,2025-09-09T18:18:51
+cars.com,2006 Mitsubishi Lancer ES,2300,157354,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/0b536961-3b53-4aac-91f3-8d33643443ba/,2025-09-09T18:18:51
+cars.com,2012 Subaru Legacy Base,4500,166100,Driven Imports,,https://www.cars.com/vehicledetail/3753b9f0-2d65-476e-bd41-5d058c45b1ea/,2025-09-09T18:18:51
+cars.com,2011 Mitsubishi Galant Base,3700,182286,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/eedf8939-5ed2-4b30-8a90-b19fa1fe98f6/,2025-09-09T18:18:51
+cars.com,2017 Dodge Journey SXT,3495,98807,Deals On Wheels LLC,,https://www.cars.com/vehicledetail/c1240a2e-d6fe-4528-8ad3-ffb5aebc8e0c/,2025-09-09T18:18:51
+cars.com,2007 BMW 328 xi,4200,143348,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/cbbe0c94-3735-4e75-aeee-bdd0fb7a1a48/,2025-09-09T18:18:51
+cars.com,2008 Ford Taurus SEL,2550,126962,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/d8d707fd-a18b-4c0f-be98-57a64da0a27c/,2025-09-09T18:18:51
+cars.com,2015 Mitsubishi Outlander Sport SE,4495,165007,Nemir Auto Sales,,https://www.cars.com/vehicledetail/95545763-b537-4a0d-b99a-7ba14542c219/,2025-09-09T18:18:51
+cars.com,2016 Nissan Pathfinder SV,3495,142252,A&R Auto,,https://www.cars.com/vehicledetail/eafbb0d5-f182-4bb2-905a-a3bc98d73253/,2025-09-09T18:18:51
+cars.com,2012 Dodge Charger SE,4500,173000,,,https://www.cars.com/vehicledetail/3efedbb5-eaae-4790-858a-871aeb190715/,2025-09-09T18:18:51
+cars.com,2016 FIAT 500 Pop,3195,89865,A&R Auto,,https://www.cars.com/vehicledetail/37e435a5-5976-4310-8e88-ff355d83f53c/,2025-09-09T18:18:51
+cars.com,2007 Toyota Yaris Base,3495,193414,Advantage Motors,,https://www.cars.com/vehicledetail/e6bfdaaf-3321-4992-b255-edda4e3ac4a2/,2025-09-09T18:18:51
+cars.com,2009 Nissan Murano SL,4500,140332,Ron Motor Inc.,,https://www.cars.com/vehicledetail/7e9975f3-1f64-43d2-b2ff-af91ec0fafb3/,2025-09-09T18:18:51
+cars.com,2009 Toyota Camry LE,4000,172500,,,https://www.cars.com/vehicledetail/14ce1652-6024-49de-8a1f-27eecaffc59d/,2025-09-09T18:18:51
+cars.com,2016 Nissan Versa Note S Plus,4300,128609,Stop and Drive Auto Sales,,https://www.cars.com/vehicledetail/895daa4e-7f8f-4c06-99c5-dcc6863cd0cd/,2025-09-09T18:18:51
+cars.com,2014 FIAT 500L 5dr HB Trekking,4250,154656,Stamford European Motor Sales Inc,,https://www.cars.com/vehicledetail/672dd7ee-e2bb-49b4-9baa-57d5090eee83/,2025-09-09T18:18:51
+cars.com,2007 Pontiac G6 GT,2525,156862,NJ Auto Pros,,https://www.cars.com/vehicledetail/689230bb-6a93-4c2b-a844-ed7ce0dfee10/,2025-09-09T18:18:51
+cars.com,2004 Oldsmobile Alero GLS,1895,159807,A&R Auto,,https://www.cars.com/vehicledetail/908845b4-136b-435f-a83d-8adc46c03ac6/,2025-09-09T18:18:51
+cars.com,2006 Toyota Camry Solara SE,3977,182381,Off Lease Motors,,https://www.cars.com/vehicledetail/d36b736a-fcc3-4418-a132-f2497d0d8cc2/,2025-09-09T18:18:51
+cars.com,2014 Ford C-Max Energi SEL,3999,140318,63 Auto Inc,,https://www.cars.com/vehicledetail/65ed2c6e-245e-494d-a90f-05d919b34f75/,2025-09-09T18:18:51
+cars.com,2013 Nissan Versa 1.6 SL,3995,114982,"CT Car Co, LLC",,https://www.cars.com/vehicledetail/260c209f-d168-48d1-8237-f19801f6db39/,2025-09-09T18:18:51
+cars.com,2007 Chevrolet Cobalt LT,3995,83080,B & B Auto,,https://www.cars.com/vehicledetail/19c68964-49d2-428c-bacc-a4c4730d73e7/,2025-09-09T18:18:51
+cars.com,2009 Mitsubishi Lancer ES,2495,177236,NJ Auto Pros,,https://www.cars.com/vehicledetail/481b4d27-0c83-4aaf-9cc6-ae79309b5912/,2025-09-09T18:18:51
+cars.com,2004 Chevrolet Astro Base,4500,120000,,,https://www.cars.com/vehicledetail/f66705a1-0230-4bcc-8c09-2a52d44fa443/,2025-09-09T18:18:51
+cars.com,2010 Honda Civic LX,4450,195264,DMV Auto Group,,https://www.cars.com/vehicledetail/e5f056c6-5d9e-40f8-92b3-04dd10d212aa/,2025-09-09T18:18:51
+cars.com,2005 Toyota Camry Solara SLE V6,3809,167288,Yosh Motors of Somerville,,https://www.cars.com/vehicledetail/ce02d611-2b03-4478-b3ac-c5cdbc10a6ad/,2025-09-09T18:18:51
+cars.com,2006 Nissan Murano SL,3995,181541,Kingstowne Motorcars,,https://www.cars.com/vehicledetail/c8c5d8ea-54a0-4cbb-98dc-de8beaf03325/,2025-09-09T18:18:51
+cars.com,2015 Nissan Versa 1.6 SL,3500,95030,Auto Bid Center,,https://www.cars.com/vehicledetail/fc038e4c-e282-4853-ad1a-d4933d6e6019/,2025-09-09T18:18:59
+cars.com,2010 Honda Civic EX,2750,189321,,,https://www.cars.com/vehicledetail/1dedd43d-675a-48ff-a746-1af1eba85fb0/,2025-09-09T18:18:59
+cars.com,2006 Chevrolet Uplander LS,2700,119086,,,https://www.cars.com/vehicledetail/f14b0ad8-6678-4893-88c3-5707a6c23c26/,2025-09-09T18:18:59
+cars.com,2007 Pontiac G6 Base,4497,57209,West Islip Auto Sales Inc,,https://www.cars.com/vehicledetail/2fefe6f0-a542-4b49-865b-5294cd4b5802/,2025-09-09T18:18:59
+cars.com,2012 Jeep Patriot Latitude,4495,128132,DMV Automotive of Falls Church,,https://www.cars.com/vehicledetail/cb943b7d-97de-469f-ab75-1dd0609fcb7b/,2025-09-09T18:18:59
+cars.com,2011 Hyundai ELANTRA GLS,2995,150759,PLATINUM AUTO SALES,,https://www.cars.com/vehicledetail/862c3b0d-10c0-4dd0-a3b7-21a4a9ed9a51/,2025-09-09T18:18:59
+cars.com,2015 Honda Pilot EX-L,3796,185311,VK Auto Group,,https://www.cars.com/vehicledetail/7fbc56ad-a91b-4feb-a565-0410d7b94c21/,2025-09-09T18:18:59
+cars.com,2011 Kia Forte LX,2695,125648,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/5a062869-bc22-4a1a-90f0-dd226a3a888c/,2025-09-09T18:18:59
+cars.com,2010 Mazda CX-9 Sport,2995,194576,"CT Car Co, LLC",,https://www.cars.com/vehicledetail/53ed04b5-9764-497a-82dd-ecdb0a9cb6c2/,2025-09-09T18:18:59
+cars.com,2012 Nissan Rogue S,3591,185134,Straight Motor Sales,,https://www.cars.com/vehicledetail/82765787-bed7-4cf3-b78f-9874ef6786be/,2025-09-09T18:18:59
+cars.com,2009 Dodge Caliber SXT,2949,75467,Deal Hunter Autos,,https://www.cars.com/vehicledetail/efaf89a6-153a-4bc6-ae01-09df67b4f65d/,2025-09-09T18:18:59
+cars.com,2006 Subaru B9 Tribeca Base,3991,171804,Straight Motor Sales,,https://www.cars.com/vehicledetail/3c1462c5-7a7e-4598-81fa-6124f6540105/,2025-09-09T18:18:59
+cars.com,2006 Subaru Forester 2.5X,3000,198944,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/3121f041-89f2-44a3-8ba9-3e4266015eb8/,2025-09-09T18:18:59
+cars.com,2011 Buick Enclave 2XL,2495,180044,A&R Auto,,https://www.cars.com/vehicledetail/1ec69de0-a34b-4493-99f9-4af032a86b41/,2025-09-09T18:18:59
+cars.com,2008 Volkswagen Eos Turbo,3495,186354,A&R Auto,,https://www.cars.com/vehicledetail/e541d2a0-946d-44f3-a0e3-5d18f99da986/,2025-09-09T18:18:59
+cars.com,2009 Nissan Sentra 2.0 S,4495,75893,B & B Auto,,https://www.cars.com/vehicledetail/b945d19b-e4fe-497e-852c-c4acee760e9d/,2025-09-09T18:18:59
+cars.com,2014 Honda Pilot LX,3500,130000,,,https://www.cars.com/vehicledetail/46dd098d-0eee-4cc0-89ca-611b7e58d846/,2025-09-09T18:18:59
+cars.com,2005 Volvo S40 2.4i,2985,142771,Car n Drive,,https://www.cars.com/vehicledetail/045a5432-030c-452e-8767-034f0cdf0c46/,2025-09-09T18:18:59
+cars.com,2008 Chevrolet Trailblazer LT,3999,116473,VK Auto Group,,https://www.cars.com/vehicledetail/e0afa5f7-b9da-44f0-9e27-87342d9bc6fa/,2025-09-09T18:18:59
+cars.com,2011 Nissan Sentra 2.0 S,2700,175410,,,https://www.cars.com/vehicledetail/a12ac69d-1ffd-40b8-b5db-65fa078bcab8/,2025-09-09T18:18:59
+cars.com,2014 Kia Sorento LX,3700,184500,,,https://www.cars.com/vehicledetail/c5a3fc6d-c19f-4e6a-a24c-30cfc8a87fe7/,2025-09-09T18:18:59
+cars.com,2011 Subaru Outback 2.5 i Premium,3900,114449,Jack Pfister Autos,,https://www.cars.com/vehicledetail/353f19ae-b44b-437b-b422-40d8c7279c76/,2025-09-09T18:18:59
+cars.com,2009 Nissan Sentra 2.0 SR,2800,176135,Auto Bid Center,,https://www.cars.com/vehicledetail/6edc4e47-f894-48e9-b1a2-adb6d88166de/,2025-09-09T18:18:59
+cars.com,2010 Audi A4 2.0T Premium quattro,3895,168028,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/8aa5a4a9-1d82-43b2-84a0-2e2550fe0baf/,2025-09-09T18:18:59
+cars.com,2009 Pontiac G8 Base 4dr Sedan,1495,192922,A&R Auto,,https://www.cars.com/vehicledetail/e6d9eb17-bc22-4ff8-ad3d-74774710cfc9/,2025-09-09T18:18:59
+cars.com,2006 Honda Civic LX,3000,195600,,,https://www.cars.com/vehicledetail/ee733d45-6d11-4a92-b034-4edad9ea6ff3/,2025-09-09T18:18:59
+cars.com,2004 Chrysler PT Cruiser GT,3800,47500,,,https://www.cars.com/vehicledetail/7286bb2b-cef2-4ecc-abaf-909a88996593/,2025-09-09T18:18:59
+cars.com,2014 Nissan Rogue Select S,4450,114676,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/5a5eed4e-8d26-46d9-8e3f-4345db54d17d/,2025-09-09T18:18:59
+cars.com,2010 MINI Cooper S Base,4000,120000,,,https://www.cars.com/vehicledetail/9b1bfc0a-bbc4-40a5-a954-d8e6449a1b1b/,2025-09-09T18:18:59
+cars.com,2010 Honda Ridgeline RTL,3995,197725,"CT Car Co, LLC",,https://www.cars.com/vehicledetail/81c95693-b723-4674-b680-cd169f8bf49b/,2025-09-09T18:18:59
+cars.com,2008 Ford Escape XLT,3600,164055,,,https://www.cars.com/vehicledetail/59f3294c-fedc-4f6c-880d-5cc658055126/,2025-09-09T18:18:59
+cars.com,2008 Land Rover LR2 HSE,2500,169600,,,https://www.cars.com/vehicledetail/ac03021a-c957-47bd-8bf6-40b83256ab78/,2025-09-09T18:18:59
+cars.com,2004 Ford Taurus SE,4490,115526,JC MILLER AUTO SALES INC,,https://www.cars.com/vehicledetail/999e0dbf-8540-4681-9e9f-2bafb20574b6/,2025-09-09T18:18:59
+cars.com,2010 Kia Soul +,2995,199367,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/aa1e34f3-17b1-48c8-84b6-364b84aa0187/,2025-09-09T18:18:59
+cars.com,2012 Nissan Sentra 2.0 SR,4424,160266,Toyota Universe,,https://www.cars.com/vehicledetail/ed9ea37b-94a5-421e-ad1c-e1a045262aee/,2025-09-09T18:18:59
+cars.com,2011 Ford Flex SE,4494,99152,Deal Hunter Autos,,https://www.cars.com/vehicledetail/41c0626c-f588-4e4e-92d7-fe274ffbc625/,2025-09-09T18:18:59
+cars.com,2013 Buick Enclave Premium,3999,190010,Quality Autos LLC,,https://www.cars.com/vehicledetail/6a7a49aa-3fc8-42dd-9e1d-4b7c7f78c42b/,2025-09-09T18:18:59
+cars.com,2010 Ford Edge SE,3995,162810,"CT Car Co, LLC",,https://www.cars.com/vehicledetail/950cf0fc-bffb-4820-bd13-80d7fcfcc447/,2025-09-09T18:18:59
+cars.com,2007 Hyundai SONATA GLS,2500,103000,,,https://www.cars.com/vehicledetail/9e75e4de-eb08-41da-9164-6437bae00034/,2025-09-09T18:18:59
+cars.com,2008 Nissan Pathfinder SE,4200,146825,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/e1d93482-ce7d-4e85-a062-a460cbd464fb/,2025-09-09T18:18:59
+cars.com,2010 Mazda Mazda5 Grand Touring,3100,150260,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/63669956-ecf3-424a-896f-751fb1e471a5/,2025-09-09T18:18:59
+cars.com,2004 Audi A6 2.7T quattro,4400,113377,,,https://www.cars.com/vehicledetail/977c4d0d-9236-452a-bb82-98e4f6d1fbc5/,2025-09-09T18:18:59
+cars.com,2004 Subaru Outback Base,2900,190545,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/a83946d1-756e-4f29-9c2c-d63bb0522a19/,2025-09-09T18:18:59
+cars.com,2010 Ford Focus SE,3200,171550,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/32abdb05-0029-4f92-b3ff-9f9ca7913383/,2025-09-09T18:18:59
+cars.com,2012 Kia Soul +,3200,194624,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/f624a05e-8bb1-4063-a879-de451de554de/,2025-09-09T18:18:59
+cars.com,2012 Volkswagen Jetta SE,3999,169670,DIN Motors,,https://www.cars.com/vehicledetail/b822fa71-6fd1-4e8b-b53e-5b67435f4261/,2025-09-09T18:18:59
+cars.com,2005 Nissan Titan SE Crew Cab,3000,155000,,,https://www.cars.com/vehicledetail/39091943-3801-4464-ba10-342c5353260a/,2025-09-09T18:18:59
+cars.com,2008 Ford Escape XLT,4495,111959,New 2 You Car Sales,,https://www.cars.com/vehicledetail/6655ec4f-d768-409b-b4fa-20cd7ff8f8da/,2025-09-09T18:18:59
+cars.com,2009 Chevrolet Impala LS,3450,98855,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/537f2cb5-6cfb-4048-8bf3-54b824013801/,2025-09-09T18:18:59
+cars.com,2008 Subaru Impreza 2.5i,2595,152425,Great Auto Deals,,https://www.cars.com/vehicledetail/5b80a9e1-be17-4694-8345-d1a0ba2fec5d/,2025-09-09T18:18:59
+cars.com,2013 Ford Focus SE,3990,176491,Gold Coast Cadillac,,https://www.cars.com/vehicledetail/ddb34260-1246-46ee-a5da-d42fe77d3644/,2025-09-09T18:19:07
+cars.com,2004 Ford Taurus SES,2490,195999,Automan Empire,,https://www.cars.com/vehicledetail/7d49c267-d3f1-4927-ba8e-791a81480ded/,2025-09-09T18:19:07
+cars.com,2011 Ford Fusion Sport,3980,139758,DCH Montclair Acura,,https://www.cars.com/vehicledetail/b6214498-495b-4a69-bd4f-6ffc2b386dec/,2025-09-09T18:19:07
+cars.com,2007 BMW 328 i,4000,170000,,,https://www.cars.com/vehicledetail/d66dbc2f-ee53-436c-80ec-08ad325ea338/,2025-09-09T18:19:07
+cars.com,2013 Ford Fiesta S,3800,109622,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/c47c26e1-24e0-4967-882c-0fb151462181/,2025-09-09T18:19:07
+cars.com,2004 BMW 325 xi,3200,170000,,,https://www.cars.com/vehicledetail/4dc7ecfa-284f-4223-b65a-d385874689c9/,2025-09-09T18:19:07
+cars.com,2009 Nissan Quest 3.5 S,4000,141000,,,https://www.cars.com/vehicledetail/3899b48e-4d89-45f0-b994-90ab178da8c4/,2025-09-09T18:19:07
+cars.com,2014 Jeep Compass Limited,3990,188843,MASSARI MOTORS,,https://www.cars.com/vehicledetail/589f43b2-4c36-4c09-8188-6d43a24c447b/,2025-09-09T18:19:07
+cars.com,2010 Volkswagen Jetta SE,4495,158051,New 2 You Car Sales,,https://www.cars.com/vehicledetail/4bba8d37-8bf9-4707-b4b3-d84e37a0c546/,2025-09-09T18:19:08
+cars.com,2009 Toyota Camry LE,4500,115000,,,https://www.cars.com/vehicledetail/25ac8b0e-08a7-4212-8882-ea4674849aba/,2025-09-09T18:19:08
+cars.com,2014 Nissan Juke S,4495,165839,A-Kar Auto Sales,,https://www.cars.com/vehicledetail/0552a1b9-e347-4d3a-ac75-279b8495b714/,2025-09-09T18:19:08
+cars.com,2013 Ford Escape SE,4499,113368,Auto Spot LLC,,https://www.cars.com/vehicledetail/9895ed70-ddce-4a35-aa51-1f44b96130cc/,2025-09-09T18:19:08
+cars.com,2013 Kia Forte EX,3795,123400,JDM Auto,,https://www.cars.com/vehicledetail/7ac99cf2-158a-41f5-8380-357a9ce9a760/,2025-09-09T18:19:08
+cars.com,2013 Chrysler 200 LX,4497,136736,Prize Auto,,https://www.cars.com/vehicledetail/28e43db2-d3db-4720-9dc7-d48d36a11706/,2025-09-09T18:19:08
+cars.com,2010 Honda Civic LX,4495,179693,Cars By AJ,,https://www.cars.com/vehicledetail/6f445f12-9dfd-4fd7-b2af-d4a7cd26e606/,2025-09-09T18:19:08
+cars.com,2009 Hyundai ELANTRA GLS,2450,128165,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/9fbb9e1f-e7c1-4e45-b585-801aa717a229/,2025-09-09T18:19:08
+cars.com,2006 Toyota Highlander Sport,4200,180000,,,https://www.cars.com/vehicledetail/aedaeef4-ce0c-4b6d-a393-8b0edb48f1f6/,2025-09-09T18:19:08
+cars.com,2015 Chevrolet Spark LS,2500,122000,,,https://www.cars.com/vehicledetail/d4c9fd25-3e5b-42a2-9087-6b2c6431549b/,2025-09-09T18:19:08
+cars.com,2006 Jaguar S-Type 3.0L V6,2450,98832,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/bbe871ef-b1ac-4b61-a255-1443e4fc81e2/,2025-09-09T18:19:08
+cars.com,2006 Chrysler Sebring Touring,3600,110423,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/c4d9f23b-1c39-491e-a755-87eafdb753a3/,2025-09-09T18:19:08
+cars.com,2009 Ford Fusion SEL,3000,190465,,,https://www.cars.com/vehicledetail/a047050c-6000-4e4b-9806-77499187f723/,2025-09-09T18:19:08
+cars.com,2007 Pontiac Torrent,3400,175555,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/3a3754ac-14b5-486e-9b03-981a27e4012d/,2025-09-09T18:19:08
+cars.com,2007 Audi A4 2.0T quattro,3485,162219,TSF Auto Sales,,https://www.cars.com/vehicledetail/c3cad1b5-3d84-4caa-bf14-9e7470814452/,2025-09-09T18:19:08
+cars.com,2010 Subaru Impreza 2.5 i Premium,2388,163113,Route 46 Auto Inc.,,https://www.cars.com/vehicledetail/6b327256-31ca-46de-b0eb-855a942c369f/,2025-09-09T18:19:08
+cars.com,2006 Nissan Sentra 1.8 S,1750,157456,Auto Bid Center,,https://www.cars.com/vehicledetail/96ecca19-226a-4815-a61a-10b5324a40cb/,2025-09-09T18:19:08
+cars.com,2007 Jeep Grand Cherokee Laredo,4490,140472,MASSARI MOTORS,,https://www.cars.com/vehicledetail/63ea566b-1113-42d0-b952-4d534766c206/,2025-09-09T18:19:08
+cars.com,2013 Nissan Rogue SV,3495,179705,"CT Car Co, LLC",,https://www.cars.com/vehicledetail/de3e4797-3174-4952-9a4f-5f53897c5ca2/,2025-09-09T18:19:08
+cars.com,2011 Honda Accord EX-L,4500,184992,,,https://www.cars.com/vehicledetail/2e481be6-19e1-448f-9bc5-529f4557c175/,2025-09-09T18:19:08
+cars.com,2011 Dodge Journey Mainstreet,2995,169898,A&R Auto,,https://www.cars.com/vehicledetail/d2dc8d05-e9ca-480c-ad95-94027f6e4211/,2025-09-09T18:19:08
+cars.com,2004 Mitsubishi Endeavor LS,2103,161191,Maserati of Monmouth,,https://www.cars.com/vehicledetail/54064281-59fd-404b-8f79-8d08d7f7622e/,2025-09-09T18:19:08
+cars.com,2009 Toyota Camry CE,2500,185655,,,https://www.cars.com/vehicledetail/bf02fcb8-66fb-4659-957a-36260d15909f/,2025-09-09T18:19:08
+cars.com,2010 Chevrolet Impala LS,1800,158000,,,https://www.cars.com/vehicledetail/9e6cbd1b-f899-4c31-8864-cbc2eb8e4a14/,2025-09-09T18:19:08
+cars.com,2009 Nissan Altima 2.5 S,3950,123995,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/bbffa46c-c4e0-4bf5-9bea-6cf3c33db1a2/,2025-09-09T18:19:08
+cars.com,2015 Ford Escape SE,4499,164100,,,https://www.cars.com/vehicledetail/4d786a5a-4924-453a-9489-56d519036e31/,2025-09-09T18:19:08
+cars.com,2012 Hyundai TUCSON GL,4000,128669,,,https://www.cars.com/vehicledetail/c67c0906-62f7-43c9-989f-2ea882dcec12/,2025-09-09T18:19:08
+cars.com,2006 Honda Odyssey EX-L,3499,154000,,,https://www.cars.com/vehicledetail/295b9616-cfac-4b6d-ada2-e36cce048e80/,2025-09-09T18:19:08
+cars.com,2016 Hyundai SONATA SE,3500,156000,,,https://www.cars.com/vehicledetail/efaebe67-232c-4eba-9c2b-77842c2400d2/,2025-09-09T18:19:08
+cars.com,2009 Hyundai SONATA GLS,3995,161988,Safford Brown Subaru Manassas,,https://www.cars.com/vehicledetail/8f1d3483-7bc0-489b-a111-ec7bf0c0b1b1/,2025-09-09T18:19:08
+cars.com,2007 Jeep Compass Sport,3999,140077,Carma Auto,,https://www.cars.com/vehicledetail/9084e769-cf3e-4602-9fff-96d36d8e1986/,2025-09-09T18:19:08
+cars.com,2008 Scion xD Base 4dr Hatchback 4A,3795,174551,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/3ec045ba-f634-4149-a38b-0d0cd7ad44b8/,2025-09-09T18:19:08
+cars.com,2009 Mercedes-Benz C-Class C 300 4MATIC Luxury,2250,156251,,,https://www.cars.com/vehicledetail/1ab4ebc2-6950-4156-abd4-52944bda3ec3/,2025-09-09T18:19:08
+cars.com,2010 Ford Focus S,3500,103578,,,https://www.cars.com/vehicledetail/68ef6b35-c348-4ad3-9643-cd555f7de575/,2025-09-09T18:19:08
+cars.com,2009 Toyota Camry SE,3988,180345,Enfield Street Auto Sales,,https://www.cars.com/vehicledetail/c4fcd7d3-5a49-42a6-8f3d-52b89706ff4e/,2025-09-09T18:19:08
+cars.com,2008 Chevrolet Equinox LS,3395,120654,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/d8ee0d58-3add-4353-9b02-6797c547c756/,2025-09-09T18:19:08
+cars.com,2006 Honda Pilot LX,2800,187000,,,https://www.cars.com/vehicledetail/71c4d0e5-553b-429b-8e19-e0f984dfa28c/,2025-09-09T18:19:08
+cars.com,2012 Ford Fiesta SE,4000,137489,,,https://www.cars.com/vehicledetail/05e7b83d-ba40-4ffe-af5f-a4e9d39037d3/,2025-09-09T18:19:08
+cars.com,2007 Mazda Mazda5 Sport,2995,172692,Auto Trader Wholesale,,https://www.cars.com/vehicledetail/b7522c17-a7da-4cae-9863-3dda8b1c987a/,2025-09-09T18:19:08
+cars.com,2004 Hyundai SONATA Base,2500,68328,Blue Star Cars,,https://www.cars.com/vehicledetail/c6e5cda7-3c83-47e2-9510-e04ee3ccf373/,2025-09-09T18:19:08
+cars.com,2009 Chevrolet Malibu 2LT,3500,109000,,,https://www.cars.com/vehicledetail/ddff7a1a-8449-4eff-9ce8-090ff6790cdc/,2025-09-09T18:19:08
+cars.com,2007 Toyota Corolla LE,3995,159349,"CT Car Co, LLC",,https://www.cars.com/vehicledetail/8d6d19f7-a292-4a70-a1b6-d123bbcc7f31/,2025-09-09T18:19:08
+cars.com,2012 Nissan Rogue SV,3495,177882,"CT Car Co, LLC",,https://www.cars.com/vehicledetail/cb68c6f5-d4a4-4f29-9f85-0d3674437437/,2025-09-09T18:19:28
+cars.com,2015 Kia Soul Base,4495,129930,A&R Auto,,https://www.cars.com/vehicledetail/8cf62b9a-fe22-42c6-b34b-5e3ff1789330/,2025-09-09T18:19:28
+cars.com,2008 Buick Enclave,3995,155989,"CT Car Co, LLC",,https://www.cars.com/vehicledetail/f38c8052-3f6d-4e30-b1ab-8e0e11ffbfb3/,2025-09-09T18:19:28
+cars.com,2013 FIAT 500 Pop,4368,124068,Deal Hunter Autos,,https://www.cars.com/vehicledetail/f82654c4-9554-4fae-b2e8-649c2eadc0e6/,2025-09-09T18:19:28
+cars.com,2006 Honda Accord EX-L,3995,196050,B & B Auto,,https://www.cars.com/vehicledetail/f30895c6-001c-4055-8d6e-304a3ff8aa1a/,2025-09-09T18:19:28
+cars.com,2010 Jeep Commander Sport,4100,194181,Ron Motor Inc.,,https://www.cars.com/vehicledetail/5066c932-34eb-43ca-90c9-335d945eac01/,2025-09-09T18:19:28
+cars.com,2008 Hyundai SONATA Limited,2999,183214,VK Auto Group,,https://www.cars.com/vehicledetail/f3148cd0-5cd3-4d87-95e2-39a45da6f69d/,2025-09-09T18:19:28
+cars.com,2006 Toyota Corolla LE,4162,164436,Deal Hunter Autos,,https://www.cars.com/vehicledetail/be6ef7bf-3046-4b70-9ade-56a1a6067604/,2025-09-09T18:19:28
+cars.com,2009 Hyundai SANTA FE Limited,3995,192327,Car Loft,,https://www.cars.com/vehicledetail/45e26737-0354-49f6-b257-481060438a1a/,2025-09-09T18:19:28
+cars.com,2008 Acura RDX Base,3499,146321,Carbuyus,,https://www.cars.com/vehicledetail/e12ffc14-8819-4860-b5e9-193e2a01aa01/,2025-09-09T18:19:28
+cars.com,2013 Volkswagen Jetta TDI,4500,135036,"Mancini Motors, Inc.",,https://www.cars.com/vehicledetail/daf5bfa0-a639-417a-aef6-50a7fb6ed1c9/,2025-09-09T18:19:28
+cars.com,2007 Ford Fusion SE,3494,103879,Deal Hunter Autos,,https://www.cars.com/vehicledetail/93173917-efaa-439d-a9b9-cd83e0c8c8d1/,2025-09-09T18:19:28
+cars.com,2015 Ford Focus SE,4499,145720,Aren Auto Group,,https://www.cars.com/vehicledetail/7393ce72-b5c5-4dae-ba41-6d17483d3710/,2025-09-09T18:19:28
+cars.com,2013 Hyundai ELANTRA Limited,2450,180373,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/1d19b777-ab3b-41c2-b832-aad379b01d8c/,2025-09-09T18:19:28
+cars.com,2004 BMW X3 3.0i,1950,162194,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/d09b2f36-3fe1-4dad-9759-0ff5281dfe8b/,2025-09-09T18:19:28
+cars.com,2011 Jeep Liberty Sport,2826,120992,Volkswagen of West Islip,,https://www.cars.com/vehicledetail/a18d7ee1-6d8d-4145-a426-72839986cf52/,2025-09-09T18:19:28
+cars.com,2015 Hyundai ELANTRA SE,4495,171439,A&R Auto,,https://www.cars.com/vehicledetail/69c61c46-2e90-4ecf-bde4-ad22ecff6a35/,2025-09-09T18:19:28
+cars.com,2007 BMW 328 328XI 4 DOOR SEDAN 3.0L 6 CYL,3195,127638,A Impuls,,https://www.cars.com/vehicledetail/50aafb15-431e-4c1e-aa2a-128e18bea6df/,2025-09-09T18:19:28
+cars.com,2015 Nissan Versa Note SV,3300,158166,,,https://www.cars.com/vehicledetail/3cc8efdf-9811-45c5-a1c6-f8bb2165a9fd/,2025-09-09T18:19:28
+cars.com,2008 GMC Sierra 1500 SLE2 Extended Cab,4500,199124,Luxurious Auto Sales Inc,,https://www.cars.com/vehicledetail/2045032b-4be0-489b-82e2-5fe310f8fd32/,2025-09-09T18:19:28
+cars.com,2011 BMW X3 xDrive28i,4000,160101,Silverton Motors,,https://www.cars.com/vehicledetail/4e1c9001-abca-4f1c-ab7e-30f20a75e54f/,2025-09-09T18:19:28
+cars.com,2008 Buick Lucerne CX,3950,137139,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/ed4a6aef-ef73-4d19-94ea-bd86fba727bc/,2025-09-09T18:19:28
+cars.com,2007 Hyundai Accent SE,4480,115850,Rev Auto Wholesalers,,https://www.cars.com/vehicledetail/db28467c-0b17-4fb2-943c-fbbfc15a8921/,2025-09-09T18:19:28
+cars.com,2010 Nissan Sentra 2.0 SR,3999,118371,"A-1 Auto Sales, LLC",,https://www.cars.com/vehicledetail/ecfb2c18-263f-43c1-b47b-283ea759fc86/,2025-09-09T18:19:28
+cars.com,2005 Honda Odyssey Touring,2695,198413,A&R Auto,,https://www.cars.com/vehicledetail/5b099060-edaa-4583-b1a5-a20d2f5e28e6/,2025-09-09T18:19:28
+cars.com,2012 Chevrolet Sonic 2LT,2999,155858,VNC Inc.,,https://www.cars.com/vehicledetail/6960e57b-ad91-45c0-b382-c92250129c7f/,2025-09-09T18:19:28
+cars.com,2013 Ford Edge SEL,3995,196656,Best Value Autos,,https://www.cars.com/vehicledetail/4683f37c-f0db-4747-99d7-cbd6e943bfb7/,2025-09-09T18:19:28
+cars.com,2011 Chevrolet Cruze LS,3250,122314,,,https://www.cars.com/vehicledetail/e226ed24-e4da-41d0-9490-55bc716e294b/,2025-09-09T18:19:28
+cars.com,2008 Ford Taurus SEL,3270,129500,,,https://www.cars.com/vehicledetail/0f6e7d98-91fb-4631-842e-3ee26af69d93/,2025-09-09T18:19:28
+cars.com,2006 Nissan Frontier SE Crew Cab,4450,171869,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/dc187c35-3ba6-4be8-b976-fdf53ab0c5ca/,2025-09-09T18:19:28
+cars.com,2012 Hyundai ELANTRA GLS,3700,151826,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/d66f0c80-224c-49b4-91e6-e0d6db465103/,2025-09-09T18:19:28
+cars.com,2012 Hyundai Elantra Touring SE,3900,111085,Jack Pfister Autos,,https://www.cars.com/vehicledetail/5cc70a15-154a-4de0-b127-0222777fe4e8/,2025-09-09T18:19:28
+cars.com,2013 Hyundai ELANTRA Limited,3950,155732,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/4616c7ed-a2e8-4956-8d32-7b9722bfa0b5/,2025-09-09T18:19:28
+cars.com,2008 Jeep Patriot Sport,4399,131646,Ramsey Corp. Com,,https://www.cars.com/vehicledetail/cacd8bdf-f2c7-4f24-9cd2-7673f686bacd/,2025-09-09T18:19:28
+cars.com,2011 Kia Soul +,3999,160903,Independence Auto Sale,,https://www.cars.com/vehicledetail/13df63bc-5940-45c4-ab01-2bc74b27383e/,2025-09-09T18:19:28
+cars.com,2005 Dodge Durango Limited,2999,140650,VK Auto Group,,https://www.cars.com/vehicledetail/4640650b-aefc-467a-8e0f-34946df52fdc/,2025-09-09T18:19:28
+cars.com,2004 Mercedes-Benz E-Class E320 4MATIC,3000,177000,,,https://www.cars.com/vehicledetail/cab70c03-1d1f-470a-a10a-3ed8f5042c41/,2025-09-09T18:19:28
+cars.com,2010 Honda CR-V EX-L,4499,190666,Auto Spot LLC,,https://www.cars.com/vehicledetail/e3c9e572-e85b-4354-b38e-3d98371175ad/,2025-09-09T18:19:28
+cars.com,2007 Chevrolet Cobalt LS,2300,160523,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/cd8b3a6c-103c-4be5-9de4-6ed9fe361b5a/,2025-09-09T18:19:28
+cars.com,2005 Dodge Stratus SXT,3500,134455,Deal Hunter Autos,,https://www.cars.com/vehicledetail/2e687bbe-6aea-48b6-a880-09c535600773/,2025-09-09T18:19:28
+cars.com,2008 Chevrolet Equinox LS,2000,190852,Jack Pfister Autos,,https://www.cars.com/vehicledetail/5d822da5-0a09-4562-a4bc-7a172cabdc49/,2025-09-09T18:19:28
+cars.com,2012 Subaru Forester 2.5X Premium,3000,178997,Silverton Motors,,https://www.cars.com/vehicledetail/4c5b848a-3743-4861-8f39-025d069297ce/,2025-09-09T18:19:28
+cars.com,2013 Chevrolet Impala LT,3650,153220,Quality Autos LLC,,https://www.cars.com/vehicledetail/aa92d35c-819e-431f-9076-ee38b2e1886c/,2025-09-09T18:19:28
+cars.com,2009 Toyota Camry SE,3999,162318,Metro Auto Exchange Inc.,,https://www.cars.com/vehicledetail/99d1c0bb-383c-478a-b222-57bb5c329b4f/,2025-09-09T18:19:28
+cars.com,2015 Hyundai Accent GLS,4499,124562,Carbuyus,,https://www.cars.com/vehicledetail/6cce1ecb-fc60-4cce-a844-a87bd547b93f/,2025-09-09T18:19:28
+cars.com,2015 Dodge Journey Crossroad,4500,159587,Silverton Motors,,https://www.cars.com/vehicledetail/e9922b16-9b34-4c16-bb25-2442ced085fc/,2025-09-09T18:19:28
+cars.com,2012 Jeep Patriot Sport,3495,179925,Golden Motors LLC,,https://www.cars.com/vehicledetail/62113674-a4b7-4dc1-bc82-3484f23baf44/,2025-09-09T18:19:28
+cars.com,2013 Volvo S60 T5 Premier,3990,166606,American Standard Auto Group Inc,,https://www.cars.com/vehicledetail/8b3336d2-b0ae-4ea8-9f29-2ab4d5445753/,2025-09-09T18:19:28
+cars.com,2012 Nissan Leaf SL,3899,65658,Universal Autos,,https://www.cars.com/vehicledetail/8cc12780-c3d7-471d-b4cf-8256dd31ee32/,2025-09-09T18:19:28
+cars.com,2013 Chevrolet Impala LT,3999,136920,Carbuyus,,https://www.cars.com/vehicledetail/b2eeb3d2-f226-4ed2-bc6f-4f0b940a4b50/,2025-09-09T18:19:28
+cars.com,2012 Mazda Mazda3 i Touring,3750,161919,Prime Motors LLC,,https://www.cars.com/vehicledetail/2e9c307d-ef26-4953-ab1c-058c1b7b6de3/,2025-09-09T18:19:37
+cars.com,2004 Hyundai SANTA FE GLS,1450,168141,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/b561858d-7146-4078-a552-b1a9392de3c9/,2025-09-09T18:19:37
+cars.com,2012 Nissan Juke SV,3495,164672,JDM Auto,,https://www.cars.com/vehicledetail/94589c7b-c7d8-4e8a-8cd6-6a69b41dcfc9/,2025-09-09T18:19:37
+cars.com,2004 Ford Focus SE,4150,179855,Maserati of Monmouth,,https://www.cars.com/vehicledetail/016001a3-c167-4511-87cb-7ebacd3fbfa2/,2025-09-09T18:19:37
+cars.com,2006 Ford Focus ZX4 S,3749,105469,Shore Motor Group,,https://www.cars.com/vehicledetail/cb5b707a-7c9b-4667-b2ef-94c6f0425635/,2025-09-09T18:19:37
+cars.com,2012 Hyundai Accent SE,3695,186863,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/c36f27b7-10c6-43c1-8011-54f8fe26e453/,2025-09-09T18:19:37
+cars.com,2010 Audi A6 3.0T Prestige Quattro,3795,160664,Cars By AJ,,https://www.cars.com/vehicledetail/ba15144b-f56b-4763-908e-bb2d2aebaf01/,2025-09-09T18:19:37
+cars.com,2005 Chevrolet Silverado 1500 W/T,2950,193683,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/ef502aa1-d6fc-4b53-829e-5c76b606f453/,2025-09-09T18:19:37
+cars.com,2009 Hyundai SANTA FE GLS,3495,174926,Noble Pre-Owned Auto Sales,,https://www.cars.com/vehicledetail/ad56405d-fae4-47a3-a947-668b7eaef1e8/,2025-09-09T18:19:37
+cars.com,2007 Honda Fit Sport,4300,183171,Ron Motor Inc.,,https://www.cars.com/vehicledetail/10716e80-eeda-4b31-baf0-b32e2d3550f0/,2025-09-09T18:19:37
+cars.com,2005 Nissan Maxima SE,3999,112174,Auto Heaven Inc,,https://www.cars.com/vehicledetail/9f1a79b6-c25e-4e9b-89af-2b5af2ca24e3/,2025-09-09T18:19:37
+cars.com,2006 Honda Odyssey EX-L,3450,145338,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/5f7ca263-a874-4031-9aca-16c6ae2f7698/,2025-09-09T18:19:37
+cars.com,2005 Honda Odyssey EX-L,1950,196023,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/bf7cb77c-a7e1-4b70-8ab3-562e80150728/,2025-09-09T18:19:37
+cars.com,2009 Mercedes-Benz C-Class C300,4493,150206,Automan Empire,,https://www.cars.com/vehicledetail/b4e51676-c2a7-44fd-87e6-6b0776c7a7de/,2025-09-09T18:19:37
+cars.com,2009 Ford Edge SE,3900,173938,Jack Pfister Autos,,https://www.cars.com/vehicledetail/498a03f5-7b6d-4548-bf26-4c02a8f1a865/,2025-09-09T18:19:37
+cars.com,2007 Subaru Outback 2.5 i,3999,139867,63 Auto Inc,,https://www.cars.com/vehicledetail/29a6d3d2-3294-44da-838b-1f0e5d26038b/,2025-09-09T18:19:37
+cars.com,2011 Chevrolet Cruze ECO,2500,177710,Vans Vans Vans,,https://www.cars.com/vehicledetail/6b72f187-8bba-4650-8a3f-2fa7c2717b4f/,2025-09-09T18:19:37
+cars.com,2004 Jeep Grand Cherokee Laredo,3480,128255,Rev Auto Wholesalers,,https://www.cars.com/vehicledetail/d6b5c601-f5e4-49c7-ae93-f95f5ee17a93/,2025-09-09T18:19:37
+cars.com,2008 Toyota Sienna LE,4500,164632,Jack Pfister Autos,,https://www.cars.com/vehicledetail/688b868b-53bf-42bf-af62-0ffbb81ceb45/,2025-09-09T18:19:37
+cars.com,2011 Ford Fiesta S,3100,174298,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/09c4dc38-e69d-426b-96fc-57cfbcb69b75/,2025-09-09T18:19:37
+cars.com,2004 Mercedes-Benz E-Class 4MATIC,3980,161917,Rev Auto Wholesalers,,https://www.cars.com/vehicledetail/9ff08d78-55ba-43c0-970f-2e70890a688e/,2025-09-09T18:19:37
+cars.com,2011 Mazda Mazda3 i Sport,2500,174514,,,https://www.cars.com/vehicledetail/b81ebd3e-08ac-496b-8615-19e853af13c2/,2025-09-09T18:19:37
+cars.com,2011 Subaru Impreza 2.5 i,3895,182110,Cars Trend LLC,,https://www.cars.com/vehicledetail/889031ce-99c0-4061-a778-c5102a9f2065/,2025-09-09T18:19:37
+cars.com,2009 Saab 9-3 Aero,3000,172000,,,https://www.cars.com/vehicledetail/dc41224a-c887-4b23-886a-7f8e90f9779a/,2025-09-09T18:19:37
+cars.com,2006 Hyundai SONATA GLS,2998,149846,Independence Auto Sale,,https://www.cars.com/vehicledetail/a1b8df5d-ee0d-4a88-9ea9-47d904e1d720/,2025-09-09T18:19:37
+cars.com,2005 Honda CR-V EX,3995,163948,5 Towns Drive,,https://www.cars.com/vehicledetail/cdba62f2-84e7-416e-871f-605ce35d1664/,2025-09-09T18:19:37
+cars.com,2014 Nissan Versa 1.6 SL,4481,135270,H & R Auto,,https://www.cars.com/vehicledetail/2f8ab207-a3a6-4ecd-bddd-b1d0f35a6aba/,2025-09-09T18:19:37
+cars.com,2013 Mazda Mazda3 i Sport,4450,185583,95 Motors,,https://www.cars.com/vehicledetail/d019280b-a9ea-4f51-b1c6-e11939192b9e/,2025-09-09T18:19:37
+cars.com,2012 Chevrolet Sonic 2LT,3788,159440,Brick City Motors,,https://www.cars.com/vehicledetail/e6473409-2b14-4afb-80d4-2ce97e18ecde/,2025-09-09T18:19:37
+cars.com,2007 Honda Odyssey EX,4500,118834,Blue Star Cars,,https://www.cars.com/vehicledetail/f9d135ad-dd00-48d7-bdfa-071a083f6a65/,2025-09-09T18:19:37
+cars.com,2012 FIAT 500 Pop,4495,96471,DMV Automotive of Falls Church,,https://www.cars.com/vehicledetail/c9af32b9-1b38-42b0-80a2-9ab8d0d17996/,2025-09-09T18:19:37
+cars.com,2004 Subaru Forester 2.5 X,3717,169421,Bridge Auto Group,,https://www.cars.com/vehicledetail/55585e58-baa4-4b09-ae6a-f7a96dac2fe8/,2025-09-09T18:19:37
+cars.com,2010 Hyundai Accent GS,2788,165294,Brick City Motors,,https://www.cars.com/vehicledetail/8bcf14ba-7045-4f5f-974a-a971a5d1ce38/,2025-09-09T18:19:37
+cars.com,2009 Chrysler Town & Country Touring,3995,149692,Auto World,,https://www.cars.com/vehicledetail/bc7b5c89-2b6b-4900-8ec0-d3fe4bc8bdc5/,2025-09-09T18:19:37
+cars.com,2012 Ford Focus SE,3995,146728,Genesis Auto & Truck Sales,,https://www.cars.com/vehicledetail/e1311ad4-6dd2-48af-8fdf-d6585364e7e4/,2025-09-09T18:19:37
+cars.com,2005 Hyundai ELANTRA GLS,3995,90885,Certified MotorCars,,https://www.cars.com/vehicledetail/bad6c189-0415-4a3c-ba67-6eb625993864/,2025-09-09T18:19:37
+cars.com,2005 Cadillac SRX V6,4300,177924,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/ed0a8fe5-c648-44e5-9797-8178023b8916/,2025-09-09T18:19:37
+cars.com,2011 Nissan Pathfinder LE,3450,184659,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/90d3dd5e-26bc-44fa-9cef-21eac77d4275/,2025-09-09T18:19:37
+cars.com,2008 Scion tC Base,4491,199881,Cars of Rockville,,https://www.cars.com/vehicledetail/38224d92-07b3-44c8-b840-d154bf4cd04d/,2025-09-09T18:19:37
+cars.com,2007 Mercury Mariner Luxury,2195,195074,A&R Auto,,https://www.cars.com/vehicledetail/247877f6-092b-4a5e-81b6-a519c5a771a6/,2025-09-09T18:19:37
+cars.com,2012 MINI Cooper S Base,4495,126626,101 Motors LLC,,https://www.cars.com/vehicledetail/fc6e1871-1b21-4203-b95a-ffeb6d1068c8/,2025-09-09T18:19:37
+cars.com,2013 Kia Forte EX,2499,193085,,,https://www.cars.com/vehicledetail/c744b112-6e45-4413-9f06-07086add4f1e/,2025-09-09T18:19:37
+cars.com,2009 Nissan Versa 1.6,4250,89070,Magic Auto Sales,,https://www.cars.com/vehicledetail/f27531c3-54e0-4d10-8373-b3525e8ffbe8/,2025-09-09T18:19:37
+cars.com,2013 Hyundai SONATA SE 2.0T,3988,190500,Maserati of Bergen County,,https://www.cars.com/vehicledetail/e274d265-a009-49ab-8f3f-5b3a3fefe896/,2025-09-09T18:19:37
+cars.com,2004 Ford Explorer XLT,3999,141886,Carbuyus,,https://www.cars.com/vehicledetail/aaf637e7-29d4-40de-a0ae-e1e4607c67de/,2025-09-09T18:19:37
+cars.com,2015 Ford Fusion SE,4395,97797,Jerry Morese Auto Sales,,https://www.cars.com/vehicledetail/1628852c-573a-415a-86a4-8612c60dcb2a/,2025-09-09T18:19:37
+cars.com,2013 Subaru Impreza 2.0i Premium,3500,163145,Blue Star Cars,,https://www.cars.com/vehicledetail/4b801d61-0715-42e6-b7c3-b3ef9c981440/,2025-09-09T18:19:37
+cars.com,2011 Ford Fusion Sport,3953,167352,Kelly Buick GMC,,https://www.cars.com/vehicledetail/f7366391-db92-41d6-9529-5dc7b7fc02bd/,2025-09-09T18:19:37
+cars.com,2009 Jeep Compass Sport,3599,115865,Mini of Ramsey,,https://www.cars.com/vehicledetail/f231e879-e1ee-455c-9d1c-e4697b7b2a63/,2025-09-09T18:19:37
+cars.com,2013 Chevrolet Sonic LT,3999,146908,Premier Automotive,,https://www.cars.com/vehicledetail/60a7c947-fe79-4352-977d-c40cdeae1dbe/,2025-09-09T18:19:37
+cars.com,2013 Nissan Leaf S,4488,53758,Prime Wheels LLC,,https://www.cars.com/vehicledetail/1a8ce6c7-c34e-4be1-a46a-7dcbf1c49ecf/,2025-09-09T18:19:46
+cars.com,2008 Volvo XC90 AWD 4dr I6 w/Snrf/3rd Row,2450,171784,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/221c68ec-5d37-4198-aadd-872316e8ad74/,2025-09-09T18:19:46
+cars.com,2008 Toyota RAV4 Sport,4495,170500,Samra Autos,,https://www.cars.com/vehicledetail/3a00dde2-0163-4de9-ac51-e81b6644b213/,2025-09-09T18:19:46
+cars.com,2006 Dodge Durango SLT,3988,127648,Brick City Motors,,https://www.cars.com/vehicledetail/2598264b-ed6c-46b0-808a-86c325380637/,2025-09-09T18:19:46
+cars.com,2014 Nissan Rogue Select S,4497,137239,West Islip Auto Sales Inc,,https://www.cars.com/vehicledetail/e3af51f1-eef6-4f02-8556-3a4260dcee17/,2025-09-09T18:19:46
+cars.com,2013 Hyundai Accent SE,4445,88099,North Jersey Motors,,https://www.cars.com/vehicledetail/a2eaca79-6b14-429f-9ace-c67bde8ec579/,2025-09-09T18:19:46
+cars.com,2011 Hyundai Veracruz GLS,3450,139781,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/6b2a348a-5a02-4a84-bee6-8d9203e397e2/,2025-09-09T18:19:46
+cars.com,2013 Hyundai Accent SE,3399,170831,Auto Spot of Mountain Lakes,,https://www.cars.com/vehicledetail/064c8b42-a057-4573-9fdb-69e22a040ed1/,2025-09-09T18:19:46
+cars.com,2010 Honda Odyssey EX,4495,165289,Easy Credit of Jersey,,https://www.cars.com/vehicledetail/e31cf5e8-ff5a-49a9-87b0-517608be2cd5/,2025-09-09T18:19:46
+cars.com,2005 Ford Escape Base,1950,192841,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/f2c326c3-ed05-46f6-bd30-e92e5589dd0e/,2025-09-09T18:19:46
+cars.com,2006 Mercedes-Benz C-Class Sport,3995,108716,DMV Automotive of Falls Church,,https://www.cars.com/vehicledetail/d55b152d-2804-4bba-a2a3-cc8207d40bba/,2025-09-09T18:19:46
+cars.com,2004 Ford Explorer XLT,3911,123679,Kelly Buick GMC,,https://www.cars.com/vehicledetail/fe8664cf-2b4a-4d86-b49a-a161692afa68/,2025-09-09T18:19:46
+cars.com,2006 Kia Sportage LX,3995,184000,Gene Scatena Auto Sales,,https://www.cars.com/vehicledetail/3c8665a9-2c52-4ccb-8a40-9e1395771e7c/,2025-09-09T18:19:46
+cars.com,2010 MINI Cooper S Base,3985,119926,NY Auto Find,,https://www.cars.com/vehicledetail/60b9cc59-cf73-4b9a-b88c-4811b9d69173/,2025-09-09T18:19:46
+cars.com,2010 Chevrolet Malibu LT,3997,143512,OtoCity LLC,,https://www.cars.com/vehicledetail/22fc2bc7-a2b3-4581-98a3-60348c7c7c48/,2025-09-09T18:19:46
+cars.com,2008 Toyota Sienna LE,4250,120735,Brick City Motors,,https://www.cars.com/vehicledetail/3b92f1a8-bc42-4bb9-81a1-4f0c97e40721/,2025-09-09T18:19:46
+cars.com,2005 Hyundai TUCSON LX,4495,144720,Big C Motors,,https://www.cars.com/vehicledetail/7e828478-0d29-4aa9-81d2-8a6d56476fb4/,2025-09-09T18:19:46
+cars.com,2006 Hyundai SONATA GL,3995,92144,B & B Auto,,https://www.cars.com/vehicledetail/fd52ad52-6a86-48e2-abb8-da9c617d259c/,2025-09-09T18:19:46
+cars.com,2009 Hyundai Elantra Touring,4400,160384,CMA's Chevrolet of Martinsburg,,https://www.cars.com/vehicledetail/f3a5db1e-d225-431f-be89-e2f63a785ced/,2025-09-09T18:19:46
+cars.com,2012 Chevrolet Equinox 1LT,3600,153402,Ron Motor Inc.,,https://www.cars.com/vehicledetail/259eab5e-8327-48c8-a654-227ce99d4f3c/,2025-09-09T18:19:46
+cars.com,2007 Honda Civic EX,4495,199019,JDM Auto,,https://www.cars.com/vehicledetail/43767a15-a805-44e7-a4c2-fc9d136ec799/,2025-09-09T18:19:46
+cars.com,2006 Ford Escape Limited,3600,181750,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/82a57238-0088-4a3e-bc81-e42ed1469923/,2025-09-09T18:19:46
+cars.com,2012 Kia Soul Base,4250,119988,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/8a96d17a-9cfd-49a7-a117-919eeede4c51/,2025-09-09T18:19:46
+cars.com,2012 Honda Accord SE,4495,190987,B & B Auto,,https://www.cars.com/vehicledetail/e77ccadc-892d-45e7-9d25-a6523aa97487/,2025-09-09T18:19:46
+cars.com,2011 Nissan Altima 2.5 SL,3999,140325,"A-1 Auto Sales, LLC",,https://www.cars.com/vehicledetail/d5b97b7f-8fea-4caa-bb83-ba6b4752b5fb/,2025-09-09T18:19:46
+cars.com,2013 Nissan Pathfinder SL,3895,188254,Car n Drive,,https://www.cars.com/vehicledetail/0746efdc-c5cc-413d-af86-13f60595849e/,2025-09-09T18:19:46
+cars.com,2014 Chevrolet Malibu 1LS,4488,193217,Brick City Motors,,https://www.cars.com/vehicledetail/a120ee98-5b1f-4b92-829c-eb4272c95090/,2025-09-09T18:19:46
+cars.com,2011 Chevrolet Equinox LT,4487,158035,Speedway Motors LLC,,https://www.cars.com/vehicledetail/ad685e3d-436a-407b-9a75-ed9695c5d8f1/,2025-09-09T18:19:46
+cars.com,2006 Chevrolet Equinox LT,3999,121554,Quality Autos LLC,,https://www.cars.com/vehicledetail/303f6d7c-5724-4da4-9591-a819387737f7/,2025-09-09T18:19:46
+cars.com,2014 Chevrolet Cruze 1LT,3950,147704,Auto Haus of Irvington,,https://www.cars.com/vehicledetail/a9d154dc-705d-4e93-9ddc-00aaeff314ed/,2025-09-09T18:19:46
+cars.com,2011 Subaru Legacy Premium,3450,161065,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/2f71210a-d07e-4879-b11e-53ba9af38e1a/,2025-09-09T18:19:46
+cars.com,2012 Volvo S60 T6,4200,168719,Ron Motor Inc.,,https://www.cars.com/vehicledetail/3468f907-d309-4cec-88c1-437293d23444/,2025-09-09T18:19:46
+cars.com,2009 Nissan Murano S,3488,130302,Brick City Motors,,https://www.cars.com/vehicledetail/9a1f59a6-bc07-4d7f-894e-805d1a078178/,2025-09-09T18:19:46
+cars.com,2010 Mazda Mazda3 s Sport,4499,127143,Carbuyus,,https://www.cars.com/vehicledetail/074a9839-ba47-4c3f-9857-df504e492632/,2025-09-09T18:19:46
+cars.com,2015 Nissan Sentra SV,3995,187614,A&R Auto,,https://www.cars.com/vehicledetail/2a691b49-c4fd-4fee-9165-d0b41b644972/,2025-09-09T18:19:46
+cars.com,2010 Chevrolet Malibu LT,3495,107000,DND Auto Group,,https://www.cars.com/vehicledetail/311c826b-a441-4a65-b251-d90997499b2f/,2025-09-09T18:19:46
+cars.com,2012 Chrysler 200 Touring,3991,133490,CarPoint Auto Group,,https://www.cars.com/vehicledetail/6fc00925-b1ae-4b0c-ad45-f8ee120a1425/,2025-09-09T18:19:46
+cars.com,2013 Volvo XC90 3.2 Premier Plus,4297,146472,West Islip Auto Sales Inc,,https://www.cars.com/vehicledetail/806bb6f7-80b2-4f5d-9235-65150a6b2b95/,2025-09-09T18:19:46
+cars.com,2007 Hyundai SANTA FE GLS,3700,105474,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/5677c0d6-0c7d-4289-bf84-a0d977d869ef/,2025-09-09T18:19:46
+cars.com,2005 Honda Civic Hybrid Base,3999,145598,Brooklyn Auto Mall,,https://www.cars.com/vehicledetail/07783141-55e0-4264-aa75-f52bed9f6a24/,2025-09-09T18:19:46
+cars.com,2010 Toyota Prius V,3999,168930,"A-1 Auto Sales, LLC",,https://www.cars.com/vehicledetail/83ab5cd2-6c5a-4603-ab38-ef9b97103851/,2025-09-09T18:19:46
+cars.com,2014 Volkswagen Tiguan 4MOTION Auto SE,2995,150139,Toms River Volkswagen,,https://www.cars.com/vehicledetail/3c7bab50-bedb-497b-bb84-5de42057e766/,2025-09-09T18:19:46
+cars.com,2007 Pontiac G6 GT,2995,145010,New 2 You Car Sales,,https://www.cars.com/vehicledetail/f16ab98b-16c1-4309-b669-da765e0215a1/,2025-09-09T18:19:46
+cars.com,2013 Mitsubishi Outlander Sport SE,2950,191646,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/fa4bc9fe-46ac-4b3e-b97e-c22ab6e4c35e/,2025-09-09T18:19:46
+cars.com,2005 Toyota Camry LE V6,3995,162436,B & B Auto,,https://www.cars.com/vehicledetail/e62569ef-ce92-4db5-ab30-000ffa0f64ec/,2025-09-09T18:19:46
+cars.com,2015 Mitsubishi Mirage ES,4250,121468,Prime Motors LLC,,https://www.cars.com/vehicledetail/d934aade-2baa-4ad3-a34d-2c642b9a8ab6/,2025-09-09T18:19:46
+cars.com,2010 Subaru Impreza 2.5 i Premium,3800,142740,Auto Bid Center,,https://www.cars.com/vehicledetail/3a802e22-3e75-40b7-bf0e-cc768ae8e1be/,2025-09-09T18:19:46
+cars.com,2008 Honda Pilot EX-L,3988,162841,Brick City Motors,,https://www.cars.com/vehicledetail/a75a8389-6f37-4fc4-9f15-f0118784683e/,2025-09-09T18:19:46
+cars.com,2009 Nissan Rogue SL,2000,195455,NJ State Auto Used Cars,,https://www.cars.com/vehicledetail/d99c20a0-b749-48ef-bd05-171deaef36e7/,2025-09-09T18:19:46
+cars.com,2015 Mitsubishi Mirage DE,3995,103373,Global Pre-Owned Auto Sales,,https://www.cars.com/vehicledetail/9f6a9f9e-0632-41c1-b5fd-b827fc936a2b/,2025-09-09T18:19:46
+cars.com,2015 Nissan Rogue S,3995,178528,B & B Auto,,https://www.cars.com/vehicledetail/a8ebb622-2966-422f-9e08-ef9a8715d106/,2025-09-09T18:19:53
+cars.com,2011 Mazda Mazda6 i Sport,3400,129385,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/56a1ec93-dd2e-456f-a2de-e73d41192dd8/,2025-09-09T18:19:53
+cars.com,2014 Kia Forte LX,4499,120299,Auto Spot LLC,,https://www.cars.com/vehicledetail/84204257-7c36-4e40-87d6-5edcfea2453d/,2025-09-09T18:19:53
+cars.com,2012 Volkswagen Jetta GLI,4050,155433,Prime Motors LLC,,https://www.cars.com/vehicledetail/8a475ae7-2a11-4fd7-a69e-3bf8d8121c4f/,2025-09-09T18:19:53
+cars.com,2008 Volkswagen Eos 2.0T,3988,172682,Brick City Motors,,https://www.cars.com/vehicledetail/9f2b9ea5-9d34-49fc-8445-3752fba666e3/,2025-09-09T18:19:53
+cars.com,2012 Nissan Versa 1.8 S,4495,114302,Metro Auto Exchange Inc.,,https://www.cars.com/vehicledetail/d01b8825-84a2-4c3f-87f3-2e47004e629a/,2025-09-09T18:19:53
+cars.com,2010 Ford Focus SE,1950,132321,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/6ea959ed-4cd0-4a2d-a725-29a6ad84c705/,2025-09-09T18:19:53
+cars.com,2013 Nissan Rogue S,2995,184068,A&R Auto,,https://www.cars.com/vehicledetail/b42b361d-01a9-498c-9d95-4a2f62936bcb/,2025-09-09T18:19:53
+cars.com,2013 FIAT 500 Pop,3250,109141,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/0ed596dd-c214-4588-9589-cdd9af425112/,2025-09-09T18:19:53
+cars.com,2004 Chevrolet Aveo Base 4dr Sedan,2999,195622,Ron Motor Inc.,,https://www.cars.com/vehicledetail/2bd32931-71f0-48b8-910d-d80589384d63/,2025-09-09T18:19:53
+cars.com,2008 Honda Civic LX,4500,185636,Stop and Drive Auto Sales,,https://www.cars.com/vehicledetail/9f3c901e-46f5-45ad-90ed-58baebece8a0/,2025-09-09T18:19:53
+cars.com,2009 Audi Q7 3.6 Premium,4488,163838,Brick City Motors,,https://www.cars.com/vehicledetail/c228f0e8-c99e-478c-8845-5cc57a8c48ad/,2025-09-09T18:19:53
+cars.com,2005 Ford F-150 Lariat SuperCab,2995,189057,A&R Auto,,https://www.cars.com/vehicledetail/73daf555-7820-44a4-adb9-dab16078fdfb/,2025-09-09T18:19:53
+cars.com,2006 Audi A4 2.0T quattro,2800,187286,Auto Bid Center,,https://www.cars.com/vehicledetail/985f5d86-fd69-4a25-ae3c-92e3542e2886/,2025-09-09T18:19:53
+cars.com,2009 Chevrolet Aveo LT,3299,124671,Ramsey Corp. Com,,https://www.cars.com/vehicledetail/ea732a50-e3a8-4f61-a922-d9fd1c14d9db/,2025-09-09T18:19:53
+cars.com,2012 Kia Sedona LX,3499,189589,Auto Spot LLC,,https://www.cars.com/vehicledetail/b0996cb2-c20c-4d8a-b9b9-177c3d9cae5e/,2025-09-09T18:19:53
+cars.com,2012 Kia Soul Base,4499,105587,Magic Auto Sales,,https://www.cars.com/vehicledetail/f96b8794-214f-460d-a3f9-2e03b7bfb599/,2025-09-09T18:19:53
+cars.com,2004 Chevrolet Blazer LS,3995,121580,Cars R Us Auto Sales,,https://www.cars.com/vehicledetail/78887514-6ed0-4434-9f35-3cc695ce7aae/,2025-09-09T18:19:53
+cars.com,2012 FIAT 500 Sport,3350,137680,Prime Motors LLC,,https://www.cars.com/vehicledetail/0c545b10-f58b-45a3-b342-177d57821f84/,2025-09-09T18:19:53
+cars.com,2007 Hyundai SONATA GLS,2995,190298,101 Motors LLC,,https://www.cars.com/vehicledetail/b913484d-332d-4002-bfc2-c8f3038bd9f5/,2025-09-09T18:19:53
+cars.com,2012 Subaru Impreza 2.0i Premium,3100,167049,Pre-Owned Cars of York,,https://www.cars.com/vehicledetail/0120094a-3495-4a5b-8417-8c198c883cd8/,2025-09-09T18:19:53
+cars.com,2013 Dodge Journey SXT,3450,193189,NJ Auto Pros,,https://www.cars.com/vehicledetail/02a4e591-6883-432a-ba92-78d4ee14b2be/,2025-09-09T18:19:53
+cars.com,2007 Jeep Grand Cherokee Laredo,1950,147605,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/daf86b7c-ac5e-4ce9-be04-aa7b90d517e9/,2025-09-09T18:19:53
+cars.com,2013 MINI Hardtop Cooper,3750,164335,Prime Motors LLC,,https://www.cars.com/vehicledetail/649e418c-ff52-4b98-8433-f6a6e2fc63db/,2025-09-09T18:19:53
+cars.com,2011 Mitsubishi Outlander Sport ES,3746,194651,Bridge Auto Group,,https://www.cars.com/vehicledetail/5d250712-c19a-4935-ba53-ebf98edcc4d3/,2025-09-09T18:19:53
+cars.com,2011 Buick Enclave 1XL,4195,187940,WBM of Arlington,,https://www.cars.com/vehicledetail/e6807d99-0da4-49b1-b676-7207739c4df9/,2025-09-09T18:19:53
+cars.com,2010 Ford Explorer XLT,2995,176702,A&R Auto,,https://www.cars.com/vehicledetail/d3990aa4-a39d-4f2e-8d62-e0169f059afd/,2025-09-09T18:19:53
+cars.com,2012 Chevrolet Impala LTZ,3000,156860,Auto Bid Center,,https://www.cars.com/vehicledetail/56bd7e25-8879-440f-aa12-9d30d159fa24/,2025-09-09T18:19:53
+cars.com,2013 Subaru Legacy Premium,3650,170916,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/000403f7-dec1-4cc4-8bbe-06b84f3db083/,2025-09-09T18:19:53
+cars.com,2011 Ford Fiesta SES 4dr Hatchback,3999,91237,Metro Auto Exchange Inc.,,https://www.cars.com/vehicledetail/d55bb260-2d43-4caf-8096-685441efdfad/,2025-09-09T18:19:53
+cars.com,2014 Hyundai ELANTRA Limited,4500,165335,Auto Bid Center,,https://www.cars.com/vehicledetail/0ca3f920-26c8-4fa6-99e2-bfba8d0f26a9/,2025-09-09T18:19:53
+cars.com,2012 FIAT 500 Pop,4500,156472,Auto Land Fredericksburg,,https://www.cars.com/vehicledetail/c5fda462-7f16-4feb-8ade-575a1a1e309a/,2025-09-09T18:19:53
+cars.com,2010 Toyota Corolla S,4450,197756,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/c41cfe9c-57b9-4347-9228-ca306c6a0927/,2025-09-09T18:19:53
+cars.com,2015 Jeep Patriot Sport,2250,174138,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/8e58280b-7efa-4883-bee0-71ffe1541945/,2025-09-09T18:19:53
+cars.com,2014 Chevrolet Cruze 1LT,3999,129000,63 Auto Inc,,https://www.cars.com/vehicledetail/a61d1159-cef5-4e87-8839-7f8bd210b4a9/,2025-09-09T18:19:53
+cars.com,2004 Toyota Camry LE,3995,164962,B & B Auto,,https://www.cars.com/vehicledetail/88304693-9c6a-4b91-946f-842076d6dd41/,2025-09-09T18:19:53
+cars.com,2009 Volkswagen Jetta TDI,2250,181371,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/d8cf3428-f1c8-4135-a4a5-9fe79d3cd9e4/,2025-09-09T18:19:53
+cars.com,2011 Nissan Altima 2.5 S,3499,138400,"A-1 Auto Sales, LLC",,https://www.cars.com/vehicledetail/294e31a8-3ae9-448e-858b-ed4f04cee6b7/,2025-09-09T18:19:53
+cars.com,2006 Jeep Grand Cherokee Laredo,3900,160350,Branch Ave Auto Auction,,https://www.cars.com/vehicledetail/8bb2bac8-06e1-4d83-a6e6-434db25bf9f2/,2025-09-09T18:19:53
+cars.com,2012 Nissan Rogue SV w/SL Pkg,3988,173212,Enfield Street Auto Sales,,https://www.cars.com/vehicledetail/9e24c212-388a-4164-9325-45527031dea9/,2025-09-09T18:19:53
+cars.com,2010 Jeep Compass Sport,3999,155057,Blue Star Cars,,https://www.cars.com/vehicledetail/291eb6b2-acd1-4fe7-a817-8234cf29ec06/,2025-09-09T18:19:53
+cars.com,2012 Ford Fusion SE,1950,172484,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/8ed57189-0a13-4fe8-bc63-7f2517cd8d41/,2025-09-09T18:19:53
+cars.com,2014 Jeep Compass Sport,4499,128714,Carbuyus,,https://www.cars.com/vehicledetail/a1e7386f-3296-4c9b-a4d8-c90e948c58e9/,2025-09-09T18:19:53
+cars.com,2009 Nissan Altima 2.5 S,3999,126588,Blue Star Cars,,https://www.cars.com/vehicledetail/de99bcad-27af-4786-981f-7b5cab3b72e0/,2025-09-09T18:19:53
+cars.com,2015 Volkswagen Passat 1.8T S,3788,193299,Brick City Motors,,https://www.cars.com/vehicledetail/196ccc34-5051-4f62-8e8c-0eb52e9fc1c9/,2025-09-09T18:19:53
+cars.com,2007 BMW X3 3.0si,2950,137001,Woodbridge Public Auto Auction,,https://www.cars.com/vehicledetail/7b5ba5d0-f1aa-4393-a730-17d0a00985ed/,2025-09-09T18:19:53
+cars.com,2014 Subaru Outback 2.5i Premium,3988,198054,Enfield Street Auto Sales,,https://www.cars.com/vehicledetail/7db15a59-9323-4979-9c4e-e4c24201e039/,2025-09-09T18:19:53
+cars.com,2009 Volkswagen Tiguan Base,3900,167787,GTA Motors,,https://www.cars.com/vehicledetail/b2c37eff-8646-48a0-a98d-6d0f1c0d3428/,2025-09-09T18:19:53
+cars.com,2013 Nissan Rogue S,3449,176908,Danbury Chrysler Jeep Dodge Ram FIAT,,https://www.cars.com/vehicledetail/083bf93c-a220-43c8-b97b-3ed8a390b93b/,2025-09-09T18:19:53

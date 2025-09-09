@@ -16,6 +16,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait  # fixed import
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.edge.options import Options as EdgeOptions
+from selenium.webdriver.edge.service import Service as EdgeService
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
+from selenium.webdriver.remote.webdriver import WebDriver as SeleniumWebDriver
 
 from utils.url import canonical_url
 from utils.throttle import polite_sleep
@@ -27,7 +32,7 @@ BASE_URL = "https://www.cars.com/shopping/results/"
 HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.9",
-    # Avoid brotli as many Python stacks lack brotli decoder
+    # Keep encoding realistic but avoid br to not require brotli locally
     "Accept-Encoding": "gzip, deflate",
     "Referer": "https://www.cars.com/",
     "Connection": "keep-alive",
@@ -35,6 +40,14 @@ HEADERS = {
     "DNT": "1",
     "Pragma": "no-cache",
     "Cache-Control": "no-cache",
+    # Additional browser-like client hints and fetch headers
+    "sec-ch-ua": '"Chromium";v="127", "Not;A=Brand";v="24", "Google Chrome";v="127"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Windows"',
+    "Sec-Fetch-Site": "same-origin",
+    "Sec-Fetch-Mode": "navigate",
+    "Sec-Fetch-User": "?1",
+    "Sec-Fetch-Dest": "document",
 }
 
 OUTPUT_DIR = "data"
@@ -44,8 +57,11 @@ MAX_PAGES = int(os.getenv("CARS_MAX_PAGES", "10"))  # safety cap
 PAGE_DELAY_RANGE: Tuple[float, float] = (2.0, 6.0)
 REQUEST_TIMEOUT = int(os.getenv("CARS_TIMEOUT", "45"))
 USE_SELENIUM = os.getenv("USE_SELENIUM", "0") not in ("0", "false", "False", "")
+# Automatically fall back to Selenium on failures or bot checks unless disabled
+AUTO_SELENIUM_ON_FAIL = os.getenv("AUTO_SELENIUM_ON_FAIL", "1") not in ("0", "false", "False", "")
 SELENIUM_WAIT = int(os.getenv("CARS_SELENIUM_WAIT", "12"))
 PAGE_SIZE = int(os.getenv("CARS_PAGE_SIZE", "50"))
+BROWSER = os.getenv("BROWSER", "auto").lower()  # 'chrome', 'edge', or 'auto'
 
 
 def build_search_url(page: int) -> str:
@@ -71,7 +87,67 @@ def clean_number(text: Optional[str]) -> Optional[int]:
 
 
 
-def make_driver() -> webdriver.Chrome:
+def _locate_chrome_windows() -> Optional[str]:
+    """Try to find Chrome binary on Windows typical install paths."""
+    candidates = [
+        # Stable
+        os.path.expandvars(r"%ProgramFiles%\Google\Chrome\Application\chrome.exe"),
+        os.path.expandvars(r"%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe"),
+        os.path.expandvars(r"%LocalAppData%\Google\Chrome\Application\chrome.exe"),
+        # Dev
+        os.path.expandvars(r"%ProgramFiles%\Google\Chrome Dev\Application\chrome.exe"),
+        os.path.expandvars(r"%ProgramFiles(x86)%\Google\Chrome Dev\Application\chrome.exe"),
+        os.path.expandvars(r"%LocalAppData%\Google\Chrome Dev\Application\chrome.exe"),
+        # Beta
+        os.path.expandvars(r"%ProgramFiles%\Google\Chrome Beta\Application\chrome.exe"),
+        os.path.expandvars(r"%ProgramFiles(x86)%\Google\Chrome Beta\Application\chrome.exe"),
+        os.path.expandvars(r"%LocalAppData%\Google\Chrome Beta\Application\chrome.exe"),
+        # Canary
+        os.path.expandvars(r"%LocalAppData%\Google\Chrome SxS\Application\chrome.exe"),
+    ]
+    for path in candidates:
+        if path and os.path.isfile(path):
+            return path
+    return None
+
+
+def _locate_edge_windows() -> Optional[str]:
+    """Try to find Microsoft Edge binary on Windows typical install paths."""
+    candidates = [
+        os.path.expandvars(r"%ProgramFiles%\Microsoft\Edge\Application\msedge.exe"),
+        os.path.expandvars(r"%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"),
+        os.path.expandvars(r"%LocalAppData%\Microsoft\Edge\Application\msedge.exe"),
+    ]
+    for path in candidates:
+        if path and os.path.isfile(path):
+            return path
+    return None
+
+
+def make_driver() -> SeleniumWebDriver:
+    # If user explicitly wants Edge
+    if BROWSER == "edge":
+        edge_binary = os.getenv("EDGE_BINARY") or (os.name == "nt" and _locate_edge_windows()) or None
+        eopts = EdgeOptions()
+        if os.getenv("HEADLESS", "1") not in ("0", "false", "False"):
+            eopts.add_argument("--headless=new")
+        eopts.add_argument("--disable-gpu")
+        eopts.add_argument("--no-sandbox")
+        eopts.add_argument("--window-size=1365,1024")
+        eopts.add_argument(f"--user-agent={random.choice(USER_AGENTS)}")
+        if edge_binary:
+            eopts.binary_location = edge_binary
+        try:
+            eservice = EdgeService(EdgeChromiumDriverManager().install())
+            driver = webdriver.Edge(service=eservice, options=eopts)
+        except Exception:
+            driver = webdriver.Edge(options=eopts)
+        try:
+            driver.set_page_load_timeout(REQUEST_TIMEOUT)
+        except Exception:
+            pass
+        return driver
+
     opts = ChromeOptions()
     if os.getenv("HEADLESS", "1") not in ("0", "false", "False"):
         opts.add_argument("--headless=new")
@@ -79,9 +155,56 @@ def make_driver() -> webdriver.Chrome:
     opts.add_argument("--no-sandbox")
     opts.add_argument("--window-size=1365,1024")
     opts.add_argument(f"--user-agent={random.choice(USER_AGENTS)}")
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=opts)
+    # Reduce obvious automation signals
+    opts.add_experimental_option("excludeSwitches", ["enable-automation"])  # type: ignore[arg-type]
+    opts.add_experimental_option("useAutomationExtension", False)  # type: ignore[arg-type]
+    # Allow overriding Chrome binary via env (useful in containers)
+    chrome_binary = os.getenv("CHROME_BINARY")
+    if chrome_binary:
+        opts.binary_location = chrome_binary
+    elif os.name == "nt":
+        auto = _locate_chrome_windows()
+        if auto:
+            opts.binary_location = auto
+
+    # Initialize driver: prefer Selenium Manager auto-detect for speed
+    try:
+        driver = webdriver.Chrome(options=opts)
+    except Exception:
+        # Fallback to webdriver-manager if needed
+        try:
+            service = ChromeService(ChromeDriverManager().install())
+            driver = webdriver.Chrome(service=service, options=opts)
+        except TypeError:
+            driver = webdriver.Chrome(options=opts)
+    try:
+        # Mask webdriver property
+        driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+            "source": "Object.defineProperty(navigator, 'webdriver', {get: () => undefined});"
+        })
+    except Exception:
+        pass
     driver.set_page_load_timeout(REQUEST_TIMEOUT)
     return driver
+
+
+def looks_like_bot_check(html: Optional[str]) -> bool:
+    if not html:
+        return False
+    text = html.lower()
+    signals = [
+        "are you a human",
+        "verify you are human",
+        "checking your browser",
+        "please enable javascript",
+        "captcha",
+        "access denied",
+        "request blocked",
+        "attention required",
+        "cf-chl-",
+        "just a moment",
+    ]
+    return any(s in text for s in signals)
 
 
 def parse_listings(html: str) -> List[Dict]:
@@ -206,9 +329,49 @@ def fetch_html_requests(session: requests.Session, url: str) -> Optional[str]:
         return None
 
 
-def fetch_html_selenium(driver: webdriver.Chrome, url: str) -> Optional[str]:
+def fetch_html_selenium(driver: SeleniumWebDriver, url: str) -> Optional[str]:
     try:
         driver.get(url)
+        # Attempt to accept cookie banner if present
+        # 1) Try common CSS selectors (OneTrust / generic)
+        consent_selectors = [
+            "button#onetrust-accept-btn-handler",
+            "#onetrust-accept-btn-handler",
+            "button[aria-label='Accept all cookies']",
+            "button[aria-label*='Accept'][aria-label*='cookie']",
+        ]
+        for sel in consent_selectors:
+            try:
+                els = driver.find_elements(By.CSS_SELECTOR, sel)
+                if els:
+                    try:
+                        els[0].click()
+                        break
+                    except Exception:
+                        pass
+            except Exception:
+                # ignore bad selector issues and keep trying
+                continue
+        else:
+            # 2) Fallback: XPath contains text 'Accept all cookies'
+            try:
+                xpath_variants = [
+                    "//button[contains(translate(normalize-space(.), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'accept all cookies')]",
+                    "//button[contains(translate(@aria-label, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), 'accept')]",
+                ]
+                for xp in xpath_variants:
+                    try:
+                        els = driver.find_elements(By.XPATH, xp)
+                        if els:
+                            try:
+                                els[0].click()
+                                break
+                            except Exception:
+                                pass
+                    except Exception:
+                        continue
+            except Exception:
+                pass
         # Wait for at least one vehicle-card to appear, or a results container
         WebDriverWait(driver, SELENIUM_WAIT).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, ".vehicle-card, article.vehicle-card"))
@@ -226,7 +389,7 @@ def scrape() -> List[Dict]:
     # In tests, make_session may be mocked to a dummy object without headers
     if hasattr(session, "headers") and isinstance(getattr(session, "headers", None), dict):
         session.headers.update(HEADERS)
-    driver: Optional[webdriver.Chrome] = None
+    driver: Optional[SeleniumWebDriver] = None
 
     # Warm-up: hit homepage to establish cookies/session
     try:
@@ -239,14 +402,50 @@ def scrape() -> List[Dict]:
         url = build_search_url(page)
         print(f"[cars.com] Fetching page {page}: {url}")
 
-        html = fetch_html_requests(session, url)
-        page_rows: List[Dict] = parse_listings(html) if html else []
+        html: Optional[str]
+        page_rows: List[Dict]
 
-        if not page_rows and USE_SELENIUM:
+        if USE_SELENIUM:
+            # Skip requests entirely for speed and to avoid bot timeouts
             if driver is None:
-                driver = make_driver()
-            html = fetch_html_selenium(driver, url)
+                try:
+                    driver = make_driver()
+                except Exception as e:
+                    print(f"[cars.com] selenium driver init failed: {e}")
+                    driver = None
+            if driver is not None:
+                html = fetch_html_selenium(driver, url)
+                page_rows = parse_listings(html) if html else []
+            else:
+                html = None
+                page_rows = []
+        else:
+            html = fetch_html_requests(session, url)
             page_rows = parse_listings(html) if html else []
+
+        # If requests failed entirely, optionally auto-fallback
+        if not page_rows and (html is None) and AUTO_SELENIUM_ON_FAIL:
+            if driver is None:
+                try:
+                    driver = make_driver()
+                except Exception as e:
+                    print(f"[cars.com] selenium driver init failed: {e}")
+                    driver = None
+            if driver is not None:
+                html = fetch_html_selenium(driver, url)
+                page_rows = parse_listings(html) if html else []
+
+        # If HTML looks like a bot-check or empty results, use configured selenium path
+        if not page_rows and (USE_SELENIUM or (AUTO_SELENIUM_ON_FAIL and looks_like_bot_check(html))):
+            if driver is None:
+                try:
+                    driver = make_driver()
+                except Exception as e:
+                    print(f"[cars.com] selenium driver init failed: {e}")
+                    driver = None
+            if driver is not None:
+                html = fetch_html_selenium(driver, url)
+                page_rows = parse_listings(html) if html else []
 
         if not page_rows:
             reason = "Failed to fetch" if not html else "No results found"
