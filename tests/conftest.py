@@ -17,6 +17,12 @@ def pytest_addoption(parser: pytest.Parser) -> None:
 
 def pytest_configure(config: pytest.Config) -> None:
     config.addinivalue_line("markers", "live: mark test as requiring live HTTP")
+    config.addinivalue_line(
+        "markers", "vcr: record/replay HTTP requests using pytest-recording"
+    )
+    config.addinivalue_line(
+        "markers", "default_cassette(name): set cassette name for pytest-recording"
+    )
 
 
 def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]) -> None:
