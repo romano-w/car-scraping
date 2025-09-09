@@ -1,8 +1,6 @@
 import csv
 import os
-import random
-import time
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 from urllib.parse import urlencode, urljoin
 
 import requests
@@ -17,6 +15,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait  # fixed import
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
+
+from utils.throttle import polite_sleep
 
 import config
 
@@ -42,7 +42,8 @@ HEADERS = {
 OUTPUT_DIR = "data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "carscom_results.csv")
 MAX_PAGES = int(os.getenv("CARS_MAX_PAGES", "10"))  # safety cap
-PAGE_DELAY_RANGE = (2.0, 6.0)
+# Polite delay range between page requests (seconds) for cars.com
+PAGE_DELAY_RANGE: Tuple[float, float] = (2.0, 6.0)
 REQUEST_TIMEOUT = int(os.getenv("CARS_TIMEOUT", "45"))
 USE_SELENIUM = os.getenv("USE_SELENIUM", "0") not in ("0", "false", "False", "")
 SELENIUM_WAIT = int(os.getenv("CARS_SELENIUM_WAIT", "12"))
@@ -263,7 +264,7 @@ def scrape() -> List[Dict]:
         all_rows.extend(page_rows)
 
         # Polite delay between pages
-        time.sleep(random.uniform(*PAGE_DELAY_RANGE))
+        polite_sleep(PAGE_DELAY_RANGE)
 
     if driver:
         try:

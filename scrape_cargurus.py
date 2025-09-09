@@ -1,15 +1,15 @@
 import csv
 import json
 import os
-import random
-import time
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import urlencode, urljoin
 
 import requests
 from bs4 import BeautifulSoup
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+
+from utils.throttle import polite_sleep
 
 import config
 
@@ -30,7 +30,8 @@ HEADERS = {
 OUTPUT_DIR = "data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "cargurus_results.csv")
 MAX_PAGES = int(os.getenv("CARGURUS_MAX_PAGES", "10"))
-PAGE_DELAY_RANGE = (2.0, 6.0)
+# Polite delay range between page requests (seconds) for cargurus.com
+PAGE_DELAY_RANGE: Tuple[float, float] = (2.0, 6.0)
 REQUEST_TIMEOUT = int(os.getenv("CARGURUS_TIMEOUT", "45"))
 
 
@@ -273,7 +274,7 @@ def scrape() -> List[Dict]:
         print(f"[cargurus] Parsed {len(page_rows)} listings from page {page}.")
         all_rows.extend(page_rows)
 
-        time.sleep(random.uniform(*PAGE_DELAY_RANGE))
+        polite_sleep(PAGE_DELAY_RANGE)
 
     return all_rows
 
