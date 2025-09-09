@@ -66,12 +66,21 @@ Run individually; each writes a CSV to `data/`.
 ```bash
 # Cars.com (static; fastest to validate pipeline)
 uv run python scrape_carscom.py
+# enable Selenium fallback if needed
+USE_SELENIUM=1 uv run python scrape_carscom.py
 
 # Craigslist (private sellers)
 uv run python scrape_craigslist.py
 
 # CarGurus (try requests first; may auto-fallback to Selenium later)
 uv run python scrape_cargurus.py
+```
+
+To avoid re-downloading the same pages across runs, enable a local cache by
+setting `REQUESTS_CACHE=1`:
+
+```bash
+REQUESTS_CACHE=1 uv run python scrape_carscom.py
 ```
 
 Outputs (by default):

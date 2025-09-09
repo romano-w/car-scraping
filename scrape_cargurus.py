@@ -4,25 +4,21 @@ import os
 import random
 import time
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import urlencode, urljoin
 
 import requests
 from bs4 import BeautifulSoup
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+
+from utils.throttle import polite_sleep
 
 from utils.url import canonical_url
 
 import config
+from utils.http_client import make_session
 
 BASE_URL = "https://www.cargurus.com/Cars/inventorylisting/viewDetailsFilterViewInventoryListing.action"
 HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/127.0.0.0 Safari/537.36"
-    ),
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.9",
     "Accept-Encoding": "gzip, deflate, br",
@@ -33,7 +29,8 @@ HEADERS = {
 OUTPUT_DIR = "data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "cargurus_results.csv")
 MAX_PAGES = int(os.getenv("CARGURUS_MAX_PAGES", "10"))
-PAGE_DELAY_RANGE = (2.0, 6.0)
+# Polite delay range between page requests (seconds) for cargurus.com
+PAGE_DELAY_RANGE: Tuple[float, float] = (2.0, 6.0)
 REQUEST_TIMEOUT = int(os.getenv("CARGURUS_TIMEOUT", "45"))
 
 
@@ -57,20 +54,6 @@ def clean_number(text: Optional[str]) -> Optional[int]:
     return int(digits) if digits else None
 
 
-def make_session() -> requests.Session:
-    session = requests.Session()
-    session.headers.update(HEADERS)
-    retry = Retry(
-        total=4,
-        backoff_factor=2,
-        status_forcelist=[429, 500, 502, 503, 504],
-        allowed_methods=["HEAD", "GET", "OPTIONS"],
-        raise_on_status=False,
-    )
-    adapter = HTTPAdapter(max_retries=retry)
-    session.mount("https://", adapter)
-    session.mount("http://", adapter)
-    return session
 
 
 def _find_listings_in_data(data: Any) -> Optional[List[Dict[str, Any]]]:
@@ -171,11 +154,11 @@ def parse_listings(html: str) -> List[Dict]:
 
     # Fallback to parsing visible HTML cards
     cards = soup.select(
-        ".cg-dealFinderResult-wrap, div[data-listingid], div.listing-item"
+        "[data-test='inventory-listing'], [data-cg-ft='inventory-listing'], div[data-listingid]"
     )
 
     for card in cards:
-        link = card.select_one("a[href]")
+        link = card.select_one("a[data-test='listing-link'], a[itemprop='url'], a[href]")
         href_val = link.get("href") if link else None
         if isinstance(href_val, list):
             href_val = href_val[0] if href_val else None
@@ -186,26 +169,26 @@ def parse_listings(html: str) -> List[Dict]:
         title = link.get_text(strip=True) if link else None
 
         price_el = card.select_one(
-            ".listing-price, .cg-dealFinderPrice, [data-test='listing-price']"
+            "[data-test='listing-price'], [itemprop='price'], [data-cg-ft='listing-price']"
         )
         price_text = price_el.get_text(strip=True) if price_el else None
         price = clean_number(price_text)
 
         mileage_el = card.select_one(
-            ".listing-mileage, .cg-listingDetail-byline, [data-test='mileage']"
+            "[data-test='mileage'], [data-test='listing-mileage'], [itemprop='mileage']"
         )
         mileage_text = mileage_el.get_text(strip=True) if mileage_el else None
         mileage = clean_number(mileage_text)
 
         dealer_el = card.select_one(
-            ".dealer-name, .cg-dealerName, [data-test='dealer-name']"
+            "[data-test='dealer-name'], [itemprop='seller'], [data-cg-ft='dealer-name']"
         )
-        dealer = dealer_el.get_text(" ", strip=True) if dealer_el else None
+        dealer = dealer_el.get_text(strip=True) if dealer_el else None
 
         location_el = card.select_one(
-            ".listing-location, .cg-dealerAddress, [data-test='dealer-address']"
+            "[data-test='dealer-address'], [data-test='listing-location'], [itemprop='address']"
         )
-        location = location_el.get_text(" ", strip=True) if location_el else None
+        location = location_el.get_text(strip=True) if location_el else None
 
         if not url and not title:
             continue
@@ -269,7 +252,9 @@ def write_csv(rows: List[Dict], path: str) -> None:
 
 def scrape() -> List[Dict]:
     all_rows: List[Dict] = []
-    session = make_session()
+    use_cache = os.getenv("REQUESTS_CACHE", "0") not in ("0", "false", "False")
+    session = make_session(use_cache=use_cache)
+    session.headers.update(HEADERS)
 
     for page in range(1, MAX_PAGES + 1):
         url = build_search_url(page)
@@ -292,7 +277,7 @@ def scrape() -> List[Dict]:
         print(f"[cargurus] Parsed {len(page_rows)} listings from page {page}.")
         all_rows.extend(page_rows)
 
-        time.sleep(random.uniform(*PAGE_DELAY_RANGE))
+        polite_sleep(PAGE_DELAY_RANGE)
 
     return all_rows
 

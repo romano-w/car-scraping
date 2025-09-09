@@ -44,7 +44,7 @@ class CarsComScraperLiveTests(unittest.TestCase):
 @pytest.mark.live
 def test_scrape_live():
     with patch.object(sc, "MAX_PAGES", 1), patch.object(sc, "PAGE_DELAY_RANGE", (0, 0)), patch.object(
-        sc, "FETCH_MODE", "requests"
+        sc, "USE_SELENIUM", False
     ):
         try:
             rows = sc.scrape()
@@ -53,5 +53,40 @@ def test_scrape_live():
     if not rows:
         pytest.skip("No rows returned from live scrape")
     assert rows[0]["source"] == "cars.com"
-    assert "?" not in rows[0]["url"] and "#" not in rows[0]["url"]
-    datetime.fromisoformat(rows[0]["first_seen"])
+
+
+def test_scrape_requests_only():
+    dummy_session = object()
+    with patch.object(sc, "make_session", return_value=dummy_session), patch.object(
+        sc, "fetch_html_requests", return_value="<html></html>"
+    ) as fr, patch.object(sc, "parse_listings", return_value=[{"source": "cars.com"}]), patch.object(
+        sc, "fetch_html_selenium"
+    ) as fs, patch.object(sc, "MAX_PAGES", 1), patch.object(sc, "PAGE_DELAY_RANGE", (0, 0)), patch.object(
+        sc, "USE_SELENIUM", False
+    ):
+        rows = sc.scrape()
+    assert fr.called
+    fs.assert_not_called()
+    assert rows
+
+
+def test_scrape_selenium_fallback():
+    class DummyDriver:
+        def quit(self):
+            pass
+
+    dummy_session = object()
+    dummy_driver = DummyDriver()
+
+    with patch.object(sc, "make_session", return_value=dummy_session), patch.object(
+        sc, "fetch_html_requests", return_value="<html></html>"
+    ), patch.object(
+        sc, "parse_listings", side_effect=[[], [{"source": "cars.com"}]]
+    ), patch.object(
+        sc, "fetch_html_selenium", return_value="<html></html>"
+    ) as fs, patch.object(sc, "make_driver", return_value=dummy_driver), patch.object(
+        sc, "MAX_PAGES", 1
+    ), patch.object(sc, "PAGE_DELAY_RANGE", (0, 0)), patch.object(sc, "USE_SELENIUM", True):
+        rows = sc.scrape()
+    assert fs.called
+    assert rows

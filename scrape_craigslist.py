@@ -1,28 +1,24 @@
 import csv
-import json
 import os
 import random
 import time
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 from urllib.parse import urlencode, urljoin
 
 import requests
 from bs4 import BeautifulSoup
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+
+from utils.throttle import polite_sleep
 
 from utils.url import canonical_url
 
 import config
+from utils.http_client import make_session
 
-BASE_URL = "https://philadelphia.craigslist.org/search/cto"
+CRAIGS_DOMAIN = os.getenv("CRAIGS_DOMAIN", getattr(config, "CRAIGS_DOMAIN", "philadelphia"))
+BASE_URL = f"https://{CRAIGS_DOMAIN}.craigslist.org/search/cta"
 HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/127.0.0.0 Safari/537.36"
-    ),
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.9",
     "Connection": "keep-alive",
@@ -31,7 +27,8 @@ HEADERS = {
 OUTPUT_DIR = "data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "craigslist_results.csv")
 MAX_PAGES = int(os.getenv("CRAIG_MAX_PAGES", "10"))
-PAGE_DELAY_RANGE = (3.0, 7.0)
+# Polite delay range between page requests (seconds) for Craigslist
+PAGE_DELAY_RANGE: Tuple[float, float] = (3.0, 7.0)
 REQUEST_TIMEOUT = int(os.getenv("CRAIG_TIMEOUT", "45"))
 
 
@@ -55,26 +52,17 @@ def clean_number(text: Optional[str]) -> Optional[int]:
     return int(digits) if digits else None
 
 
-def make_session() -> requests.Session:
-    session = requests.Session()
-    session.headers.update(HEADERS)
-    retry = Retry(
-        total=4,
-        backoff_factor=2,
-        status_forcelist=[429, 500, 502, 503, 504],
-        allowed_methods=["HEAD", "GET", "OPTIONS"],
-        raise_on_status=False,
-    )
-    adapter = HTTPAdapter(max_retries=retry)
-    session.mount("https://", adapter)
-    session.mount("http://", adapter)
-    return session
 
 
 def parse_listings(html: str) -> List[Dict]:
     soup = BeautifulSoup(html, "lxml")
     results: List[Dict] = []
-
+    for row in soup.select("li.result-row"):
+        link = row.select_one("a.result-title")
+        href = link.get("href") if link and link.has_attr("href") else None
+        url = urljoin(BASE_URL, href) if href else None
+        title = link.get_text(strip=True) if link else None
+        
     # Craigslist search pages embed results in a JSON block with id
     # "ld_searchpage_results". Prefer parsing this structured data if
     # available as it is more consistent than scraping DOM elements.
@@ -198,7 +186,9 @@ def write_csv(rows: List[Dict], path: str) -> None:
 
 def scrape() -> List[Dict]:
     all_rows: List[Dict] = []
-    session = make_session()
+    use_cache = os.getenv("REQUESTS_CACHE", "0") not in ("0", "false", "False")
+    session = make_session(use_cache=use_cache)
+    session.headers.update(HEADERS)
 
     for page in range(1, MAX_PAGES + 1):
         url = build_search_url(page)
@@ -221,7 +211,7 @@ def scrape() -> List[Dict]:
         print(f"[craigslist] Parsed {len(page_rows)} listings from page {page}.")
         all_rows.extend(page_rows)
 
-        time.sleep(random.uniform(*PAGE_DELAY_RANGE))
+        polite_sleep(PAGE_DELAY_RANGE)
 
     return all_rows
 
