@@ -44,7 +44,7 @@ OUTPUT_FILE = os.path.join(OUTPUT_DIR, "carscom_results.csv")
 MAX_PAGES = int(os.getenv("CARS_MAX_PAGES", "10"))  # safety cap
 PAGE_DELAY_RANGE = (2.0, 6.0)
 REQUEST_TIMEOUT = int(os.getenv("CARS_TIMEOUT", "45"))
-FETCH_MODE = os.getenv("CARS_FETCH_MODE", "auto").lower()  # auto | requests | selenium
+USE_SELENIUM = os.getenv("USE_SELENIUM", "0") not in ("0", "false", "False", "")
 SELENIUM_WAIT = int(os.getenv("CARS_SELENIUM_WAIT", "12"))
 PAGE_SIZE = int(os.getenv("CARS_PAGE_SIZE", "50"))
 
@@ -235,11 +235,6 @@ def scrape() -> List[Dict]:
     session = make_session()
     driver: Optional[webdriver.Chrome] = None
 
-    if FETCH_MODE == "selenium":
-        driver = make_driver()
-    elif FETCH_MODE == "auto":
-        driver = None
-
     # Warm-up: hit homepage to establish cookies/session
     try:
         _ = session.get("https://www.cars.com/", timeout=min(REQUEST_TIMEOUT, 20))
@@ -250,30 +245,18 @@ def scrape() -> List[Dict]:
         url = build_search_url(page)
         print(f"[cars.com] Fetching page {page}: {url}")
 
-        html: Optional[str] = None
-        used_driver = False
+        html = fetch_html_requests(session, url)
+        page_rows: List[Dict] = parse_listings(html) if html else []
 
-        if FETCH_MODE == "requests":
-            html = fetch_html_requests(session, url)
-        elif FETCH_MODE == "selenium":
+        if not page_rows and USE_SELENIUM:
+            if driver is None:
+                driver = make_driver()
             html = fetch_html_selenium(driver, url)
-            used_driver = True
-        else:  # auto
-            html = fetch_html_requests(session, url)
-            if not html:
-                if driver is None:
-                    driver = make_driver()
-                assert driver is not None  # for type checkers
-                html = fetch_html_selenium(driver, url)
-                used_driver = True
+            page_rows = parse_listings(html) if html else []
 
-        if not html:
-            print(f"[cars.com] Failed to fetch page {page}; stopping.")
-            break
-
-        page_rows = parse_listings(html)
         if not page_rows:
-            print(f"[cars.com] No results found on page {page}; stopping.")
+            reason = "Failed to fetch" if not html else "No results found"
+            print(f"[cars.com] {reason} on page {page}; stopping.")
             break
 
         print(f"[cars.com] Parsed {len(page_rows)} listings from page {page}.")
