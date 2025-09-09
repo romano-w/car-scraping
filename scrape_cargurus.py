@@ -1,8 +1,9 @@
 import csv
+import json
 import os
 import random
 import time
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 from urllib.parse import urlencode, urljoin
 
 import requests
@@ -69,12 +70,101 @@ def make_session() -> requests.Session:
     return session
 
 
+def _find_listings_in_data(data: Any) -> Optional[List[Dict[str, Any]]]:
+    """Recursively search for a list of listing-like dictionaries."""
+    if isinstance(data, list):
+        if data and all(isinstance(x, dict) for x in data):
+            sample = data[0]
+            # Heuristic: listings typically include a price or mileage field
+            if any(k in sample for k in ("price", "mileage", "canonicalUrl", "title", "name")):
+                return data  # type: ignore[return-value]
+        for item in data:
+            found = _find_listings_in_data(item)
+            if found:
+                return found
+    elif isinstance(data, dict):
+        for v in data.values():
+            found = _find_listings_in_data(v)
+            if found:
+                return found
+    return None
+
+
+def _row_from_item(item: Dict[str, Any]) -> Dict[str, Any]:
+    """Build a normalized row dictionary from a listing item."""
+    title = (
+        item.get("title")
+        or item.get("name")
+        or item.get("header")
+        or item.get("heading")
+    )
+
+    price = item.get("price") or item.get("listingPrice") or item.get("priceString")
+    price = clean_number(str(price)) if price is not None else None
+
+    mileage = item.get("mileage") or item.get("mileageString")
+    mileage = clean_number(str(mileage)) if mileage is not None else None
+
+    dealer = None
+    dealer_obj = item.get("dealer")
+    if isinstance(dealer_obj, dict):
+        dealer = dealer_obj.get("name")
+    dealer = dealer or item.get("dealerName") or item.get("sellerName")
+
+    location = None
+    if isinstance(dealer_obj, dict):
+        location = dealer_obj.get("address") or dealer_obj.get("location")
+    location = location or item.get("dealerLocation") or item.get("location")
+
+    url = (
+        item.get("canonicalUrl")
+        or item.get("url")
+        or item.get("link")
+        or item.get("detailUrl")
+    )
+    if url and not str(url).startswith("http"):
+        url = urljoin("https://www.cargurus.com", str(url))
+
+    return {
+        "source": "cargurus",
+        "title": title,
+        "price": price,
+        "mileage": mileage,
+        "dealer": dealer,
+        "location": location,
+        "url": url,
+    }
+
+
 def parse_listings(html: str) -> List[Dict]:
     soup = BeautifulSoup(html, "lxml")
+    results: List[Dict] = []
+
+    # Attempt to find JSON data embedded in script tags
+    for script in soup.find_all("script"):
+        text = script.string or ""
+        if "{" not in text:
+            continue
+        candidate = text.strip()
+        if "=" in candidate and not candidate.strip().startswith("{"):
+            # e.g., window.__DATA__ = {...};
+            candidate = candidate.split("=", 1)[1].strip()
+        candidate = candidate.strip(";\n ")
+        try:
+            data = json.loads(candidate)
+        except json.JSONDecodeError:
+            continue
+        listings = _find_listings_in_data(data)
+        if listings:
+            for item in listings:
+                results.append(_row_from_item(item))
+            if results:
+                return results
+
+    # Fallback to parsing visible HTML cards
     cards = soup.select(
         ".cg-dealFinderResult-wrap, div[data-listingid], div.listing-item"
     )
-    results: List[Dict] = []
 
     for card in cards:
         link = card.select_one("a[href]")
