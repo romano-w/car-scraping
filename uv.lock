@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 2
 requires-python = ">=3.9"
 resolution-markers = [
     "python_full_version >= '3.12' and platform_python_implementation == 'PyPy'",
@@ -47,6 +47,11 @@ dependencies = [
     { name = "webdriver-manager" },
 ]
 
+[package.optional-dependencies]
+beautifulsoup4 = [
+    { name = "beautifulsoup4" },
+]
+
 [package.dev-dependencies]
 dev = [
     { name = "pytest" },
@@ -56,12 +61,14 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "beautifulsoup4", specifier = ">=4.13.5" },
+    { name = "beautifulsoup4", marker = "extra == 'beautifulsoup4'", specifier = ">=4.13.5" },
     { name = "lxml", specifier = ">=6.0.1" },
     { name = "pandas", specifier = ">=2.3.2" },
     { name = "requests", specifier = ">=2.32.5" },
     { name = "selenium", specifier = ">=4.35.0" },
     { name = "webdriver-manager", specifier = ">=4.0.2" },
 ]
+provides-extras = ["beautifulsoup4"]
 
 [package.metadata.requires-dev]
 dev = [

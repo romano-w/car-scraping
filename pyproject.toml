@@ -13,6 +13,9 @@ dependencies = [
     "webdriver-manager>=4.0.2",
 ]
 
+[project.optional-dependencies]
+beautifulsoup4 = ["beautifulsoup4>=4.13.5"]
+
 [dependency-groups]
 dev = [
     "pytest>=8.4.2",
