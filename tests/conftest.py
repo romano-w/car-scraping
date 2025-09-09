@@ -1,5 +1,8 @@
 import sys
 from pathlib import Path
+import pytest
+
+import pytest
 
 import pytest
 
@@ -12,14 +15,18 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         "--live",
         action="store_true",
         default=False,
-        help="run tests that hit the live network",
+        help="Run tests marked as requiring network access",
     )
 
 
-def pytest_configure(config: pytest.Config) -> None:
-    config.addinivalue_line("markers", "live: mark test as requiring network access")
+def pytest_configure(config):
+    config.addinivalue_line("markers", "live: tests that access live network resources")
 
 
-def pytest_runtest_setup(item: pytest.Item) -> None:
-    if "live" in item.keywords and not item.config.getoption("--live"):
-        pytest.skip("need --live option to run")
+def pytest_collection_modifyitems(config, items):
+    if config.getoption("--live"):
+        return
+    skip_live = pytest.mark.skip(reason="use --live to run integration tests")
+    for item in items:
+        if "live" in item.keywords:
+            item.add_marker(skip_live)

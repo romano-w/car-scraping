@@ -1,12 +1,17 @@
 import pathlib
 from unittest.mock import patch
-
+import requests
 import pytest
+
+pytestmark = pytest.mark.live
 
 import scrape_carscom as sc
 
 FIXTURE = pathlib.Path(__file__).parent / "fixtures" / "carscom_page1.html"
 
+@pytest.mark.live
+class CarsComScraperLiveTests(unittest.TestCase):
+    """Tests that exercise the cars.com scraper against the live site."""
 
 def test_parse_listings_from_fixture():
     html = FIXTURE.read_text()
