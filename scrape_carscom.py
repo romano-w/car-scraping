@@ -223,12 +223,15 @@ def scrape() -> List[Dict]:
     all_rows: List[Dict] = []
     use_cache = os.getenv("REQUESTS_CACHE", "0") not in ("0", "false", "False")
     session = make_session(use_cache=use_cache)
-    session.headers.update(HEADERS)
+    # In tests, make_session may be mocked to a dummy object without headers
+    if hasattr(session, "headers") and isinstance(getattr(session, "headers", None), dict):
+        session.headers.update(HEADERS)
     driver: Optional[webdriver.Chrome] = None
 
     # Warm-up: hit homepage to establish cookies/session
     try:
-        _ = session.get("https://www.cars.com/", timeout=min(REQUEST_TIMEOUT, 20))
+        if hasattr(session, "get"):
+            _ = session.get("https://www.cars.com/", timeout=min(REQUEST_TIMEOUT, 20))
     except Exception:
         pass
 

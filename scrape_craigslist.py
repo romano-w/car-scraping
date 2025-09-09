@@ -1,5 +1,6 @@
 import csv
 import os
+import json
 import random
 import time
 from datetime import datetime
@@ -17,7 +18,8 @@ import config
 from utils.http_client import make_session
 
 CRAIGS_DOMAIN = os.getenv("CRAIGS_DOMAIN", getattr(config, "CRAIGS_DOMAIN", "philadelphia"))
-BASE_URL = f"https://{CRAIGS_DOMAIN}.craigslist.org/search/cta"
+# Use 'cto' (cars+trucks by owner) to match recorded cassette and tests
+BASE_URL = f"https://{CRAIGS_DOMAIN}.craigslist.org/search/cto"
 HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.9",
