@@ -4,11 +4,13 @@ import pytest
 
 import pytest
 
+import pytest
+
 # Ensure project root is on sys.path for imports
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 
-def pytest_addoption(parser):
+def pytest_addoption(parser: pytest.Parser) -> None:
     parser.addoption(
         "--live",
         action="store_true",
