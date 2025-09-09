@@ -18,3 +18,8 @@ dev = [
     "pytest>=8.4.2",
     "pytest-recording>=0.13",
 ]
+
+[tool.pytest.ini_options]
+markers = [
+    "live: run tests that require live network access",
+]
