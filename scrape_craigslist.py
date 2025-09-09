@@ -28,7 +28,7 @@ HEADERS = {
 
 OUTPUT_DIR = "data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "craigslist_results.csv")
-MAX_PAGES = int(os.getenv("CRAIG_MAX_PAGES", "10"))
+MAX_PAGES = int(os.getenv("CRAIG_MAX_PAGES", "9999"))
 # Polite delay range between page requests (seconds) for Craigslist
 PAGE_DELAY_RANGE: Tuple[float, float] = (3.0, 7.0)
 REQUEST_TIMEOUT = int(os.getenv("CRAIG_TIMEOUT", "45"))

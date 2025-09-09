@@ -5,6 +5,7 @@ import time
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 from urllib.parse import urlencode, urljoin
+import statistics
 
 import requests
 from bs4 import BeautifulSoup
@@ -52,7 +53,8 @@ HEADERS = {
 
 OUTPUT_DIR = "data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "carscom_results.csv")
-MAX_PAGES = int(os.getenv("CARS_MAX_PAGES", "10"))  # safety cap
+# High default so we capture all pages unless overridden via env
+MAX_PAGES = int(os.getenv("CARS_MAX_PAGES", "9999"))
 # Polite delay range between page requests (seconds) for cars.com
 PAGE_DELAY_RANGE: Tuple[float, float] = (2.0, 6.0)
 REQUEST_TIMEOUT = int(os.getenv("CARS_TIMEOUT", "45"))
@@ -134,11 +136,15 @@ def make_driver() -> SeleniumWebDriver:
         eopts.add_argument("--disable-gpu")
         eopts.add_argument("--no-sandbox")
         eopts.add_argument("--window-size=1365,1024")
+        eopts.add_argument("--log-level=3")
+        eopts.add_argument("--silent")
+        eopts.add_argument("--enable-unsafe-swiftshader")
         eopts.add_argument(f"--user-agent={random.choice(USER_AGENTS)}")
         if edge_binary:
             eopts.binary_location = edge_binary
         try:
-            eservice = EdgeService(EdgeChromiumDriverManager().install())
+            # Silence EdgeDriver logs
+            eservice = EdgeService(EdgeChromiumDriverManager().install(), log_path=os.devnull)
             driver = webdriver.Edge(service=eservice, options=eopts)
         except Exception:
             driver = webdriver.Edge(options=eopts)
@@ -154,9 +160,12 @@ def make_driver() -> SeleniumWebDriver:
     opts.add_argument("--disable-gpu")
     opts.add_argument("--no-sandbox")
     opts.add_argument("--window-size=1365,1024")
+    opts.add_argument("--log-level=3")
+    opts.add_argument("--silent")
+    opts.add_argument("--enable-unsafe-swiftshader")
     opts.add_argument(f"--user-agent={random.choice(USER_AGENTS)}")
     # Reduce obvious automation signals
-    opts.add_experimental_option("excludeSwitches", ["enable-automation"])  # type: ignore[arg-type]
+    opts.add_experimental_option("excludeSwitches", ["enable-automation", "enable-logging"])  # type: ignore[arg-type]
     opts.add_experimental_option("useAutomationExtension", False)  # type: ignore[arg-type]
     # Allow overriding Chrome binary via env (useful in containers)
     chrome_binary = os.getenv("CHROME_BINARY")
@@ -169,11 +178,12 @@ def make_driver() -> SeleniumWebDriver:
 
     # Initialize driver: prefer Selenium Manager auto-detect for speed
     try:
+        # Prefer Selenium Manager auto-detect and silence logs if possible
         driver = webdriver.Chrome(options=opts)
     except Exception:
-        # Fallback to webdriver-manager if needed
+        # Fallback to webdriver-manager if needed and silence chromedriver logs
         try:
-            service = ChromeService(ChromeDriverManager().install())
+            service = ChromeService(ChromeDriverManager().install(), log_path=os.devnull)
             driver = webdriver.Chrome(service=service, options=opts)
         except TypeError:
             driver = webdriver.Chrome(options=opts)
@@ -273,6 +283,49 @@ def parse_listings(html: str) -> List[Dict]:
         )
 
     return results
+
+
+def dedupe_rows(rows: List[Dict]) -> List[Dict]:
+    """Remove duplicate listings across pages by URL, keeping first occurrence."""
+    seen: set = set()
+    out: List[Dict] = []
+    for r in rows:
+        u = r.get("url")
+        if not u:
+            out.append(r)
+            continue
+        if u in seen:
+            continue
+        seen.add(u)
+        out.append(r)
+    return out
+
+
+def _fmt_duration(seconds: float) -> str:
+    seconds = int(seconds)
+    m, s = divmod(seconds, 60)
+    h, m = divmod(m, 60)
+    return f"{h:d}:{m:02d}:{s:02d}" if h else f"{m:d}:{s:02d}"
+
+
+def _numeric_stats(values: List[Optional[int]]) -> Tuple[Optional[int], Optional[int], Optional[int]]:
+    """Return (min, median, avg) as ints for a list of optional ints, ignoring None."""
+    nums = [v for v in values if isinstance(v, int)]
+    if not nums:
+        return None, None, None
+    nums_sorted = sorted(nums)
+    mn = nums_sorted[0]
+    med = int(statistics.median(nums_sorted))
+    avg = int(statistics.mean(nums_sorted))
+    return mn, med, avg
+
+
+def _fmt_int(n: Optional[int]) -> str:
+    return f"{n:,}" if isinstance(n, int) else "n/a"
+
+
+def _fmt_currency(n: Optional[int]) -> str:
+    return f"${n:,}" if isinstance(n, int) else "n/a"
 
 
 def filter_by_config(rows: List[Dict]) -> List[Dict]:
@@ -384,6 +437,7 @@ def fetch_html_selenium(driver: SeleniumWebDriver, url: str) -> Optional[str]:
 
 def scrape() -> List[Dict]:
     all_rows: List[Dict] = []
+    start_ts = time.time()
     use_cache = os.getenv("REQUESTS_CACHE", "0") not in ("0", "false", "False")
     session = make_session(use_cache=use_cache)
     # In tests, make_session may be mocked to a dummy object without headers
@@ -398,9 +452,19 @@ def scrape() -> List[Dict]:
     except Exception:
         pass
 
+    # Run header
+    mode = "selenium" if USE_SELENIUM else ("requests + auto-selenium" if AUTO_SELENIUM_ON_FAIL else "requests-only")
+    headless = os.getenv("HEADLESS", "1") not in ("0", "false", "False")
+    browser = BROWSER
+    print("[cars.com] ── Run ─────────────────────────────────────────────────────")
+    print(f"[cars.com] Mode: {mode} • Browser: {browser} • Headless: {headless}")
+    print(f"[cars.com] Zip {config.ZIP_CODE} • Radius {config.RADIUS_MILES}mi • Year ≥ {config.YEAR_MIN} • Price ≤ ${int(config.PRICE_MAX):,} • Miles ≤ {int(config.MILEAGE_MAX):,}")
+    print(f"[cars.com] Pages: {MAX_PAGES} • Page size: {PAGE_SIZE}")
+
+    cumulative = 0
     for page in range(1, MAX_PAGES + 1):
         url = build_search_url(page)
-        print(f"[cars.com] Fetching page {page}: {url}")
+        print(f"[cars.com] Page {page}/{MAX_PAGES} → {url}")
 
         html: Optional[str]
         page_rows: List[Dict]
@@ -452,7 +516,11 @@ def scrape() -> List[Dict]:
             print(f"[cars.com] {reason} on page {page}; stopping.")
             break
 
-        print(f"[cars.com] Parsed {len(page_rows)} listings from page {page}.")
+        # Per-page progress
+        cumulative += len(page_rows)
+        elapsed = _fmt_duration(time.time() - start_ts)
+        print(f"[cars.com] ✓ Parsed {len(page_rows)} on page {page} • cumulative {cumulative} • elapsed {elapsed}")
+
         all_rows.extend(page_rows)
 
         # Polite delay between pages
@@ -469,9 +537,33 @@ def scrape() -> List[Dict]:
 
 def main() -> None:
     rows = scrape()
-    rows = filter_by_config(rows)
-    print(f"[cars.com] Total listings after filtering: {len(rows)}")
-    write_csv(rows, OUTPUT_FILE)
+    total_raw = len(rows)
+    # Global de-dup by URL before filtering
+    deduped = dedupe_rows(rows)
+    dropped_dupes = total_raw - len(deduped)
+
+    # Quick stats before filtering
+    price_min, price_med, price_avg_int = _numeric_stats([r.get("price") for r in deduped])
+    miles_min, miles_med, miles_avg_int = _numeric_stats([r.get("mileage") for r in deduped])
+    missing_dealer = sum(1 for r in deduped if not (r.get("dealer") or "" ).strip())
+    missing_location = sum(1 for r in deduped if not (r.get("location") or "").strip())
+
+    print("[cars.com] ── Summary (raw) ───────────────────────────────────────────")
+    print(f"[cars.com] Total rows: {total_raw} • Unique by URL: {len(deduped)} • Duplicates dropped: {dropped_dupes}")
+    print(f"[cars.com] Price: min {_fmt_currency(price_min)} • median {_fmt_currency(price_med)} • avg {_fmt_currency(price_avg_int)}")
+    print(f"[cars.com] Mileage: min {_fmt_int(miles_min)} • median {_fmt_int(miles_med)} • avg {_fmt_int(miles_avg_int)}")
+    print(f"[cars.com] Missing dealer: {missing_dealer} • Missing location: {missing_location}")
+
+    # Apply filters from config
+    filtered = filter_by_config(deduped)
+    print("[cars.com] ── Summary (filtered) ─────────────────────────────────────")
+    print(f"[cars.com] Rows after filtering: {len(filtered)} (dropped {len(deduped) - len(filtered)})")
+    f_price_min, f_price_med, f_price_avg_int = _numeric_stats([r.get("price") for r in filtered])
+    f_miles_min, f_miles_med, f_miles_avg_int = _numeric_stats([r.get("mileage") for r in filtered])
+    print(f"[cars.com] Price: min {_fmt_currency(f_price_min)} • median {_fmt_currency(f_price_med)} • avg {_fmt_currency(f_price_avg_int)}")
+    print(f"[cars.com] Mileage: min {_fmt_int(f_miles_min)} • median {_fmt_int(f_miles_med)} • avg {_fmt_int(f_miles_avg_int)}")
+
+    write_csv(filtered, OUTPUT_FILE)
     print(f"[cars.com] Wrote CSV: {OUTPUT_FILE}")
 
 

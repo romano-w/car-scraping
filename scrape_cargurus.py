@@ -28,7 +28,7 @@ HEADERS = {
 
 OUTPUT_DIR = "data"
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "cargurus_results.csv")
-MAX_PAGES = int(os.getenv("CARGURUS_MAX_PAGES", "10"))
+MAX_PAGES = int(os.getenv("CARGURUS_MAX_PAGES", "9999"))
 # Polite delay range between page requests (seconds) for cargurus.com
 PAGE_DELAY_RANGE: Tuple[float, float] = (2.0, 6.0)
 REQUEST_TIMEOUT = int(os.getenv("CARGURUS_TIMEOUT", "45"))
