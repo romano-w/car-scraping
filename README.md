@@ -83,10 +83,18 @@ Outputs (by default):
 
 ## Merge results (optional)
 
-A simple merger script can combine per-source CSVs into one master file with a `source` column and basic de-duplication heuristics (e.g., URL or VIN if present):
+A simple merger script can combine per-source CSVs into one master file with a `source` column and basic de-duplication heuristics (e.g., URL or VIN if present). Run it via uv:
 
-```powershell
-python data/merge_results.py
+```bash
+uv run python data/merge_results.py
+```
+
+## Run tests
+
+Use uv to execute the test suite:
+
+```bash
+uv run pytest
 ```
 
 Target: `data/combined_listings.csv`
