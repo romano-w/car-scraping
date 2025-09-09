@@ -1,0 +1,11 @@
+Fixtures capture small slices of HTML used in tests.
+
+To update a fixture:
+- Load a real search result page in your browser.
+- Use "View Source" or `curl` to copy the HTML for a couple of listings.
+- Remove unrelated markup, scripts, and personal data.
+- Keep only the minimal elements required by the parser (link, price, mileage,
+  dealer, location, etc.).
+- Preserve two listings so tests can exercise filtering logic.
+
+Trimmed fixtures make tests fast and focused while still covering required fields.
