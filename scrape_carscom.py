@@ -217,6 +217,22 @@ def looks_like_bot_check(html: Optional[str]) -> bool:
     return any(s in text for s in signals)
 
 
+def is_partial_matches(html: Optional[str]) -> bool:
+    """Detect the banner that indicates results are outside search area.
+
+    Cars.com shows a notice like "We found partial matches" / "outside your search area"
+    once you page past the locally matching results. When this appears, we should stop
+    to avoid scraping out-of-area listings.
+    """
+    if not html:
+        return False
+    text = html.lower()
+    return (
+        ("we found partial matches" in text)
+        or ("partial matches" in text and "outside your search area" in text)
+    )
+
+
 def parse_listings(html: str) -> List[Dict]:
     soup = BeautifulSoup(html, "lxml")
     cards = soup.select(".vehicle-card, article.vehicle-card")
@@ -498,6 +514,11 @@ def scrape() -> List[Dict]:
             if driver is not None:
                 html = fetch_html_selenium(driver, url)
                 page_rows = parse_listings(html) if html else []
+
+        # Stop before collecting out-of-area results
+        if html and is_partial_matches(html):
+            print(f"[cars.com] Partial matches banner on page {page}; stopping to avoid out-of-area results.")
+            break
 
         # If HTML looks like a bot-check or empty results, use configured selenium path
         if not page_rows and (USE_SELENIUM or (AUTO_SELENIUM_ON_FAIL and looks_like_bot_check(html))):

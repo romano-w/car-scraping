@@ -59,29 +59,35 @@ def clean_number(text: Optional[str]) -> Optional[int]:
 def parse_listings(html: str) -> List[Dict]:
     soup = BeautifulSoup(html, "lxml")
     results: List[Dict] = []
-    for row in soup.select("li.result-row"):
-        link = row.select_one("a.result-title")
-        href = link.get("href") if link and link.has_attr("href") else None
-        url = urljoin(BASE_URL, href) if href else None
-        title = link.get_text(strip=True) if link else None
-        
+    seen_urls = set()
+
     # Craigslist search pages embed results in a JSON block with id
     # "ld_searchpage_results". Prefer parsing this structured data if
     # available as it is more consistent than scraping DOM elements.
-    script = soup.find("script", id="ld_searchpage_results")
+    script = soup.find("script", id="ld_searchpage_results") or soup.find(
+        "script", attrs={"type": "application/ld+json"}
+    )
     if script and script.string:
         try:
             data = json.loads(script.string)
         except json.JSONDecodeError:
             data = None
         if isinstance(data, dict):
-            items = data.get("about") or data.get("itemListElement") or []
-            for item in items:
-                title = item.get("name")
-                url = item.get("url")
+            items = data.get("itemListElement") or data.get("about") or []
+            for entry in items:
+                # itemListElement is often an array of ListItem with "item" nested
+                item = entry.get("item") if isinstance(entry, dict) and "item" in entry else entry
+                if not isinstance(item, dict):
+                    continue
+                title = item.get("name") or item.get("headline")
+                url = item.get("url") or item.get("@id")
                 if url and not url.startswith("http"):
                     url = urljoin(BASE_URL, url)
                 url = canonical_url(url) if url else None
+
+                # Guard against empty rows
+                if not url and not title:
+                    continue
 
                 price_val = None
                 offers = item.get("offers")
@@ -92,11 +98,16 @@ def parse_listings(html: str) -> List[Dict]:
                 price = clean_number(str(price_val) if price_val is not None else None)
 
                 location = None
-                area = item.get("areaServed")
+                area = item.get("areaServed") or item.get("address")
                 if isinstance(area, dict):
-                    location = area.get("name") or area.get("addressLocality")
+                    location = area.get("name") or area.get("addressLocality") or area.get("addressRegion")
                 elif isinstance(area, str):
                     location = area
+
+                if url and url in seen_urls:
+                    continue
+                if url:
+                    seen_urls.add(url)
 
                 results.append(
                     {
@@ -113,23 +124,28 @@ def parse_listings(html: str) -> List[Dict]:
 
     # Fallback to legacy HTML scraping if structured data isn't available
     if not results:
-        rows = soup.select("li.result-row")
+        rows = soup.select("li.result-row, li.cl-search-result")
         for row in rows:
-            link = row.select_one("a.result-title")
+            link = row.select_one("a.result-title, a.hdrlnk")
             href = link.get("href") if link else None
             url = urljoin(BASE_URL, href) if href else None
             url = canonical_url(url) if url else None
             title = link.get_text(strip=True) if link else None
 
-            price_el = row.select_one("span.result-price")
+            price_el = row.select_one("span.result-price, span.price")
             price_text = price_el.get_text(strip=True) if price_el else None
             price = clean_number(price_text)
 
-            hood_el = row.select_one("span.result-hood")
+            hood_el = row.select_one("span.result-hood, span.nearby")
             location = hood_el.get_text(strip=True).strip("()") if hood_el else None
 
             if not url and not title:
                 continue
+
+            if url and url in seen_urls:
+                continue
+            if url:
+                seen_urls.add(url)
 
             results.append(
                 {
