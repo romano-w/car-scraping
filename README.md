@@ -29,6 +29,7 @@ Optional backups later: Autotrader (via service), Carfax, etc.
 
 - Python 3.9+
 - [uv](https://docs.astral.sh/uv/) for dependency management
+- `beautifulsoup4` for HTML parsing
 
 Install dependencies and create a virtual environment with:
 
