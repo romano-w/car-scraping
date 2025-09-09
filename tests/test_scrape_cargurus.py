@@ -1,6 +1,7 @@
 import os
 import types
 import unittest
+from datetime import datetime
 from pathlib import Path
 from unittest.mock import patch, MagicMock
 
@@ -24,6 +25,9 @@ class CarGurusScraperTests(unittest.TestCase):
         self.assertTrue(first["url"].startswith("https://www.cargurus.com/Cars/"))
         self.assertEqual(first["dealer"], "Best Dealer")
         self.assertIn("Philadelphia", first["location"])
+        self.assertNotIn("?", first["url"])
+        self.assertNotIn("#", first["url"])
+        datetime.fromisoformat(first["first_seen"])
 
     def test_filter_by_config_applies_limits(self):
         rows = cg.parse_listings(HTML)
@@ -58,6 +62,9 @@ class CarGurusScraperTests(unittest.TestCase):
             rows = cg.scrape()
         self.assertEqual(len(rows), 2)
         self.assertEqual(rows[0]["source"], "cargurus")
+        self.assertNotIn("?", rows[0]["url"])
+        self.assertNotIn("#", rows[0]["url"])
+        datetime.fromisoformat(rows[0]["first_seen"])
 
 
 if __name__ == "__main__":

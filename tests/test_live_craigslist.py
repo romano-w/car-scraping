@@ -1,6 +1,7 @@
 import os
 import pytest
 import requests
+from datetime import datetime
 
 os.environ.setdefault("CRAIGS_DOMAIN", "philadelphia")
 import scrape_craigslist as cl
@@ -19,3 +20,5 @@ def test_craigslist_one_page() -> None:
     assert resp.status_code == 200
     rows = cl.parse_listings(resp.text)
     assert rows and rows[0]["source"] == "craigslist"
+    assert "?" not in rows[0]["url"] and "#" not in rows[0]["url"]
+    datetime.fromisoformat(rows[0]["first_seen"])

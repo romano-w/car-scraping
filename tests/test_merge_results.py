@@ -21,6 +21,7 @@ def test_merge_csv_dedupes_by_url(tmp_path):
             "dealer": "A",
             "location": "X",
             "url": "http://1",
+            "first_seen": "2024-01-01T00:00:00",
         },
         {
             "source": "cars.com",
@@ -30,6 +31,7 @@ def test_merge_csv_dedupes_by_url(tmp_path):
             "dealer": "B",
             "location": "Y",
             "url": "http://2",
+            "first_seen": "2024-01-01T00:00:00",
         },
     ]
     rows2 = [
@@ -41,6 +43,7 @@ def test_merge_csv_dedupes_by_url(tmp_path):
             "dealer": "C",
             "location": "Z",
             "url": "http://2",
+            "first_seen": "2024-01-02T00:00:00",
         },
         {
             "source": "craigslist",
@@ -50,6 +53,7 @@ def test_merge_csv_dedupes_by_url(tmp_path):
             "dealer": "D",
             "location": "W",
             "url": "http://3",
+            "first_seen": "2024-01-02T00:00:00",
         },
     ]
 

@@ -1,5 +1,8 @@
 import csv
 import os
+import random
+import time
+from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 from urllib.parse import urlencode, urljoin
 
@@ -14,6 +17,7 @@ from selenium.webdriver.support.wait import WebDriverWait  # fixed import
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 
+from utils.url import canonical_url
 from utils.throttle import polite_sleep
 
 import config
@@ -94,6 +98,7 @@ def parse_listings(html: str) -> List[Dict]:
             href_val = href_val[0] if href_val else None
         href = href_val if isinstance(href_val, str) else None
         url = urljoin("https://www.cars.com", href) if href else None
+        url = canonical_url(url) if url else None
 
         # Title
         title_el = card.select_one("h2, a.vehicle-card-link")
@@ -140,6 +145,7 @@ def parse_listings(html: str) -> List[Dict]:
                 "dealer": dealer,
                 "location": location,
                 "url": url,
+                "first_seen": datetime.utcnow().isoformat(timespec="seconds"),
             }
         )
 
@@ -171,7 +177,16 @@ def filter_by_config(rows: List[Dict]) -> List[Dict]:
 
 def write_csv(rows: List[Dict], path: str) -> None:
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    fieldnames = ["source", "title", "price", "mileage", "dealer", "location", "url"]
+    fieldnames = [
+        "source",
+        "title",
+        "price",
+        "mileage",
+        "dealer",
+        "location",
+        "url",
+        "first_seen",
+    ]
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()

@@ -1,6 +1,9 @@
 import csv
 import json
 import os
+import random
+import time
+from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import urlencode, urljoin
 
@@ -8,6 +11,8 @@ import requests
 from bs4 import BeautifulSoup
 
 from utils.throttle import polite_sleep
+
+from utils.url import canonical_url
 
 import config
 from utils.http_client import make_session
@@ -138,7 +143,12 @@ def parse_listings(html: str) -> List[Dict]:
         listings = _find_listings_in_data(data)
         if listings:
             for item in listings:
-                results.append(_row_from_item(item))
+                row = _row_from_item(item)
+                url = row.get("url")
+                if url:
+                    row["url"] = canonical_url(url)
+                row["first_seen"] = datetime.utcnow().isoformat(timespec="seconds")
+                results.append(row)
             if results:
                 return results
 
@@ -154,6 +164,7 @@ def parse_listings(html: str) -> List[Dict]:
             href_val = href_val[0] if href_val else None
         href = href_val if isinstance(href_val, str) else None
         url = urljoin("https://www.cargurus.com", href) if href else None
+        url = canonical_url(url) if url else None
 
         title = link.get_text(strip=True) if link else None
 
@@ -191,6 +202,7 @@ def parse_listings(html: str) -> List[Dict]:
                 "dealer": dealer,
                 "location": location,
                 "url": url,
+                "first_seen": datetime.utcnow().isoformat(timespec="seconds"),
             }
         )
 
@@ -221,7 +233,16 @@ def filter_by_config(rows: List[Dict]) -> List[Dict]:
 
 def write_csv(rows: List[Dict], path: str) -> None:
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    fieldnames = ["source", "title", "price", "mileage", "dealer", "location", "url"]
+    fieldnames = [
+        "source",
+        "title",
+        "price",
+        "mileage",
+        "dealer",
+        "location",
+        "url",
+        "first_seen",
+    ]
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()

@@ -5,7 +5,16 @@ from typing import Dict, List, Set
 
 DATA_DIR = os.path.dirname(__file__)
 OUTPUT_FILE = os.path.join(DATA_DIR, "combined_listings.csv")
-FIELDS = ["source", "title", "price", "mileage", "dealer", "location", "url"]
+FIELDS = [
+    "source",
+    "title",
+    "price",
+    "mileage",
+    "dealer",
+    "location",
+    "url",
+    "first_seen",
+]
 
 
 def merge_csv_files(

@@ -1,5 +1,6 @@
 import pathlib
 import unittest
+from datetime import datetime
 from unittest.mock import patch
 
 import pytest
@@ -24,6 +25,8 @@ class CarsComScraperLiveTests(unittest.TestCase):
         assert first["source"] == "cars.com"
         assert first["title"]
         assert first["url"].startswith("https://www.cars.com/")
+        assert "?" not in first["url"] and "#" not in first["url"]
+        datetime.fromisoformat(first["first_seen"])
 
     def test_filter_by_config_applies_limits(self):
         html = FIXTURE.read_text()

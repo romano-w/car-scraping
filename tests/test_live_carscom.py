@@ -1,5 +1,6 @@
 import pytest
 import requests
+from datetime import datetime
 
 import scrape_carscom as sc
 
@@ -18,3 +19,5 @@ def test_carscom_one_page() -> None:
     assert resp.status_code == 200
     rows = sc.parse_listings(resp.text)
     assert rows and rows[0]["source"] == "cars.com"
+    assert "?" not in rows[0]["url"] and "#" not in rows[0]["url"]
+    datetime.fromisoformat(rows[0]["first_seen"])

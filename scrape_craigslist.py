@@ -1,5 +1,8 @@
 import csv
 import os
+import random
+import time
+from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 from urllib.parse import urlencode, urljoin
 
@@ -7,6 +10,8 @@ import requests
 from bs4 import BeautifulSoup
 
 from utils.throttle import polite_sleep
+
+from utils.url import canonical_url
 
 import config
 from utils.http_client import make_session
@@ -57,28 +62,85 @@ def parse_listings(html: str) -> List[Dict]:
         href = link.get("href") if link and link.has_attr("href") else None
         url = urljoin(BASE_URL, href) if href else None
         title = link.get_text(strip=True) if link else None
+        
+    # Craigslist search pages embed results in a JSON block with id
+    # "ld_searchpage_results". Prefer parsing this structured data if
+    # available as it is more consistent than scraping DOM elements.
+    script = soup.find("script", id="ld_searchpage_results")
+    if script and script.string:
+        try:
+            data = json.loads(script.string)
+        except json.JSONDecodeError:
+            data = None
+        if isinstance(data, dict):
+            items = data.get("about") or data.get("itemListElement") or []
+            for item in items:
+                title = item.get("name")
+                url = item.get("url")
+                if url and not url.startswith("http"):
+                    url = urljoin(BASE_URL, url)
+                url = canonical_url(url) if url else None
 
-        price_el = row.select_one("span.result-price")
-        price_text = price_el.get_text(strip=True) if price_el else None
-        price = clean_number(price_text)
+                price_val = None
+                offers = item.get("offers")
+                if isinstance(offers, dict):
+                    price_val = offers.get("price")
+                elif "price" in item:
+                    price_val = item.get("price")
+                price = clean_number(str(price_val) if price_val is not None else None)
 
-        hood_el = row.select_one("span.result-hood")
-        location = hood_el.get_text(strip=True).strip("()") if hood_el else None
+                location = None
+                area = item.get("areaServed")
+                if isinstance(area, dict):
+                    location = area.get("name") or area.get("addressLocality")
+                elif isinstance(area, str):
+                    location = area
 
-        if not url and not title:
-            continue
+                results.append(
+                    {
+                        "source": "craigslist",
+                        "title": title,
+                        "price": price,
+                        "mileage": None,
+                        "dealer": None,
+                        "location": location,
+                        "url": url,
+                        "first_seen": datetime.utcnow().isoformat(timespec="seconds"),
+                    }
+                )
 
-        results.append(
-            {
-                "source": "craigslist",
-                "title": title,
-                "price": price,
-                "mileage": None,
-                "dealer": None,
-                "location": location,
-                "url": url,
-            }
-        )
+    # Fallback to legacy HTML scraping if structured data isn't available
+    if not results:
+        rows = soup.select("li.result-row")
+        for row in rows:
+            link = row.select_one("a.result-title")
+            href = link.get("href") if link else None
+            url = urljoin(BASE_URL, href) if href else None
+            url = canonical_url(url) if url else None
+            title = link.get_text(strip=True) if link else None
+
+            price_el = row.select_one("span.result-price")
+            price_text = price_el.get_text(strip=True) if price_el else None
+            price = clean_number(price_text)
+
+            hood_el = row.select_one("span.result-hood")
+            location = hood_el.get_text(strip=True).strip("()") if hood_el else None
+
+            if not url and not title:
+                continue
+
+            results.append(
+                {
+                    "source": "craigslist",
+                    "title": title,
+                    "price": price,
+                    "mileage": None,
+                    "dealer": None,
+                    "location": location,
+                    "url": url,
+                    "first_seen": datetime.utcnow().isoformat(timespec="seconds"),
+                }
+            )
 
     return results
 
@@ -105,7 +167,16 @@ def filter_by_config(rows: List[Dict]) -> List[Dict]:
 
 def write_csv(rows: List[Dict], path: str) -> None:
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    fieldnames = ["source", "title", "price", "mileage", "dealer", "location", "url"]
+    fieldnames = [
+        "source",
+        "title",
+        "price",
+        "mileage",
+        "dealer",
+        "location",
+        "url",
+        "first_seen",
+    ]
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
