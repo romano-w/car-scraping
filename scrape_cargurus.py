@@ -16,6 +16,10 @@ from utils.url import canonical_url
 
 import config
 from utils.http_client import make_session
+from utils.console import console
+from functools import partial
+
+print = partial(console.print, style="cyan", markup=False)
 
 BASE_URL = "https://www.cargurus.com/Cars/inventorylisting/viewDetailsFilterViewInventoryListing.action"
 HEADERS = {

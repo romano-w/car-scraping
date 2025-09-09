@@ -16,6 +16,10 @@ from utils.url import canonical_url
 
 import config
 from utils.http_client import make_session
+from utils.console import console
+from functools import partial
+
+print = partial(console.print, style="magenta", markup=False)
 
 CRAIGS_DOMAIN = os.getenv("CRAIGS_DOMAIN", getattr(config, "CRAIGS_DOMAIN", "philadelphia"))
 # Domain base for URL joins

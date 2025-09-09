@@ -2,6 +2,8 @@
 import os, sys, time, json, argparse, pathlib, datetime as dt
 from typing import List, Dict
 import pandas as pd
+from rich.table import Table
+from utils.console import console
 
 # Import your site scrapers (update names if different)
 import scrape_craigslist as cl
@@ -43,14 +45,14 @@ def dedupe(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 def scrape_site(site_name: str, fn) -> pd.DataFrame:
-    print(f"→ {site_name}…", flush=True)
+    console.print(f"→ {site_name}…", style="bold blue")
     try:
         rows = fn.scrape()  # assumes each module exposes scrape()
         df = as_df(rows)
-        print(f"  {site_name}: {len(df)} rows")
+        console.print(f"{site_name}: {len(df)} rows", style="green")
         return df
     except Exception as e:
-        print(f"  {site_name} failed: {e}", file=sys.stderr)
+        console.print(f"{site_name} failed: {e}", style="red", stderr=True)
         return pd.DataFrame()
 
 def main():
@@ -94,11 +96,16 @@ def main():
         if not args.no_parquet:
             combined.to_parquet(OUTPUT_DIR / f"combined-{ts}.parquet", index=False)
 
-        print("\n=== Summary ===")
-        print(combined.groupby("source")["url"].count())
-        print(f"\nCombined: {len(combined)} rows → {combined_csv}")
+        source_counts = combined.groupby("source")["url"].count()
+        table = Table(title="Summary")
+        table.add_column("Source")
+        table.add_column("Listings", justify="right")
+        for source, count in source_counts.items():
+            table.add_row(source, str(count))
+        console.print(table)
+        console.print(f"Combined: {len(combined)} rows → {combined_csv}", style="bold")
     else:
-        print("No data scraped.")
+        console.print("No data scraped.", style="yellow")
 
 if __name__ == "__main__":
     main()

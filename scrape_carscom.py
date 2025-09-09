@@ -28,6 +28,10 @@ from utils.throttle import polite_sleep
 
 import config
 from utils.http_client import USER_AGENTS, make_session
+from utils.console import console
+from functools import partial
+
+print = partial(console.print, style="green", markup=False)
 
 BASE_URL = "https://www.cars.com/shopping/results/"
 HEADERS = {
