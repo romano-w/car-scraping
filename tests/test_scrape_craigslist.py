@@ -7,6 +7,7 @@ from unittest.mock import MagicMock, patch
 
 os.environ.setdefault("CRAIGS_DOMAIN", "philadelphia")
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+from utils.url import canonical_url
 import scrape_craigslist as sc
 
 FIXTURE_PATH = Path(__file__).parent / "fixtures" / "craigslist_page1.html"
@@ -26,6 +27,7 @@ class CraigslistScraperTests(unittest.TestCase):
         self.assertEqual(first["location"], "Philadelphia")
         self.assertNotIn("?", first["url"])
         self.assertNotIn("#", first["url"])
+        self.assertEqual(first["url"], canonical_url(first["url"]))
         datetime.fromisoformat(first["first_seen"])
 
     def test_filter_by_config_applies_limits(self):
@@ -62,6 +64,7 @@ class CraigslistScraperTests(unittest.TestCase):
         self.assertEqual(rows[0]['source'], 'craigslist')
         self.assertNotIn("?", rows[0]['url'])
         self.assertNotIn("#", rows[0]['url'])
+        self.assertEqual(rows[0]['url'], canonical_url(rows[0]['url']))
         datetime.fromisoformat(rows[0]['first_seen'])
 
     @patch("requests.Session.get")

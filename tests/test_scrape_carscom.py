@@ -6,6 +6,8 @@ from unittest.mock import patch
 import pytest
 import requests
 
+from utils.url import canonical_url
+
 pytestmark = pytest.mark.live
 
 import scrape_carscom as sc
@@ -25,7 +27,7 @@ class CarsComScraperLiveTests(unittest.TestCase):
         assert first["source"] == "cars.com"
         assert first["title"]
         assert first["url"].startswith("https://www.cars.com/")
-        assert "?" not in first["url"] and "#" not in first["url"]
+        assert first["url"] == canonical_url(first["url"])
         datetime.fromisoformat(first["first_seen"])
 
     def test_filter_by_config_applies_limits(self):
@@ -53,6 +55,8 @@ def test_scrape_live():
     if not rows:
         pytest.skip("No rows returned from live scrape")
     assert rows[0]["source"] == "cars.com"
+    assert rows[0]["url"] == canonical_url(rows[0]["url"])
+    datetime.fromisoformat(rows[0]["first_seen"])
 
 
 def test_scrape_requests_only():

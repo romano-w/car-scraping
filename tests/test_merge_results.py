@@ -31,7 +31,7 @@ def test_merge_csv_dedupes_by_url(tmp_path):
             "dealer": "B",
             "location": "Y",
             "url": "http://2",
-            "first_seen": "2024-01-01T00:00:00",
+            "first_seen": "2024-01-02T00:00:00",
         },
     ]
     rows2 = [
@@ -43,7 +43,7 @@ def test_merge_csv_dedupes_by_url(tmp_path):
             "dealer": "C",
             "location": "Z",
             "url": "http://2",
-            "first_seen": "2024-01-02T00:00:00",
+            "first_seen": "2024-01-01T00:00:00",
         },
         {
             "source": "craigslist",
@@ -53,7 +53,7 @@ def test_merge_csv_dedupes_by_url(tmp_path):
             "dealer": "D",
             "location": "W",
             "url": "http://3",
-            "first_seen": "2024-01-02T00:00:00",
+            "first_seen": "2024-01-03T00:00:00",
         },
     ]
 
@@ -66,12 +66,16 @@ def test_merge_csv_dedupes_by_url(tmp_path):
     )
 
     assert len(merged) == 3
+    merged_map = {r["url"]: r["first_seen"] for r in merged}
+    assert merged_map["http://2"] == "2024-01-01T00:00:00"
     assert output_file.exists()
     with open(output_file, newline="", encoding="utf-8") as f:
         out_rows = list(csv.DictReader(f))
     assert len(out_rows) == 3
     urls = [r["url"] for r in out_rows]
     assert urls == ["http://1", "http://2", "http://3"]
+    first_seen = {r["url"]: r["first_seen"] for r in out_rows}
+    assert first_seen["http://2"] == "2024-01-01T00:00:00"
 
 
 def test_merge_csv_no_files(tmp_path, capsys):
