@@ -1,5 +1,6 @@
 import pytest
 import requests
+from datetime import datetime
 
 import scrape_cargurus as cg
 
@@ -17,3 +18,5 @@ def test_cargurus_one_page() -> None:
     assert resp.status_code == 200
     rows = cg.parse_listings(resp.text)
     assert rows and rows[0]["source"] == "cargurus"
+    assert "?" not in rows[0]["url"] and "#" not in rows[0]["url"]
+    datetime.fromisoformat(rows[0]["first_seen"])

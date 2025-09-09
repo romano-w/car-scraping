@@ -3,6 +3,7 @@ import json
 import os
 import random
 import time
+from datetime import datetime
 from typing import Dict, List, Optional
 from urllib.parse import urlencode, urljoin
 
@@ -10,6 +11,8 @@ import requests
 from bs4 import BeautifulSoup
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+
+from utils.url import canonical_url
 
 import config
 
@@ -88,6 +91,7 @@ def parse_listings(html: str) -> List[Dict]:
                 url = item.get("url")
                 if url and not url.startswith("http"):
                     url = urljoin(BASE_URL, url)
+                url = canonical_url(url) if url else None
 
                 price_val = None
                 offers = item.get("offers")
@@ -113,6 +117,7 @@ def parse_listings(html: str) -> List[Dict]:
                         "dealer": None,
                         "location": location,
                         "url": url,
+                        "first_seen": datetime.utcnow().isoformat(timespec="seconds"),
                     }
                 )
 
@@ -123,6 +128,7 @@ def parse_listings(html: str) -> List[Dict]:
             link = row.select_one("a.result-title")
             href = link.get("href") if link else None
             url = urljoin(BASE_URL, href) if href else None
+            url = canonical_url(url) if url else None
             title = link.get_text(strip=True) if link else None
 
             price_el = row.select_one("span.result-price")
@@ -144,6 +150,7 @@ def parse_listings(html: str) -> List[Dict]:
                     "dealer": None,
                     "location": location,
                     "url": url,
+                    "first_seen": datetime.utcnow().isoformat(timespec="seconds"),
                 }
             )
 
@@ -172,7 +179,16 @@ def filter_by_config(rows: List[Dict]) -> List[Dict]:
 
 def write_csv(rows: List[Dict], path: str) -> None:
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    fieldnames = ["source", "title", "price", "mileage", "dealer", "location", "url"]
+    fieldnames = [
+        "source",
+        "title",
+        "price",
+        "mileage",
+        "dealer",
+        "location",
+        "url",
+        "first_seen",
+    ]
     with open(path, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()

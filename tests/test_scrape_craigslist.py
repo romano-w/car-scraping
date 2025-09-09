@@ -1,6 +1,7 @@
 import os
 import sys
 import unittest
+from datetime import datetime
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
@@ -22,6 +23,9 @@ class CraigslistScraperTests(unittest.TestCase):
         self.assertEqual(first["price"], 3500)
         self.assertTrue(first["url"].startswith("https://philadelphia.craigslist.org/"))
         self.assertEqual(first["location"], "Philadelphia")
+        self.assertNotIn("?", first["url"])
+        self.assertNotIn("#", first["url"])
+        datetime.fromisoformat(first["first_seen"])
 
     def test_filter_by_config_applies_limits(self):
         rows = sc.parse_listings(FIXTURE_HTML)
@@ -55,6 +59,9 @@ class CraigslistScraperTests(unittest.TestCase):
             rows = sc.scrape()
         self.assertEqual(len(rows), 2)
         self.assertEqual(rows[0]['source'], 'craigslist')
+        self.assertNotIn("?", rows[0]['url'])
+        self.assertNotIn("#", rows[0]['url'])
+        datetime.fromisoformat(rows[0]['first_seen'])
 
 
 if __name__ == "__main__":
