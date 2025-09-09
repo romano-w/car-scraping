@@ -8,18 +8,12 @@ from urllib.parse import urlencode, urljoin
 
 import requests
 from bs4 import BeautifulSoup
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
 
 import config
+from utils.http_client import make_session
 
 BASE_URL = "https://philadelphia.craigslist.org/search/cto"
 HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/127.0.0.0 Safari/537.36"
-    ),
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.9",
     "Connection": "keep-alive",
@@ -52,20 +46,6 @@ def clean_number(text: Optional[str]) -> Optional[int]:
     return int(digits) if digits else None
 
 
-def make_session() -> requests.Session:
-    session = requests.Session()
-    session.headers.update(HEADERS)
-    retry = Retry(
-        total=4,
-        backoff_factor=2,
-        status_forcelist=[429, 500, 502, 503, 504],
-        allowed_methods=["HEAD", "GET", "OPTIONS"],
-        raise_on_status=False,
-    )
-    adapter = HTTPAdapter(max_retries=retry)
-    session.mount("https://", adapter)
-    session.mount("http://", adapter)
-    return session
 
 
 def parse_listings(html: str) -> List[Dict]:
@@ -182,7 +162,9 @@ def write_csv(rows: List[Dict], path: str) -> None:
 
 def scrape() -> List[Dict]:
     all_rows: List[Dict] = []
-    session = make_session()
+    use_cache = os.getenv("REQUESTS_CACHE", "0") not in ("0", "false", "False")
+    session = make_session(use_cache=use_cache)
+    session.headers.update(HEADERS)
 
     for page in range(1, MAX_PAGES + 1):
         url = build_search_url(page)
