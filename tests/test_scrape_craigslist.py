@@ -7,9 +7,9 @@ from unittest.mock import MagicMock, patch
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import scrape_craigslist as sc
 
-FIXTURE_HTML = (
-    Path(__file__).resolve().parent / "fixtures" / "craigslist_page1.html"
-).read_text(encoding="utf-8")
+FIXTURE_PATH = Path(__file__).parent / "fixtures" / "craigslist_page1.html"
+# Trimmed fixture with two example listings
+FIXTURE_HTML = FIXTURE_PATH.read_text(encoding="utf-8")
 
 
 class CraigslistScraperTests(unittest.TestCase):

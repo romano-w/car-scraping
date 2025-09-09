@@ -8,6 +8,7 @@ import scrape_cargurus as cg
 
 
 FIXTURE_PATH = Path(__file__).parent / "fixtures" / "cargurus_page1.html"
+# Trimmed fixture with just two listings for fast tests
 HTML = FIXTURE_PATH.read_text(encoding="utf-8")
 
 
