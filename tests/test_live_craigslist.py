@@ -1,6 +1,8 @@
+import os
 import pytest
 import requests
 
+os.environ.setdefault("CRAIGS_DOMAIN", "philadelphia")
 import scrape_craigslist as cl
 
 

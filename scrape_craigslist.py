@@ -1,5 +1,4 @@
 import csv
-import json
 import os
 from typing import Dict, List, Optional, Tuple
 from urllib.parse import urlencode, urljoin
@@ -12,7 +11,8 @@ from utils.throttle import polite_sleep
 import config
 from utils.http_client import make_session
 
-BASE_URL = "https://philadelphia.craigslist.org/search/cto"
+CRAIGS_DOMAIN = os.getenv("CRAIGS_DOMAIN", getattr(config, "CRAIGS_DOMAIN", "philadelphia"))
+BASE_URL = f"https://{CRAIGS_DOMAIN}.craigslist.org/search/cta"
 HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.9",
@@ -52,81 +52,33 @@ def clean_number(text: Optional[str]) -> Optional[int]:
 def parse_listings(html: str) -> List[Dict]:
     soup = BeautifulSoup(html, "lxml")
     results: List[Dict] = []
+    for row in soup.select("li.result-row"):
+        link = row.select_one("a.result-title")
+        href = link.get("href") if link and link.has_attr("href") else None
+        url = urljoin(BASE_URL, href) if href else None
+        title = link.get_text(strip=True) if link else None
 
-    # Craigslist search pages embed results in a JSON block with id
-    # "ld_searchpage_results". Prefer parsing this structured data if
-    # available as it is more consistent than scraping DOM elements.
-    script = soup.find("script", id="ld_searchpage_results")
-    if script and script.string:
-        try:
-            data = json.loads(script.string)
-        except json.JSONDecodeError:
-            data = None
-        if isinstance(data, dict):
-            items = data.get("about") or data.get("itemListElement") or []
-            for item in items:
-                title = item.get("name")
-                url = item.get("url")
-                if url and not url.startswith("http"):
-                    url = urljoin(BASE_URL, url)
+        price_el = row.select_one("span.result-price")
+        price_text = price_el.get_text(strip=True) if price_el else None
+        price = clean_number(price_text)
 
-                price_val = None
-                offers = item.get("offers")
-                if isinstance(offers, dict):
-                    price_val = offers.get("price")
-                elif "price" in item:
-                    price_val = item.get("price")
-                price = clean_number(str(price_val) if price_val is not None else None)
+        hood_el = row.select_one("span.result-hood")
+        location = hood_el.get_text(strip=True).strip("()") if hood_el else None
 
-                location = None
-                area = item.get("areaServed")
-                if isinstance(area, dict):
-                    location = area.get("name") or area.get("addressLocality")
-                elif isinstance(area, str):
-                    location = area
+        if not url and not title:
+            continue
 
-                results.append(
-                    {
-                        "source": "craigslist",
-                        "title": title,
-                        "price": price,
-                        "mileage": None,
-                        "dealer": None,
-                        "location": location,
-                        "url": url,
-                    }
-                )
-
-    # Fallback to legacy HTML scraping if structured data isn't available
-    if not results:
-        rows = soup.select("li.result-row")
-        for row in rows:
-            link = row.select_one("a.result-title")
-            href = link.get("href") if link else None
-            url = urljoin(BASE_URL, href) if href else None
-            title = link.get_text(strip=True) if link else None
-
-            price_el = row.select_one("span.result-price")
-            price_text = price_el.get_text(strip=True) if price_el else None
-            price = clean_number(price_text)
-
-            hood_el = row.select_one("span.result-hood")
-            location = hood_el.get_text(strip=True).strip("()") if hood_el else None
-
-            if not url and not title:
-                continue
-
-            results.append(
-                {
-                    "source": "craigslist",
-                    "title": title,
-                    "price": price,
-                    "mileage": None,
-                    "dealer": None,
-                    "location": location,
-                    "url": url,
-                }
-            )
+        results.append(
+            {
+                "source": "craigslist",
+                "title": title,
+                "price": price,
+                "mileage": None,
+                "dealer": None,
+                "location": location,
+                "url": url,
+            }
+        )
 
     return results
 
