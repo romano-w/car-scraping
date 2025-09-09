@@ -16,4 +16,5 @@ dependencies = [
 [dependency-groups]
 dev = [
     "pytest>=8.4.2",
+    "pytest-recording>=0.13",
 ]

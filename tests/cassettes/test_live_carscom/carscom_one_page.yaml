@@ -1,0 +1,27 @@
+interactions:
+- request:
+    method: GET
+    uri: https://www.cars.com/shopping/results/?stock_type=used&maximum_distance=200&zip=19102&list_price_max=4500&mileage_max=200000&year_min=2004&page=1&page_size=50
+    body: null
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/html; charset=utf-8
+    body:
+      string: |
+        <html>
+          <body>
+            <div class="vehicle-card">
+              <a class="vehicle-card-link" href="/vehicledetail/testcar">2010 Ford Focus</a>
+              <span class="primary-price">$4,000</span>
+              <div class="mileage">100,000 mi.</div>
+              <div class="dealer-name">Quality Cars</div>
+              <div class="vehicle-card-location">Philadelphia, PA</div>
+            </div>
+          </body>
+        </html>
+version: 1
