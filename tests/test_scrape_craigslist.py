@@ -6,6 +6,7 @@ from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 os.environ.setdefault("CRAIGS_DOMAIN", "philadelphia")
+os.environ.setdefault("CRAIG_CATEGORIES", "both")
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils.url import canonical_url
 import scrape_craigslist as sc
@@ -69,18 +70,22 @@ class CraigslistScraperTests(unittest.TestCase):
 
     @patch("requests.Session.get")
     def test_scrape_stops_when_no_results(self, mock_get):
-        resp1 = MagicMock()
-        resp1.status_code = 200
-        resp1.text = FIXTURE_HTML
-        resp2 = MagicMock()
-        resp2.status_code = 200
-        resp2.text = "<html></html>"
-        mock_get.side_effect = [resp1, resp2]
+        # Sequence:
+        # 1) cto page1 → HTML
+        # 2) cto page2 → empty => stop cto
+        # 3) cta page1 → empty => stop cta
+        resp_cto_html = MagicMock()
+        resp_cto_html.status_code = 200
+        resp_cto_html.text = FIXTURE_HTML
+        resp_empty = MagicMock()
+        resp_empty.status_code = 200
+        resp_empty.text = "<html></html>"
+        mock_get.side_effect = [resp_cto_html, resp_empty, resp_empty]
         with patch.object(sc, 'make_session') as ms, patch.object(sc, 'MAX_PAGES', 5), patch.object(sc, 'PAGE_DELAY_RANGE', (0, 0)):
             ms.return_value = sc.requests.Session()
             rows = sc.scrape()
         self.assertEqual(len(rows), 2)
-        self.assertEqual(mock_get.call_count, 2)
+        self.assertEqual(mock_get.call_count, 3)
 
 
 if __name__ == "__main__":
