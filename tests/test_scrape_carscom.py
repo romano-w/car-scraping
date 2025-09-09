@@ -12,6 +12,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import scrape_carscom as sc
 
 
+@pytest.mark.live
 class CarsComScraperLiveTests(unittest.TestCase):
     """Tests that exercise the cars.com scraper against the live site.
 
