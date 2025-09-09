@@ -163,11 +163,11 @@ def parse_listings(html: str) -> List[Dict]:
 
     # Fallback to parsing visible HTML cards
     cards = soup.select(
-        ".cg-dealFinderResult-wrap, div[data-listingid], div.listing-item"
+        "[data-test='inventory-listing'], [data-cg-ft='inventory-listing'], div[data-listingid]"
     )
 
     for card in cards:
-        link = card.select_one("a[href]")
+        link = card.select_one("a[data-test='listing-link'], a[itemprop='url'], a[href]")
         href_val = link.get("href") if link else None
         if isinstance(href_val, list):
             href_val = href_val[0] if href_val else None
@@ -177,26 +177,26 @@ def parse_listings(html: str) -> List[Dict]:
         title = link.get_text(strip=True) if link else None
 
         price_el = card.select_one(
-            ".listing-price, .cg-dealFinderPrice, [data-test='listing-price']"
+            "[data-test='listing-price'], [itemprop='price'], [data-cg-ft='listing-price']"
         )
         price_text = price_el.get_text(strip=True) if price_el else None
         price = clean_number(price_text)
 
         mileage_el = card.select_one(
-            ".listing-mileage, .cg-listingDetail-byline, [data-test='mileage']"
+            "[data-test='mileage'], [data-test='listing-mileage'], [itemprop='mileage']"
         )
         mileage_text = mileage_el.get_text(strip=True) if mileage_el else None
         mileage = clean_number(mileage_text)
 
         dealer_el = card.select_one(
-            ".dealer-name, .cg-dealerName, [data-test='dealer-name']"
+            "[data-test='dealer-name'], [itemprop='seller'], [data-cg-ft='dealer-name']"
         )
-        dealer = dealer_el.get_text(" ", strip=True) if dealer_el else None
+        dealer = dealer_el.get_text(strip=True) if dealer_el else None
 
         location_el = card.select_one(
-            ".listing-location, .cg-dealerAddress, [data-test='dealer-address']"
+            "[data-test='dealer-address'], [data-test='listing-location'], [itemprop='address']"
         )
-        location = location_el.get_text(" ", strip=True) if location_el else None
+        location = location_el.get_text(strip=True) if location_el else None
 
         if not url and not title:
             continue
