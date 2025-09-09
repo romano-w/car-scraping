@@ -5,6 +5,8 @@ from datetime import datetime
 from pathlib import Path
 from unittest.mock import patch, MagicMock
 
+from utils.url import canonical_url
+
 import scrape_cargurus as cg
 
 
@@ -27,6 +29,7 @@ class CarGurusScraperTests(unittest.TestCase):
         self.assertIn("Philadelphia", first["location"])
         self.assertNotIn("?", first["url"])
         self.assertNotIn("#", first["url"])
+        self.assertEqual(first["url"], canonical_url(first["url"]))
         datetime.fromisoformat(first["first_seen"])
 
     def test_filter_by_config_applies_limits(self):
@@ -64,6 +67,7 @@ class CarGurusScraperTests(unittest.TestCase):
         self.assertEqual(rows[0]["source"], "cargurus")
         self.assertNotIn("?", rows[0]["url"])
         self.assertNotIn("#", rows[0]["url"])
+        self.assertEqual(rows[0]["url"], canonical_url(rows[0]["url"]))
         datetime.fromisoformat(rows[0]["first_seen"])
 
 
