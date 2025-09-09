@@ -91,10 +91,10 @@ uv run python data/merge_results.py
 
 ## Run tests
 
-Use uv to execute the test suite:
+Use uv to execute the test suite with verbose output:
 
 ```bash
-uv run pytest
+uv run pytest -v
 ```
 
 Target: `data/combined_listings.csv`
