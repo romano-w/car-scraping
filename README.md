@@ -61,7 +61,22 @@ These values are applied across all scrapers.
 
 ## Run the scrapers
 
-Run individually; each writes a CSV to `data/`.
+### All sources via CLI
+
+Run every scraper at once and write results (CSV and Parquet) under
+`data/out/`:
+
+```bash
+uv run python run_all.py --zip 19102 --radius 200 --price-max 15000 --miles-max 150000
+```
+
+Environment variables like `REQUESTS_CACHE=1` or `USE_SELENIUM=1` can be
+prefixed to the command (PowerShell: `$env:REQUESTS_CACHE=1; uv run ...`,
+`cmd.exe`: `set REQUESTS_CACHE=1 && uv run ...`).
+
+### Run individually
+
+Each script saves a CSV in `data/`:
 
 ```bash
 # Cars.com (static; fastest to validate pipeline)
