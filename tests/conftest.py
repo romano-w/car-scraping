@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+import pytest
 
 import pytest
 
@@ -23,7 +24,7 @@ def pytest_configure(config):
 def pytest_collection_modifyitems(config, items):
     if config.getoption("--live"):
         return
-    skip_live = pytest.mark.skip(reason="need --live option to run")
+    skip_live = pytest.mark.skip(reason="use --live to run integration tests")
     for item in items:
         if "live" in item.keywords:
             item.add_marker(skip_live)

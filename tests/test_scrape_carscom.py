@@ -6,6 +6,8 @@ from unittest.mock import patch
 import requests
 import pytest
 
+pytestmark = pytest.mark.live
+
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import scrape_carscom as sc
 
