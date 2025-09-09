@@ -5,8 +5,6 @@ from urllib.parse import urlencode, urljoin
 
 import requests
 from bs4 import BeautifulSoup
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
 
 # New imports for Selenium fallback
 from selenium import webdriver
@@ -19,14 +17,10 @@ from webdriver_manager.chrome import ChromeDriverManager
 from utils.throttle import polite_sleep
 
 import config
+from utils.http_client import USER_AGENTS, make_session
 
 BASE_URL = "https://www.cars.com/shopping/results/"
 HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/127.0.0.0 Safari/537.36"
-    ),
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.9",
     # Avoid brotli as many Python stacks lack brotli decoder
@@ -71,27 +65,6 @@ def clean_number(text: Optional[str]) -> Optional[int]:
     return int(digits) if digits else None
 
 
-def make_session() -> requests.Session:
-    session = requests.Session()
-    session.headers.update(HEADERS)
-    retry = Retry(
-        total=4,
-        backoff_factor=2,  # integer to satisfy linter type
-        status_forcelist=[429, 500, 502, 503, 504],
-        allowed_methods=["HEAD", "GET", "OPTIONS"],
-        raise_on_status=False,
-    )
-    adapter = HTTPAdapter(max_retries=retry, pool_connections=10, pool_maxsize=10)
-    session.mount("https://", adapter)
-    session.mount("http://", adapter)
-
-    # Warm-up to establish cookies/session for cars.com
-    try:
-        session.get("https://www.cars.com/", timeout=min(REQUEST_TIMEOUT, 20))
-    except requests.RequestException:
-        # Non-fatal; continue without cookies
-        pass
-    return session
 
 
 def make_driver() -> webdriver.Chrome:
@@ -101,7 +74,7 @@ def make_driver() -> webdriver.Chrome:
     opts.add_argument("--disable-gpu")
     opts.add_argument("--no-sandbox")
     opts.add_argument("--window-size=1365,1024")
-    opts.add_argument(f"--user-agent={HEADERS['User-Agent']}")
+    opts.add_argument(f"--user-agent={random.choice(USER_AGENTS)}")
     driver = webdriver.Chrome(ChromeDriverManager().install(), options=opts)
     driver.set_page_load_timeout(REQUEST_TIMEOUT)
     return driver
@@ -233,7 +206,9 @@ def fetch_html_selenium(driver: webdriver.Chrome, url: str) -> Optional[str]:
 
 def scrape() -> List[Dict]:
     all_rows: List[Dict] = []
-    session = make_session()
+    use_cache = os.getenv("REQUESTS_CACHE", "0") not in ("0", "false", "False")
+    session = make_session(use_cache=use_cache)
+    session.headers.update(HEADERS)
     driver: Optional[webdriver.Chrome] = None
 
     # Warm-up: hit homepage to establish cookies/session

@@ -76,6 +76,13 @@ uv run python scrape_craigslist.py
 uv run python scrape_cargurus.py
 ```
 
+To avoid re-downloading the same pages across runs, enable a local cache by
+setting `REQUESTS_CACHE=1`:
+
+```bash
+REQUESTS_CACHE=1 uv run python scrape_carscom.py
+```
+
 Outputs (by default):
 
 - `data/carscom_results.csv`
