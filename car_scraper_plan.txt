@@ -74,7 +74,8 @@ scrapehero.com
 .
 selenium and a browser driver (like ChromeDriver) – in case we need to simulate a browser for sites like CarGurus. If using Selenium, also install webdriver-manager for easy driver setup.
 pandas (optional) – to organize results into DataFrame/CSV easily.
-AI assist: You can have ChatGPT/Copilot write a quick requirements list or pip install script for these. Example: “Write a pip install command for requests, beautifulsoup4, lxml, selenium, webdriver-manager, pandas.” 2. Define Search Criteria: Clearly specify your search filters so we use them in our scrapers:
+AI assist: You can have ChatGPT/Copilot write a quick dependency list or provide `uv add` commands for these packages. Example: "Write `uv add` commands for requests, beautifulsoup4, lxml, selenium, webdriver-manager, pandas."
+2. Define Search Criteria: Clearly specify your search filters so we use them in our scrapers:
 e.g. Location: Fairfax, VA – we’ll use a central ZIP (like 22030) and a radius (maybe 50 or 100 miles) for CarGurus/Cars.com queries.
 Budget: (Example) $5,000 to $15,000 – use this range to filter out cars outside your price range.
 Type: if you have particular makes/models or body type (say you only want SUVs, or specifically looking for a Toyota Camry), note that. Otherwise, we search “all makes” within criteria to cast a wide net.
