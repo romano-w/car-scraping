@@ -1,35 +1,19 @@
 import os
 import types
 import unittest
+from pathlib import Path
 from unittest.mock import patch, MagicMock
 
 import scrape_cargurus as cg
 
-SAMPLE_HTML = """
-<html>
-  <body>
-    <div class="cg-dealFinderResult-wrap">
-      <a class="listing-link" href="/Cars/SomeListingId1">2012 Toyota Camry</a>
-      <span class="listing-price">$8,999</span>
-      <span class="listing-mileage">123,456 mi</span>
-      <span class="dealer-name">Best Dealer</span>
-      <span class="listing-location">Philadelphia, PA</span>
-    </div>
-    <div class="cg-dealFinderResult-wrap">
-      <a class="listing-link" href="/Cars/SomeListingId2">2002 Honda Civic</a>
-      <span class="listing-price">$3,500</span>
-      <span class="listing-mileage">200,001 mi</span>
-      <span class="dealer-name">Good Cars</span>
-      <span class="listing-location">Philly, PA</span>
-    </div>
-  </body>
-</html>
-"""
+
+FIXTURE_PATH = Path(__file__).parent / "fixtures" / "cargurus_page1.html"
+HTML = FIXTURE_PATH.read_text(encoding="utf-8")
 
 
 class CarGurusScraperTests(unittest.TestCase):
     def test_parse_listings_extracts_fields(self):
-        rows = cg.parse_listings(SAMPLE_HTML)
+        rows = cg.parse_listings(HTML)
         self.assertEqual(len(rows), 2)
         first = rows[0]
         self.assertEqual(first["source"], "cargurus")
@@ -41,7 +25,7 @@ class CarGurusScraperTests(unittest.TestCase):
         self.assertIn("Philadelphia", first["location"])
 
     def test_filter_by_config_applies_limits(self):
-        rows = cg.parse_listings(SAMPLE_HTML)
+        rows = cg.parse_listings(HTML)
         with patch.object(cg, "config", autospec=True) as mock_cfg:
             mock_cfg.PRICE_MAX = 9000
             mock_cfg.MILEAGE_MAX = 200000
@@ -66,7 +50,7 @@ class CarGurusScraperTests(unittest.TestCase):
     def test_scrape_returns_rows(self, mock_get):
         resp = MagicMock()
         resp.status_code = 200
-        resp.text = SAMPLE_HTML
+        resp.text = HTML
         mock_get.return_value = resp
         with patch.object(cg, "make_session") as ms, patch.object(cg, "MAX_PAGES", 1), patch.object(cg, "PAGE_DELAY_RANGE", (0, 0)):
             ms.return_value = cg.requests.Session()
